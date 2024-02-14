@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="orderPage.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="order-page-header">
+            <a class="order-page-back-button" href="/menu.html">
+                <img width= "50px" src="../../assets/backButton.svg" alt="Back Button">
+            </a>
+
+            <div class="order-page-header-text">
+                <div class="order-page-food-drink-text">
+                    <h1 class="header-food">FOOD</h1>
+                    <h1>&</h1>
+                    <h1 class="header-drinks">DRINKS</h1>
+                </div>
+                <h2>Click on the name to be redirected to that catergory.</h2>
+            </div>
+
+            <img class="order-page-language-button" src="../../assets/languageButton.svg" alt="Language Button">
+
+            <div class="order-page-table-number">
+                <h2>Table No. :</h2>
+                <h1>12</h1>
+                <span>PERSON #1</span>
+            </div>
+        </div>
+
+        <div class="open-page-filter">
+
+            <div class="open-page-filter-allergies">
+                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+                </svg>
+                <h2>Allergies:</h2>
+                <input type="text" placeholder="Allergy type?">
+            </div>
+
+            <div class="open-page-filter-alcohol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+                </svg>
+                <h2>Alcohol %:</h2>
+                <input type="text" placeholder="Preferred alcohol %?">
+            </div>
+
+            <div class="open-page-filter-tannin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+                </svg>
+                <h2>Tannin:</h2>
+                <input type="text" placeholder="Desired Tannin?">
+            </div>
+        </div>
+
+        <div class="order-page-menu">
+            <div class="order-page-drink-title">
+                <h3>DRINKS</h3>
+                <h2>Beer, Wine, Cocktails</h2>
+            </div>
+        </div>
+
+        <div class="beer-menu">
+            <table id="beer-table">
+                <caption>Beer</caption>
+            </table>
+        </div>
+
+        <script src="orderPage.js"></script>
+    </body>
+</html>

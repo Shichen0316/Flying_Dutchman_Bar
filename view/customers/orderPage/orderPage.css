@@ -1,0 +1,191 @@
+h1 {
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+h2, td {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin: 0;
+    white-space: nowrap;
+}
+
+h3 {
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+caption {
+    color: #950000;
+    font-family: Koulen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: left;
+}
+
+.order-page-table-number span {
+    color: #950000;
+    font-family: Koulen;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.header-food,
+.header-drinks {
+    line-height: normal;
+    text-decoration-line: underline;
+}
+
+.open-page-filter input {
+    border: none;
+    background: none;
+    border-bottom: 2px solid #BA0000;
+    padding: 10px 10px 5px 10px;
+
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.open-page-filter input:focus {
+    outline: none;
+}
+
+.order-page-header {
+    margin: 3% 2% 0 2%;
+}
+
+.order-page-header {
+    display: flex;
+    justify-content: center;
+}
+
+.order-page-header-text {
+    text-align: center;
+    padding-left: 20px;
+}
+
+.order-page-food-drink-text {
+    display: flex;
+}
+
+.order-page-food-drink-text h1 {
+    margin: 0 10px 0 10px;
+}
+
+.order-page-header-text h2 {
+    margin: 0;
+}
+
+.order-page-table-number {
+    margin-left: auto;
+    text-align: center;
+}
+
+.order-page-table-number span,
+.order-page-table-number h1,
+.order-page-table-number h2 {
+    margin: 0;
+}
+
+.order-page-back-button {
+    margin-right: auto;
+}
+
+.order-page-language-button {
+    padding-bottom: 30px;
+    padding-left: 20px;
+}
+
+.open-page-filter {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1% 2% 0 2%;    
+}
+
+.open-page-filter-allergies,
+.open-page-filter-alcohol,
+.open-page-filter-tannin {
+    display: flex;
+    align-items: center;
+}
+
+.open-page-filter-allergies h2,
+.open-page-filter-alcohol h2,
+.open-page-filter-tannin h2 {
+    margin: 0 10px 0 10px;
+}
+
+.order-page-drink-title {
+    display: flex;
+    align-items: flex-end;
+}
+
+.order-page-drink-title h3,
+.order-page-drink-title h2 {
+    margin: 0;
+}
+
+.order-page-drink-title h2 {
+    padding-bottom: 20px;
+    margin-left: 15px;
+}
+
+.order-page-menu {
+    margin: 2% 10% 2% 10%;
+}
+
+.minus-button {
+    background-image: url('../../assets/minusButton.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px; /* Adjust the width and height as needed */
+    height: 30px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .add-button {
+    background-image: url('../../assets/addButton.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px; /* Adjust the width and height as needed */
+    height: 30px;
+    border: none;
+    cursor: pointer;
+  }
+
+  td, tr {
+    display: flex;
+    align-items: center;
+  }
+
+  tr {
+    margin-top: 10%;
+  }
+
+  td {
+    margin-right: 20%;
+  }
