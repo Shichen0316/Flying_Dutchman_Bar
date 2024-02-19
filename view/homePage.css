@@ -1,0 +1,76 @@
+h1 {
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 7%;
+}
+
+.home-page-cus-button,
+.home-page-staff-button,
+.home-page-vip-button {
+    color: #FFF;
+    font-family: Koulen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    width: 430px;
+    height: 80px;
+    border: none;
+    margin-bottom: 30px;
+    
+    transition: all 0.3s ease;
+}
+
+.home-page-cus-button {
+    border-radius: 20px;
+    background: #BA0000;
+}
+
+.home-page-vip-button {
+    border-radius: 20px;
+    background: #950000;
+}
+
+.home-page-staff-button {
+    border-radius: 20px;
+    background: #610000;
+}
+
+.home-page-language-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.home-page-cus-button:hover,
+.home-page-staff-button:hover,
+.home-page-vip-button:hover {
+    transform: scale(1.03); 
+}
+
+.home-page-cus-button:active,
+.home-page-staff-button:active,
+.home-page-vip-button:active {
+    transform: scale(0.9); 
+}
