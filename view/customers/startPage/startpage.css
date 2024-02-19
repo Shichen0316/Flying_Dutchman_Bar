@@ -98,10 +98,10 @@ h2 {
 
 .start-page-order-button:hover,
 .start-page-your-orders-button:hover {
-    transform: scale(1.03); /* Increase size on hover */
+    transform: scale(1.03); 
 }
 
 .start-page-order-button:active,
 .start-page-your-orders-button:active {
-    transform: scale(0.95); /* Decrease size when clicked */
+    transform: scale(0.95); 
 }
