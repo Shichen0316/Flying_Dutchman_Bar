@@ -1,16 +1,49 @@
 
-// beer Menu
+// Menus
 const beers = [
-    { name: "Cold Beer", price: "460 Kr" },
-    { name: "Special Beer", price: "530 Kr" },
-    { name: "Premium Beer", price: "460 Kr" },
-    { name: "Brown Beer", price: "530 Kr" },
+
+    { name: "Cold Beer", 
+        price: "460 Kr", 
+        ingredients: "Water, Malted Barley, Hops, Yeast", 
+        alchoholPercentage: "4", 
+        tannin: "Low" },
+    { name: "Special Beer", 
+        price: "530 Kr", 
+        ingredients: "Water, Malted Barley, Hops, Yeast", 
+        alchoholPercentage: "6", 
+        tannin: "Low"  },
+    { name: "Premium Beer", 
+        price: "460 Kr", 
+        ingredients: "Water, Malted Barley, Caramel Malt, Hops, Yeast", 
+        alchoholPercentage: "6", 
+        tannin: "Low" },
+    { name: "Brown Beer", 
+        price: "530 Kr", 
+        ingredients: "Water, Malted Barley, Hops, Yeast, Orange peel, Coriander seeds", 
+        alchoholPercentage: "8", 
+        tannin: "Moderate" },
 ];
 
-const table = document.getElementById("beer-table");
+const wines = [
+    { name: "Wine1", price: "Price1"},
+    { name: "Wine2", price: "Price2"},
+    { name: "Wine3", price: "Price3"},
+    { name: "Wine4", price: "Price4"}
+]
+
+const cocktails = [
+    { name: "Cocktail1", price: "Price1"},
+    { name: "Cocktail2", price: "Price2"},
+    { name: "Cocktail3", price: "Price3"},
+    { name: "Cocktail4", price: "Price4"}
+]
+
+const beerTable = document.getElementById("beer-table");
+const wineTable = document.getElementById("wine-table");
+const cocktailTable = document.getElementById("cocktail-table");
 
 for (let i = 0; i < beers.length; i += 2) {
-    const row = document.createElement("tr");
+    const beerRow = document.createElement("tr");
 
     for (let j = 0; j < 2; j++) {
         const beer = beers[i + j];
@@ -39,13 +72,66 @@ for (let i = 0; i < beers.length; i += 2) {
 
             // first column -- beer name + info button
             const nameColumn = document.createElement("td");
+
+            const container = document.createElement("div");
+            container.className = "open-page-beer-name"
+
             const beerName = document.createElement("h2");
             beerName.textContent = beer.name;
-            const infoButton = document.createElement("img");
-            infoButton.src = "../../assets/infoButton.svg";
-            infoButton.alt = "More Info";
-            nameColumn.appendChild(beerName);
-            nameColumn.appendChild(infoButton);
+
+            const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+            infoButton.setAttribute("width", "17");
+            infoButton.setAttribute("height", "9");
+            infoButton.setAttribute("viewBox", "0 0 17 9");
+            infoButton.setAttribute("fill", "#212121");
+            infoButton.setAttribute("class", "open-page-button-svg");
+
+            infoButton.onclick = function() {
+                if (infoBox.style.display === "block") {
+                    infoBox.style.display = "none";
+                } else {
+                    infoBox.style.display = "block";
+                }
+            };
+
+            // Add hover effect
+            infoButton.addEventListener("mouseenter", function() {
+                path.style.transition = "fill 0.2s ease";
+                path.setAttribute("fill", "#BA0000"); // Change to the desired color on hover
+            });
+
+            infoButton.addEventListener("mouseleave", function() {
+                path.style.transition = "fill 0.2s ease";
+                path.setAttribute("fill", "#212121"); // Revert to the original color when not hovering
+            });
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
+            path.setAttribute("fill", "#212121");
+
+            infoButton.appendChild(path);
+
+            container.appendChild(beerName);
+            container.appendChild(infoButton);
+
+            const infoBox = document.createElement("div");
+            infoBox.className = "open-page-info-box";
+
+            const infoIngredients = document.createElement("h4");
+            const infoAlcohol = document.createElement("h5");
+            const infoTannin = document.createElement("h6");
+
+            infoIngredients.textContent = "Ingredients: " + beer.ingredients;
+            infoAlcohol.textContent = "Alcohol %: " + beer.alchoholPercentage;
+            infoTannin.textContent = "Tannin: " + beer.tannin;
+
+            infoBox.appendChild(infoIngredients);
+            infoBox.appendChild(infoAlcohol);
+            infoBox.appendChild(infoTannin);
+
+            nameColumn.appendChild(container);
+            nameColumn.appendChild(infoBox)
 
             // second column -- beer price
             const priceColumn = document.createElement("td");
@@ -56,26 +142,90 @@ for (let i = 0; i < beers.length; i += 2) {
             const minusButton = document.createElement("button");
             minusButton.className = "minus-button";
             minusButton.alt = "Minus";
+
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(beer.name + "-quantity-value"); 
+            
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantity > 0) {
+                    quantitySpan.textContent = quantity - 1;
+                }
+            };
+            
+
             const quantitySpan = document.createElement("span");
             quantitySpan.textContent = "0";
+            quantitySpan.id = beer.name + "-quantity-value"
+
             const addButton = document.createElement("button");
             addButton.className = "add-button";
             addButton.alt = "Add";
+
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(beer.name + "-quantity-value"); 
+            
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantity >= 0) {
+                    quantitySpan.textContent = quantity + 1;
+                }
+            };
+
             buttonColumn.appendChild(minusButton);
             buttonColumn.appendChild(quantitySpan);
             buttonColumn.appendChild(addButton);
 
-            row.appendChild(nameColumn);
-            row.appendChild(priceColumn);
-            row.appendChild(buttonColumn);
+            beerRow.appendChild(nameColumn);
+            beerRow.appendChild(priceColumn);
+            beerRow.appendChild(buttonColumn);
 
-            table.appendChild(row);
-        } else {
+            beerTable.appendChild(beerRow);
+        } 
+        else {
             // If there's no beer for this cell, create an empty cell
             const cell = document.createElement("td");
-            row.appendChild(cell);
+            beerRow.appendChild(cell);
         }
     }
 
-    table.appendChild(row);
+    beerTable.appendChild(beerRow);
+}
+
+// Filter Function
+function filterFunction() {
+
+    const tables = document.querySelectorAll("#beer-table, #wine-table, #cocktail-table");
+
+    //Allergy Filter --> Ingredients list (change h2 element to something else)
+    const allergyInput = document.getElementById("allergy-input");
+    const allergyFilter = allergyInput.value.toUpperCase();
+
+    //Alchohol Filter --> Ingredeint List (change h3 element to something else)
+    const alcoholInput = document.getElementById("alcohol-input");
+    const alcoholFilter = alcoholInput.value.toUpperCase();
+
+    //Tannin Filter --> Ingredeint List (change h4 element to something else)
+    const tanninInput = document.getElementById("tannin-input");
+    const tanninFilter = tanninInput.value.toUpperCase();
+
+    tables.forEach(table => {
+
+        const tr = table.getElementsByTagName("tr");
+        for (let i = 0; i < tr.length; i++) {
+
+            const h4 = tr[i].getElementsByTagName("h4")[0];
+            const h6 = tr[i].getElementsByTagName("h6")[0];
+
+            console.log(h6);
+
+            if (h6) {
+                const txtValue = h6.textContent || h6.innerText;
+                if (txtValue.toUpperCase().indexOf(tanninFilter) > -1) {
+                    tr[i].style.display = "";
+
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    });
 }

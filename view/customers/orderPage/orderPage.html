@@ -41,7 +41,7 @@
                     <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
                 </svg>
                 <h2>Allergies:</h2>
-                <input type="text" placeholder="Allergy type?">
+                <input id="allergy-input" onkeyup="filterFunction()" type="text" placeholder="Allergy type?">
             </div>
 
             <div class="open-page-filter-alcohol">
@@ -49,7 +49,7 @@
                     <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
                 </svg>
                 <h2>Alcohol %:</h2>
-                <input type="text" placeholder="Preferred alcohol %?">
+                <input id="alcohol-input" onkeyup="filterFunction()" type="text" placeholder="Preferred alcohol %?">
             </div>
 
             <div class="open-page-filter-tannin">
@@ -57,7 +57,7 @@
                     <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
                 </svg>
                 <h2>Tannin:</h2>
-                <input type="text" placeholder="Desired Tannin?">
+                <input id="tannin-input" onkeyup="filterFunction()" type="text" placeholder="Desired Tannin?">
             </div>
         </div>
 
@@ -73,6 +73,19 @@
                 <caption>Beer</caption>
             </table>
         </div>
+
+        <div class="wine-menu">
+            <table id="wine-table">
+                <caption>Wine:</caption>
+            </table>
+        </div>
+
+        <div class="cocktail-menu">
+            <table id="cocktail-table">
+                <caption>Cocktails:</caption>
+            </table>
+        </div>
+
 
         <script src="orderPage.js"></script>
     </body>
