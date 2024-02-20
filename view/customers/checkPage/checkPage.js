@@ -150,3 +150,8 @@ orders.forEach((order, personIndex) => {
     ordersContainer.appendChild(container);
 
 });
+
+// redirect to Pages
+function redirectStart() {
+    window.location.href = "/view/customers/startPage/startPage.html";
+}
