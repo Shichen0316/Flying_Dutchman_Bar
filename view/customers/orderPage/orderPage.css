@@ -253,3 +253,32 @@ h4, h5, h6 {
   .open-page-button-svg {
     margin-left: 10px;
   }
+
+  .order-page-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .order-page-add-person-button,
+  .order-page-confirm-button {
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 10px;
+    border: 2px solid #BA0000;
+    background: #FFF;
+
+    padding: 0.5% 2% 0.5% 2%;
+    transition: all 0.3s ease;
+
+    margin-right: 20px;
+  }
+
+  .order-page-add-person-button:hover,
+  .order-page-confirm-button:hover {
+    transform: scale(1.03); 
+  }
