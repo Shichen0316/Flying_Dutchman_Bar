@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Spaghetti Bolognese",
+    "ingredients": ["spaghetti", "minced beef", "tomato sauce", "onion", "garlic", "herbs"],
+    "allergies": ["gluten", "lactose"],
+    "avoidWith": ["gluten intolerance", "lactose intolerance"],
+    "price": 12,
+    "stock": 8
+  },
+    {
+      "name": "Caesar Salad",
+      "ingredients": ["romaine lettuce", "croutons", "parmesan cheese", "Caesar dressing"],
+      "allergies": ["gluten", "lactose"],
+      "avoidWith": ["gluten intolerance", "lactose intolerance"],
+      "price": 9,
+      "stock": 10
+    },
+    {
+      "name": "Margherita Pizza",
+      "ingredients": ["pizza dough", "tomato sauce", "mozzarella cheese", "basil"],
+      "allergies": ["gluten", "lactose"],
+      "avoidWith": ["gluten intolerance", "lactose intolerance"],
+      "price": 10,
+      "stock": 7
+    },
+    {
+      "name": "Chicken Alfredo Pasta",
+      "ingredients": ["fettuccine pasta", "chicken breast", "cream sauce", "parmesan cheese", "garlic", "butter"],
+      "allergies": ["gluten", "lactose"],
+      "avoidWith": ["gluten intolerance", "lactose intolerance"],
+      "price": 14,
+      "stock": 6
+    },
+    {
+      "name": "Vegetable Stir Fry",
+      "ingredients": ["mixed vegetables", "tofu", "soy sauce", "ginger", "garlic", "sesame oil"],
+      "allergies": ["soy"],
+      "avoidWith": ["soy allergy"],
+      "price": 11,
+      "stock": 9
+    },
+    {
+      "name": "Grilled Salmon",
+      "ingredients": ["salmon fillet", "lemon", "olive oil", "garlic", "herbs"],
+      "allergies": [],
+      "avoidWith": [],
+      "price": 16,
+      "stock": 5
+    },
+    {
+      "name": "Beef Tacos",
+      "ingredients": ["ground beef", "taco shells", "lettuce", "tomato", "cheddar cheese", "sour cream"],
+      "allergies": ["lactose"],
+      "avoidWith": ["lactose intolerance"],
+      "price": 13,
+      "stock": 8
+    },
+    {
+      "name": "Vegetarian Sushi Roll",
+      "ingredients": ["sushi rice", "seaweed", "cucumber", "avocado", "carrot"],
+      "allergies": [],
+      "avoidWith": [],
+      "price": 10,
+      "stock": 10
+    },
+    {
+      "name": "Beef Burger",
+      "ingredients": ["beef patty", "burger bun", "lettuce", "tomato", "onion", "pickles"],
+      "allergies": ["gluten"],
+      "avoidWith": ["gluten intolerance"],
+      "price": 12,
+      "stock": 7
+    },
+    {
+      "name": "Mushroom Risotto",
+      "ingredients": ["Arborio rice", "mushrooms", "onion", "vegetable broth", "parmesan cheese", "butter"],
+      "allergies": ["lactose"],
+      "avoidWith": ["lactose intolerance"],
+      "price": 15,
+      "stock": 6
+    }
+]
