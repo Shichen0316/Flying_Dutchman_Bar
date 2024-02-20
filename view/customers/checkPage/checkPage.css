@@ -93,3 +93,37 @@ tr {
 
     margin-bottom: 30px;
 }
+
+button {
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 10px;
+    border: 2px solid #BA0000;
+    background: #FFF;
+
+    padding: 0.5% 2% 0.5% 2%;
+    transition: all 0.3s ease;
+}
+
+.check-page-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin-left: auto;
+
+    margin-right: 20px;
+}
+
+.check-page-confirm-button:hover {
+
+    transform: scale(1.03); 
+    color: #FFF;
+    border: 2px solid #FFF;
+
+    background: #BA0000;
+}
