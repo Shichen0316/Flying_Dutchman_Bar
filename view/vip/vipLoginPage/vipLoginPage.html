@@ -1,15 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login-Vip</title>
     <link rel="stylesheet" href="vipLoginPage.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
 </head>
-
 <body>
 <div>
     <center>
@@ -25,9 +24,7 @@
         <label class="text-username" for="username">Username:</label>
         <br>
         <input class="input-username" type="text" id="username" name="username">
-
         <br>
-
         <label class="text-password" for="password">Password:</label>
         <br>
         <input class="input-password" type="password" id="password" name="password">
@@ -36,17 +33,11 @@
 
 <div>
     <center>
-<a href="">
-    <button class="button-login">LOGIN</button>
-</a>
-        </center>
+        <button id="loginButton" class="button-login">LOGIN</button>
+    </center>
 </div>
-
-<div class="button-language">
-    <a href="">
-        <img src="Language Button.svg" alt="Change language">
-    </a>
-</div>
-
+<div id="message"></div>
+<script src="../../../models/database/UserData.js"></script>
+    <script src="vipLoginPage.js"></script>
 </body>
 </html>

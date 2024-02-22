@@ -99,3 +99,13 @@ img{
     margin-top: 75px;
     cursor: pointer;
 }
+/* Styling for the message element */
+#message {
+    margin-top: 10px; /* Adjust the top margin as needed */
+    padding: 10px; /* Add padding for better readability */
+    font-size: 16px; /* Set the font size */
+    color: #ffffff; /* Set the text color */
+    background-color: #007bff; /* Set the background color */
+    border-radius: 5px; /* Add rounded corners */
+    text-align: center; /* Center align the text */
+}
