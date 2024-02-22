@@ -44,7 +44,7 @@ caption {
     text-align: left;
 }
 
-h4, h5, h6 {
+h4, h5, h6, h7, h8 {
     color: #212121;
     font-family: "Josefin Sans";
     font-size: 15px;
@@ -224,7 +224,9 @@ h4, h5, h6 {
     margin: 3% 10% 3% 10%;
   }
 
-  .open-page-beer-name {
+  .open-page-beer-name,
+  .open-page-wine-name,
+  .open-page-cocktail-name {
     display: flex;
     align-items: center;
   }
@@ -282,3 +284,86 @@ h4, h5, h6 {
   .order-page-confirm-button:hover {
     transform: scale(1.03); 
   }
+
+/* Your existing CSS styles... */
+
+.food-menu {
+    margin-top: 20px;
+}
+
+#food-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#food-table caption {
+    font-weight: bold;
+    padding: 5px;
+    background-color: #f2f2f2;
+}
+
+.order-page-drink-title h2,
+.order-page-food-title {
+    padding-bottom: 20px;
+    margin-left: 15px;
+}
+
+tr {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+}
+
+td {
+    display: flex;
+    align-items: center;
+}
+
+.open-page-beer-name,
+.open-page-wine-name,
+.open-page-cocktail-name,
+.open-page-food-name {
+    display: flex;
+    align-items: center;
+}
+
+.open-page-info-button {
+    border: none;
+}
+
+.open-page-info-box {
+    display: none;
+    position: absolute;
+    max-width: 500px;
+    margin-top: 150px;
+    padding: 0 10px 0 10px;
+    border: 2px solid #BA0000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    white-space: normal;
+    overflow: visible;
+}
+
+.open-page-button-svg {
+    margin-left: 10px;
+}
+
+.minus-button,
+.add-button {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+
+
+
+

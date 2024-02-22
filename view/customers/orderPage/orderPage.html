@@ -41,7 +41,10 @@
                     <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
                 </svg>
                 <h2>Allergies:</h2>
-                <input id="allergy-input" onkeyup="filterFunction()" type="text" placeholder="Allergy type?">
+                <!-- Input field to capture user input -->
+                <input id="allergy-input" type="text" placeholder="Allergy type?">
+                <!-- Button to trigger filtering -->
+                <button onclick="filterItemsByAllergy()">Filter</button>
             </div>
 
             <div class="open-page-filter-alcohol">
@@ -49,8 +52,9 @@
                     <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
                 </svg>
                 <h2>Alcohol %:</h2>
-                <input id="alcohol-input" onkeyup="filterFunction()" type="text" placeholder="Preferred alcohol %?">
+                <input id="alcohol-input" onkeyup="filterItemsByAlcohol()" type="text" placeholder="Alcohol %?">
             </div>
+
 
             <div class="open-page-filter-tannin">
                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
@@ -83,6 +87,17 @@
         <div class="cocktail-menu">
             <table id="cocktail-table">
                 <caption>Cocktails:</caption>
+            </table>
+        </div>
+
+        <div class="order-page-menu">
+            <div class="order-page-food-title">
+                <h3>FOOD</h3>
+            </div>
+        </div>
+
+        <div class="food-menu">
+            <table id="food-table">
             </table>
         </div>
 
