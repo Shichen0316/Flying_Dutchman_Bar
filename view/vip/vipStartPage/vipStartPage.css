@@ -1,0 +1,137 @@
+body {
+    margin: 3% 2% 0 2%;
+}
+
+h1 {
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+
+    margin: 0;
+}
+
+h2 {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin: 0;
+}
+
+h3 {
+    color: #212121;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin: 0;
+
+    text-align: center;
+}
+
+button,
+.start-page-balance {
+    border-radius: 20px;
+    border: 3px solid #BA0000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    transition: all 0.3s ease;
+}
+
+.start-page-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.start-page-name {
+    display: block;
+}
+
+.start-page-vip-table-number {
+    text-align: center;
+}
+
+.start-page-vip-table-number span,
+.start-page-vip-table-number h1,
+.start-page-vip-table-number h2 {
+    margin: 0;
+}
+
+.start-page-vip-logout-button {
+    margin-left: 20px;
+}
+
+.start-page-top-button-container,
+.start-page-bottom-button-container {
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 5%;
+}
+
+.start-page-first-buttons {
+    display: flex;
+    margin-right: 13%;
+}
+
+.start-page-second-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+}
+
+.start-page-first-buttons button {
+    margin-right: 0px;
+    line-height: 1.3;
+
+    padding: 10% 15% 10% 15%;
+}
+
+.start-page-menu-button {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.start-page-special-button {
+    border-radius: 0px 20px 20px 0px;
+}
+
+.start-page-your-order-button,
+.start-page-pay-acc-button {
+    padding: 3% 5% 3% 5%;
+}
+
+.start-page-balance {
+    border-radius: 20px 20px 0px 0px;
+    padding: 10px; /* Adjust padding as needed */
+    box-sizing: border-box;
+}
+
+.start-page-amount-button {
+    border-radius: 0px 0px 20px 20px;
+    background-color: #FFE3E3;
+}
+
+.start-page-menu-button:hover,
+.start-page-special-button:hover,
+.start-page-your-order-button:hover,
+.start-page-pay-acc-button:hover,
+.start-page-amount-button:hover {
+    transform: scale(1.03); 
+}
