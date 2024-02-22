@@ -213,6 +213,41 @@ const cocktails = [
 ]
 
 // redirect to Pages
-function redirectCheck() {
-    window.location.href = "/view/customers/checkPage/checkPage.html";
+// function redirectCheck() {
+//     window.location.href = "/view/customers/checkPage/checkPage.html";
+// }
+async function redirectCheck() {
+    // Collect selected items
+    const selectedItems = [];
+let totalAmount = 0; // Initialize total amount to calculate overall total
+
+const beerRows = document.querySelectorAll(".beer-menu table tr");
+beerRows.forEach(row => {
+    const name = row.querySelector(".open-page-beer-name h2").textContent;
+    const price = parseFloat(row.querySelector("td:nth-child(2)").textContent); // Convert price to float
+    const quantity = parseInt(row.querySelector("td:nth-child(3) span").textContent);
+
+    if (quantity > 0) {
+        const itemTotal = price * quantity; // Calculate total amount for the item
+        selectedItems.push({ name, quantity, cost: itemTotal.toFixed(2) }); // Add total amount for the item in the object
+        // totalAmount += itemTotal; // Add item total to overall total
+    }
+});
+
+// Create temporary order object including total amount
+const order = {
+    items: selectedItems,
+    // totalAmount: totalAmount.toFixed(2) // Convert total amount to fixed 2 decimal places
+};
+    const temporaryOrderJSON = JSON.stringify(order);
+    
+    try {
+        // Redirect to the CheckPage
+        // window.location.href = "/view/customers/checkPage/checkPage.html";
+        window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(JSON.stringify(temporaryOrderJSON));
+        // console.log(temporaryOrderJSON);
+    } catch (error) {
+        console.error("An error occurred while redirecting:", error);
+        // Handle error
+    }
 }

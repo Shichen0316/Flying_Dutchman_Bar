@@ -3,7 +3,13 @@
     // List --> bunch of dictionaries
         // 1 Dictionary --> 1 drink/ 1 food.
 
-const orders = [
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const orders1 = JSON.parse(decodeURIComponent(urlParams.get('temporaryOrderJSON')));
+        const orders3 = JSON.parse(orders1);
+        const orders = [orders3.items];
+        // console.log(orders);
+const orders4 = [
     [
 
         {name: "Cold Beer",
@@ -15,30 +21,30 @@ const orders = [
             cost: "530.00"}
     ],
 
-    [
+    // [
 
-        {name: "Cold Beer",
-            quantity: "4",
-            cost: "1380.00"},
+    //     {name: "Cold Beer",
+    //         quantity: "4",
+    //         cost: "1380.00"},
     
-        {name: "Brown Beer",
-            quantity: "1",
-            cost: "530.00"}
-    ],
+    //     {name: "Brown Beer",
+    //         quantity: "1",
+    //         cost: "530.00"}
+    // ],
 
-    [
+    // [
 
-        {name: "Cold Beer",
-            quantity: "4",
-            cost: "1380.00"},
+    //     {name: "Cold Beer",
+    //         quantity: "4",
+    //         cost: "1380.00"},
     
-        {name: "Brown Beer",
-            quantity: "1",
-            cost: "530.00"}
-    ]
+    //     {name: "Brown Beer",
+    //         quantity: "1",
+    //         cost: "530.00"}
+    // ]
 
 ]
-
+console.log(orders,orders4);
 // Creating Date & Time object
 const currentDate = new Date();
 const formattedDate = currentDate.getDate() + "/" + (currentDate.getMonth() + 1)  + "/" + currentDate.getFullYear();
@@ -151,7 +157,86 @@ orders.forEach((order, personIndex) => {
 
 });
 
+
+
+// Function to save the order data to the JSON file
+function saveOrderToDatabase(orderData) {
+    // Read existing orders from the JSON file
+    fs.readFile('models/database/Order.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading Order.json:', err);
+            return;
+        }
+
+        let orders = [];
+        if (data) {
+            // Parse existing orders from the file
+            orders = JSON.parse(data);
+        }
+
+        // Add the new order data to the orders array
+        orders.push(orderData);
+
+        // Convert the updated orders data to JSON format
+        const updatedData = JSON.stringify(orders, null, 4);
+
+        // Write the updated data back to the JSON file
+        fs.writeFile('models/database/Order.json', updatedData, 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing Order.json:', err);
+                return;
+            }
+            console.log('Order saved successfully!');
+        });
+    });
+}
+
+const fs = require('fs');
+
+// Function to insert new JSON data into the existing JSON database
+function insertDataIntoDatabase(newData) {
+    // Read the existing JSON database
+    fs.readFile('models/database/OrderData.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading database:', err);
+            return;
+        }
+
+        let database = [];
+        if (data) {
+            // Parse the existing JSON database into a JavaScript object
+            database = JSON.parse(data);
+        }
+
+        // Insert the new data into the database
+        database.push(newData);
+
+        // Convert the updated JavaScript object back to JSON
+        const updatedData = JSON.stringify(database, null, 4);
+
+        // Write the updated JSON data back to the database file
+        fs.writeFile('path/to/your/database.json', updatedData, 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing to database:', err);
+                return;
+            }
+            console.log('Data inserted into database successfully!');
+        });
+    });
+}
+
+
+
+// Insert the new data into the database
+
+
 // redirect to Pages
+// function redirectStart() {
+//     window.location.href = "/view/customers/startPage/startPage.html";
+// }
+
 function redirectStart() {
+    // Save the order data to the database
+    insertDataIntoDatabase(orders);
     window.location.href = "/view/customers/startPage/startPage.html";
 }
