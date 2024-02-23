@@ -44,7 +44,7 @@ caption {
     text-align: left;
 }
 
-h4, h5, h6, h7, h8 {
+h4, h5, h6, h7, h8, h9 {
     color: #212121;
     font-family: "Josefin Sans";
     font-size: 15px;
@@ -285,10 +285,9 @@ h4, h5, h6, h7, h8 {
     transform: scale(1.03); 
   }
 
-/* Your existing CSS styles... */
-
 .food-menu {
-    margin-top: 20px;
+    width: 80%;
+    margin: 3% 10% 3% 10%;
 }
 
 #food-table {
@@ -362,6 +361,34 @@ td {
     cursor: pointer;
     margin: 0 5px;
 }
+
+/* CSS */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    padding: 20px;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
 
 
 

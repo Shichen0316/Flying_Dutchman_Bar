@@ -234,18 +234,21 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoType = document.createElement("h6");
                     const infoGrape = document.createElement("h7");
                     const infoServing = document.createElement("h8");
+                    const infoTannin = document.createElement("h9");
 
                     infoProducer.textContent = "Producer/ Brewery: " + wine.producer;
                     infoYear.textContent = "Year: " + wine.productionyear;
                     infoType.textContent = "Type: " + wine.captype;
                     infoGrape.textContent = "Grape: " + wine.name2;
                     infoServing.textContent = "Serving Size: " + wine.packaging;
+                    infoTannin.textContent = "Tannin: " + wine.assortment;
 
                     infoBox.appendChild(infoProducer);
                     infoBox.appendChild(infoYear);
                     infoBox.appendChild(infoType);
                     infoBox.appendChild(infoGrape);
                     infoBox.appendChild(infoServing);
+                    infoBox.appendChild(infoTannin);
 
                     nameColumn.appendChild(container);
                     nameColumn.appendChild(infoBox)
@@ -523,9 +526,12 @@ fetch("../../../../models/database/FoodStock.json")
                 infoBox.style.display = "none"; // Initially hide the info box
 
                 const infoContents = document.createElement("h4");
+                const infoAllergies = document.createElement("h5");
                 infoContents.textContent = "Ingredients: " + food.ingredients.join(", ");
+                infoAllergies.textContent = "Avoid with: " + food.avoidWith.join(", ");
 
                 infoBox.appendChild(infoContents);
+                infoBox.appendChild(infoAllergies);
                 container.appendChild(infoBox);
 
                 nameColumn.appendChild(container);
@@ -596,6 +602,7 @@ function processFoodItemsData() {
 
 
 // redirect to Pages
+<<<<<<< Updated upstream
 async function redirectCheck() {
     // Collect selected items
     const selectedItems = [];
@@ -629,8 +636,85 @@ const order = {
     } catch (error) {
         console.error("An error occurred while redirecting:", error);
         // Handle error
+=======
+function redirectCheck() {
+    // Define the function to calculate the total number of items
+    function calculateTotalItems() {
+        let totalItemsCount = 0;
+
+        // Calculate total items from food menu
+        const foodQuantitySpans = document.querySelectorAll('.food-menu span[id$="-quantity-value"]');
+        foodQuantitySpans.forEach(span => {
+            totalItemsCount += parseInt(span.textContent);
+        });
+
+        // Calculate total items from wine menu
+        const wineQuantitySpans = document.querySelectorAll('.wine-menu span[id$="-quantity-value"]');
+        wineQuantitySpans.forEach(span => {
+            totalItemsCount += parseInt(span.textContent);
+        });
+
+        // Calculate total items from cocktail menu
+        const cocktailQuantitySpans = document.querySelectorAll('.cocktail-menu span[id$="-quantity-value"]');
+        cocktailQuantitySpans.forEach(span => {
+            totalItemsCount += parseInt(span.textContent);
+        });
+
+        // Return the total count
+        return totalItemsCount;
+    }
+
+    // Get the total number of items being ordered
+    const totalItems = calculateTotalItems();
+
+    // Check if the total number of items is greater than 10
+    if (totalItems > 10) {
+        // Display the popup notification
+        const popupContainer = document.getElementById('popup-container');
+        const popupMessage = document.getElementById('popup-message');
+        popupMessage.textContent = "You cannot order more than 10 items at once.";
+        popupContainer.style.display = 'block';
+    } else {
+        // Redirect to the check page if the total number of items is 10 or fewer
+        window.location.href = "/view/customers/checkPage/checkPage.html";
+>>>>>>> Stashed changes
     }
 }
+
+function closePopup() {
+    // Close the popup notification
+    const popupContainer = document.getElementById('popup-container');
+    popupContainer.style.display = 'none';
+}
+
+
+// Example function to calculate the total number of items
+function calculateTotalItems() {
+    let totalItemsCount = 0;
+
+    // Calculate total items from food menu
+    const foodQuantitySpans = document.querySelectorAll('.food-menu span[id$="-quantity-value"]');
+    foodQuantitySpans.forEach(span => {
+        totalItemsCount += parseInt(span.textContent);
+    });
+
+    // Calculate total items from wine menu
+    const wineQuantitySpans = document.querySelectorAll('.wine-menu span[id$="-quantity-value"]');
+    wineQuantitySpans.forEach(span => {
+        totalItemsCount += parseInt(span.textContent);
+    });
+
+    // Calculate total items from cocktail menu
+    const cocktailQuantitySpans = document.querySelectorAll('.cocktail-menu span[id$="-quantity-value"]');
+    cocktailQuantitySpans.forEach(span => {
+        totalItemsCount += parseInt(span.textContent);
+    });
+
+    // Return the total count
+    return totalItemsCount;
+}
+
+
 
 // filter functions
 
