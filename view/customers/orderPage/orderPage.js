@@ -594,101 +594,8 @@ fetch("../../../../models/database/FoodStock.json")
         console.error('Error fetching food data:', error);
     });
 
-
-
-function processFoodItemsData() {
-    // You can add processing logic here if needed
-}
-
-
 // redirect to Pages
-<<<<<<< Updated upstream
-async function redirectCheck() {
-    // Collect selected items
-    const selectedItems = [];
-let totalAmount = 0; // Initialize total amount to calculate overall total
-
-const beerRows = document.querySelectorAll(".beer-menu table tr");
-beerRows.forEach(row => {
-    const name = row.querySelector(".open-page-beer-name h2").textContent;
-    const price = parseFloat(row.querySelector("td:nth-child(2)").textContent); // Convert price to float
-    const quantity = parseInt(row.querySelector("td:nth-child(3) span").textContent);
-
-    if (quantity > 0) {
-        const itemTotal = price * quantity; // Calculate total amount for the item
-        selectedItems.push({ name, quantity, cost: itemTotal.toFixed(2) }); // Add total amount for the item in the object
-        // totalAmount += itemTotal; // Add item total to overall total
-    }
-});
-
-// Create temporary order object including total amount
-const order = {
-    items: selectedItems,
-    // totalAmount: totalAmount.toFixed(2) // Convert total amount to fixed 2 decimal places
-};
-    const temporaryOrderJSON = JSON.stringify(order);
-    
-    try {
-        // Redirect to the CheckPage
-        // window.location.href = "/view/customers/checkPage/checkPage.html";
-        window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(JSON.stringify(temporaryOrderJSON));
-        // console.log(temporaryOrderJSON);
-    } catch (error) {
-        console.error("An error occurred while redirecting:", error);
-        // Handle error
-=======
-function redirectCheck() {
-    // Define the function to calculate the total number of items
-    function calculateTotalItems() {
-        let totalItemsCount = 0;
-
-        // Calculate total items from food menu
-        const foodQuantitySpans = document.querySelectorAll('.food-menu span[id$="-quantity-value"]');
-        foodQuantitySpans.forEach(span => {
-            totalItemsCount += parseInt(span.textContent);
-        });
-
-        // Calculate total items from wine menu
-        const wineQuantitySpans = document.querySelectorAll('.wine-menu span[id$="-quantity-value"]');
-        wineQuantitySpans.forEach(span => {
-            totalItemsCount += parseInt(span.textContent);
-        });
-
-        // Calculate total items from cocktail menu
-        const cocktailQuantitySpans = document.querySelectorAll('.cocktail-menu span[id$="-quantity-value"]');
-        cocktailQuantitySpans.forEach(span => {
-            totalItemsCount += parseInt(span.textContent);
-        });
-
-        // Return the total count
-        return totalItemsCount;
-    }
-
-    // Get the total number of items being ordered
-    const totalItems = calculateTotalItems();
-
-    // Check if the total number of items is greater than 10
-    if (totalItems > 10) {
-        // Display the popup notification
-        const popupContainer = document.getElementById('popup-container');
-        const popupMessage = document.getElementById('popup-message');
-        popupMessage.textContent = "You cannot order more than 10 items at once.";
-        popupContainer.style.display = 'block';
-    } else {
-        // Redirect to the check page if the total number of items is 10 or fewer
-        window.location.href = "/view/customers/checkPage/checkPage.html";
->>>>>>> Stashed changes
-    }
-}
-
-function closePopup() {
-    // Close the popup notification
-    const popupContainer = document.getElementById('popup-container');
-    popupContainer.style.display = 'none';
-}
-
-
-// Example function to calculate the total number of items
+// Define the function to calculate the total number of items
 function calculateTotalItems() {
     let totalItemsCount = 0;
 
@@ -710,65 +617,103 @@ function calculateTotalItems() {
         totalItemsCount += parseInt(span.textContent);
     });
 
-    // Return the total count
     return totalItemsCount;
 }
 
+// Define the function to display the popup notification
+function displayPopup(message) {
+    const popupContainer = document.getElementById('popup-container');
+    const popupMessage = document.getElementById('popup-message');
+    popupMessage.textContent = message;
+    popupContainer.style.display = 'block';
+}
 
+// Define the function to close the popup notification
+function closePopup() {
+    const popupContainer = document.getElementById('popup-container');
+    popupContainer.style.display = 'none';
+}
+
+// Define the function to redirect and check total items
+function redirectCheck() {
+    // Get the total number of items being ordered
+    const totalItems = calculateTotalItems();
+
+    // Check if the total number of items is greater than 10
+    if (totalItems > 10) {
+        // Display the popup notification
+        displayPopup("You cannot order more than 10 items at once.");
+    } else {
+        // Collect selected items
+        const selectedItems = [];
+        // Add your logic to collect selected items here...
+
+        // Create temporary order object including total amount
+        const order = {
+            items: selectedItems,
+        };
+        const temporaryOrderJSON = JSON.stringify(order);
+
+        // Redirect to the CheckPage
+        window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(temporaryOrderJSON);
+    }
+}
 
 // filter functions
 
 // Filter food by allergy
-function filterFoodByAllergy(allergy) {
-    return new Promise((resolve, reject) => {
-        // Fetch food data and filter based on the specified allergy
-        fetch("../../../../models/database/FoodStock.json")
-            .then(response => response.json())
-            .then(data => {
-                const foodItems = data.foodItems || [];
-                const filteredFood = foodItems.filter(food => {
-                    return food.ingredients.includes(allergy) || food.allergies.includes(allergy);
+    function filterFoodByAllergy(allergy) {
+        return new Promise((resolve, reject) => {
+            // Fetch food data and filter based on the specified allergy
+            fetch("../../../../models/database/FoodStock.json")
+                .then(response => response.json())
+                .then(data => {
+                    const foodItems = data.foodItems || [];
+                    const filteredFood = foodItems.filter(food => {
+                        return food.ingredients.includes(allergy) || food.allergies.includes(allergy);
+                    });
+                    resolve(filteredFood);
+                })
+                .catch(error => {
+                    console.error('Error fetching food data:', error);
+                    reject(error);
                 });
-                resolve(filteredFood);
-            })
-            .catch(error => {
-                console.error('Error fetching food data:', error);
-                reject(error);
-            });
-    });
-}
+        });
+    }
 
 // Display filtered food
-function displayFilteredFood(filteredFood) {
-    // Apply styling to filtered food items
-    filteredFood.forEach(food => {
-        const foodElement = document.getElementById(food.name);
-        if (foodElement) {
-            foodElement.style.color = "red";
-        }
-    });
-}
+    function displayFilteredFood(filteredFood) {
+        // Apply styling to filtered food items
+        filteredFood.forEach(food => {
+            const foodElement = document.getElementById(food.name);
+            if (foodElement) {
+                foodElement.style.color = "red";
+            }
+        });
+    }
 
 // Filter items by allergy
-function filterItemsByAllergy() {
-    // Get the user input from the input field
-    const allergyInput = document.getElementById("allergy-input").value;
-    // Call the filter function with the user input
-    filterItems(allergyInput);
-}
+    function filterItemsByAllergy() {
+        // Get the user input from the input field
+        const allergyInput = document.getElementById("allergy-input").value;
+        // Call the filter function with the user input
+        filterItems(allergyInput);
+    }
 
 // Main filter function
-function filterItems(allergy) {
-    // Call the specific filter functions for drinks and food with the allergy input
-    Promise.all([filterCocktailsByAllergy(allergy), filterFoodByAllergy(allergy)])
-        .then(([filteredCocktails, filteredFood]) => {
-            // Display the filtered items
-            displayFilteredFood(filteredFood);
-        })
-        .catch(error => {
-            console.error('Error filtering items:', error);
-        });
-}
+    function filterItems(allergy) {
+        // Call the specific filter functions for drinks and food with the allergy input
+        Promise.all([filterCocktailsByAllergy(allergy), filterFoodByAllergy(allergy)])
+            .then(([filteredCocktails, filteredFood]) => {
+                // Display the filtered items
+                displayFilteredFood(filteredFood);
+            })
+            .catch(error => {
+                console.error('Error filtering items:', error);
+            });
+    }
+    
+
 
 
 
