@@ -1,0 +1,45 @@
+h1{
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 10%;
+}
+
+.code{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.rectangle1, .rectangle2, .rectangle3, .rectangle4{
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    border: 2px solid #BA0000;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px; /* Adjusted font size for visibility */
+    font-weight: bold; /* Makes the digit bolder */
+    color: #BA0000; /* Sets the color of the digit, if desired */
+}
+
+.text-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-back{
+    position: absolute;
+    top:40px;
+    left:40px;
+}
