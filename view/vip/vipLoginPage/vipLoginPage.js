@@ -1,5 +1,6 @@
 document.getElementById('loginButton').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+
+    event.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
@@ -8,8 +9,12 @@ document.getElementById('loginButton').addEventListener('click', function(event)
     const user = combinedUsers.find(u => u.username === username && u.password === password);
 
     if (user) {
-        document.getElementById('message').innerHTML = '<span style="color: green;">Login successful!</span>';
+        redirectVipStart();
     } else {
-        document.getElementById('message').innerHTML = '<span style="color: red;">Invalid username or password.</span>';
+        document.getElementById('message').innerHTML = '<span>Sorry! We are unable to find the corresponding credentials!</span>';
     }
 });
+
+function redirectVipStart() {
+    window.location.href = "/view/vip/vipStartPage/vipStartPage.html";
+}
