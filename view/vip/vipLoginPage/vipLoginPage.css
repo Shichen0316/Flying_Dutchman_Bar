@@ -47,6 +47,8 @@ img{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    margin-right: 320px;
 }
 
 .input-username{
@@ -59,6 +61,7 @@ img{
 
     margin-top: 15px;
     margin-bottom: 20px;
+    padding: 5px;
 }
 
 .text-password{
@@ -68,6 +71,8 @@ img{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    margin-right: 320px;
 }
 
 .input-password{
@@ -79,6 +84,7 @@ img{
     border: 1px solid #950000;
 
     margin-top: 15px;
+    padding: 5px;
 }
 
 .button-login{
