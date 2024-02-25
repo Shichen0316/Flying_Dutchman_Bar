@@ -1,0 +1,113 @@
+body {
+    background-color: #F4F4F4;
+}
+
+h1{
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    position: relative;
+    top:33px;
+}
+
+h2{
+    color: #212121;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    position: relative;
+    margin-top:30px;
+}
+
+button{
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+
+    border-radius: 20px;
+    border: 4px solid #BA0000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.button-editmenu{
+    font-size: 30px;
+    margin-right: 40px;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.button-orderoverview{
+    font-size: 30px;
+    margin-right: 40px;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.button-notify{
+    font-size: 30px;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.button-editmenu:hover,
+.button-orderoverview:hover,
+.button-notify:hover {
+    transform: scale(1.03);
+}
+
+.button-editmenu:active,
+.button-orderoverview:active,
+.button-notify:active {
+    transform: scale(0.9);
+}
+
+p1{
+    position: absolute;
+    top:56%;
+    left:26%;
+}
+
+p2{
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+
+.button-back{
+    position: absolute;
+    top:40px;
+    left:40px;
+}
+
+.button-logout{
+    position: absolute;
+    top:40px;
+    right:50px;
+}
