@@ -1,0 +1,136 @@
+h1{
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+
+    position: relative;
+    top:59px;
+}
+
+h2{
+    color: #212121;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 60px;
+}
+
+.button-back{
+    position: absolute;
+    top:40px;
+    left:40px;
+}
+
+img{
+    width: 67px;
+    height: 67px;
+    flex-shrink: 0;
+}
+
+.login{
+    margin-top: 30px;
+}
+
+.text-username{
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-right: 370px;
+}
+
+.input-username{
+    width: 426px;
+    height: 51px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    border: 1px solid #610000;
+
+    margin-top: 15px;
+    margin-bottom: 20px;
+
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.text-password{
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-right: 375px;
+}
+
+.input-password{
+    width: 426px;
+    height: 51px;
+    flex-shrink: 0;
+
+    margin-top: 15px;
+
+    border-radius: 10px;
+    border: 1px solid #610000;
+
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.button-login{
+    width: 238px;
+    height: 66px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: #610000;
+
+    color: #F4F4F4;
+    font-family: Koulen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 45px;
+    cursor: pointer;
+}
+
+#message {
+    color: #610000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+    margin-top: 20px;
+}
