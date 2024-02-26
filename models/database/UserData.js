@@ -22,6 +22,7 @@ var userData = {
         "last_name": "name2"
       }
     ],
+    
     "VIPcustomers": [
       {
         "Vipcustomer_id": "VIP1",
