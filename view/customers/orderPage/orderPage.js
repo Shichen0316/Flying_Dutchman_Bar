@@ -639,25 +639,55 @@ function redirectCheck() {
     // Get the total number of items being ordered
     const totalItems = calculateTotalItems();
 
+
     // Check if the total number of items is greater than 10
     if (totalItems > 10) {
         // Display the popup notification
         displayPopup("You cannot order more than 10 items at once.");
+
     } else {
         // Collect selected items
-        const selectedItems = [];
         // Add your logic to collect selected items here...
+        const selectedItems = [];
+        let totalAmount = 0; // Initialize total amount to calculate overall total
 
+        const beerRows = document.querySelectorAll(".beer-menu table tr");
+        beerRows.forEach(row => {
+            const name = row.querySelector(".open-page-beer-name h2").textContent;
+            const price = parseFloat(row.querySelector("td:nth-child(2)").textContent); // Convert price to float
+            const quantity = parseInt(row.querySelector("td:nth-child(3) span").textContent);
+
+        if (quantity > 0) {
+            const itemTotal = price * quantity; // Calculate total amount for the item
+            selectedItems.push({ name, quantity, cost: itemTotal.toFixed(2) }); // Add total amount for the item in the object
+            totalAmount += itemTotal; // Add item total to overall total
+        }    
+    });
         // Create temporary order object including total amount
         const order = {
             items: selectedItems,
-        };
-        const temporaryOrderJSON = JSON.stringify(order);
+
+        }
+
+    // Convert order object to JSON
+    // Create temporary order object including total amount
+     window.temporaryOrderJSON = JSON.stringify(order);
+    // window.temporaryOrderJSON = JSON.stringify(order);
+
+
+    console.log("Temporary Order JSON:", temporaryOrderJSON,totalItems);
+    
+       
 
         // Redirect to the CheckPage
         window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(temporaryOrderJSON);
-    }
+        // window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(JSON.stringify(temporaryOrderJSON));
+
+
+
 }
+}
+    
 
 
 

@@ -1,3 +1,4 @@
+// import vv=view/customers/checkPage/dummy.js
 // Customer orders --> need order from database
     //  Person X --> list (x+1)
     // List --> bunch of dictionaries
@@ -22,30 +23,30 @@ const orders4 = [
             cost: "530.00"}
     ],
 
-    // [
+    [
 
-    //     {name: "Cold Beer",
-    //         quantity: "4",
-    //         cost: "1380.00"},
+        {name: "Cold Beer",
+            quantity: "4",
+            cost: "1380.00"},
     
-    //     {name: "Brown Beer",
-    //         quantity: "1",
-    //         cost: "530.00"}
-    // ],
+        {name: "Brown Beer",
+            quantity: "1",
+            cost: "530.00"}
+    ],
 
-    // [
+    [
 
-    //     {name: "Cold Beer",
-    //         quantity: "4",
-    //         cost: "1380.00"},
+        {name: "Cold Beer",
+            quantity: "4",
+            cost: "1380.00"},
     
-    //     {name: "Brown Beer",
-    //         quantity: "1",
-    //         cost: "530.00"}
-    // ]
+        {name: "Brown Beer",
+            quantity: "1",
+            cost: "530.00"}
+    ]
 
 ]
-console.log(orders,orders4);
+// console.log(orders,orders4);
 // Creating Date & Time object
 const currentDate = new Date();
 const formattedDate = currentDate.getDate() + "/" + (currentDate.getMonth() + 1)  + "/" + currentDate.getFullYear();
@@ -161,82 +162,75 @@ orders.forEach((order, personIndex) => {
 
 
 // Function to save the order data to the JSON file
-function saveOrderToDatabase(orderData) {
-    // Read existing orders from the JSON file
-    fs.readFile('models/database/Order.json', 'utf8', (err, data) => {
+// const fs = require('fs');
+// const fs=require('fs').promises
+// const filePath = 'models/database/OrderData.json';
+function pushToOrderData(customerName, orders) {
+    const fs=require('fs')
+    const filePath = 'models/database/OrderData.json';
+    fs.readFile(filePath, 'utf8', (err, existingData) => {
         if (err) {
-            console.error('Error reading Order.json:', err);
+            console.error('Error reading file:', err);
             return;
         }
-
-        let orders = [];
-        if (data) {
-            // Parse existing orders from the file
-            orders = JSON.parse(data);
-        }
-
-        // Add the new order data to the orders array
-        orders.push(orderData);
-
-        // Convert the updated orders data to JSON format
-        const updatedData = JSON.stringify(orders, null, 4);
-
-        // Write the updated data back to the JSON file
-        fs.writeFile('models/database/Order.json', updatedData, 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing Order.json:', err);
-                return;
+    
+        let jsonData;
+        try {
+            // Parse existing JSON data
+            jsonData = JSON.parse(existingData);
+    
+            // If existing data does not contain an "orders" array, create one
+            if (!Array.isArray(jsonData.orders)) {
+                jsonData.orders = [];
             }
-            console.log('Order saved successfully!');
+        } catch (parseError) {
+            console.error('Error parsing JSON:', parseError);
+            return;
+        }
+    
+        // Calculate the next available orderId
+        const nextOrderId = getNextOrderId(jsonData.orders || []);
+    
+        // Get today's date
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const date = `${year}-${month}-${day}`;
+    
+        // Add orderId, date, and customerName to the new order item
+        const newOrderItem = {
+            orderId: nextOrderId,
+            date,
+            customerName,
+            orders,
+            paid: false
+        };
+    
+        // Append new order data to existing JSON array
+        jsonData.orders.push(newOrderItem);
+    
+        // Write updated JSON data back to the file
+        fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
+            if (writeErr) {
+                console.error('Error writing file:', writeErr);
+            } else {
+                console.log('Order appended successfully.');
+            }
         });
     });
 }
-
-const fs = require('fs');
-
-// Function to insert new JSON data into the existing JSON database
-function insertDataIntoDatabase(newData) {
-    // Read the existing JSON database
-    fs.readFile('models/database/OrderData.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading database:', err);
-            return;
-        }
-
-        let database = [];
-        if (data) {
-            // Parse the existing JSON database into a JavaScript object
-            database = JSON.parse(data);
-        }
-
-        // Insert the new data into the database
-        database.push(newData);
-
-        // Convert the updated JavaScript object back to JSON
-        const updatedData = JSON.stringify(database, null, 4);
-
-        // Write the updated JSON data back to the database file
-        fs.writeFile('path/to/your/database.json', updatedData, 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing to database:', err);
-                return;
-            }
-            console.log('Data inserted into database successfully!');
-        });
-    });
+function getNextOrderId(orders) {
+    // Find the maximum orderId in the existing orders array
+    const maxOrderId = orders.reduce((max, order) => Math.max(max, parseInt(order.orderId)), 0);
+    // Increment the maximum orderId to get the next available orderId
+    return (maxOrderId + 1).toString();
 }
-
-
-
-// Insert the new data into the database
-
-
-// redirect to Pages
-// function redirectStart() {
-//     window.location.href = "/view/customers/startPage/startPage.html";
-// }
 
 function redirectStart() {
+
+    pushToOrderData("Guest", orders);
+
     // Save the order data to the database
     insertDataIntoDatabase(orders);
     window.location.href = "/view/customers/startPage/startPage.html";
