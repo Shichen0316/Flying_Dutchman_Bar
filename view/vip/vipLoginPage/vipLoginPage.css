@@ -7,9 +7,6 @@ h1{
     font-style: normal;
     font-weight: 400;
     margin: 0;
-
-    position: relative;
-    top:100px;
 }
 
 h2{
@@ -20,8 +17,7 @@ h2{
     font-weight: 400;
     line-height: normal;
 
-    position: relative;
-    top:70px;
+    margin: 0;
 }
 
 img{
@@ -30,14 +26,22 @@ img{
     flex-shrink: 0;
 }
 
-.button-language{
-    position: fixed;
-    top: 850px;
-    left: 40px;
+.login{
+    margin-top: 30px;
+    display: inline-block;
 }
 
-.login{
-    margin-top: 110px;
+.login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-username,
+.login-password {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
 }
 
 .text-username{
@@ -47,8 +51,6 @@ img{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
-    margin-right: 320px;
 }
 
 .input-username{
@@ -56,12 +58,21 @@ img{
     height: 51px;
     flex-shrink: 0;
 
-    border-radius: 30px;
-    border: 1px solid #950000;
+    border-radius: 20px;
+    border: 1px solid #610000;
 
     margin-top: 15px;
     margin-bottom: 20px;
-    padding: 5px;
+
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .text-password{
@@ -71,8 +82,6 @@ img{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
-    margin-right: 320px;
 }
 
 .input-password{
@@ -80,11 +89,20 @@ img{
     height: 51px;
     flex-shrink: 0;
 
-    border-radius: 30px;
-    border: 1px solid #950000;
+    border-radius: 20px;
+    border: 1px solid #610000;
 
     margin-top: 15px;
-    padding: 5px;
+
+    color: #000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .button-login{
@@ -92,8 +110,9 @@ img{
     height: 66px;
     flex-shrink: 0;
 
-    border-radius: 30px;
-    background: #950000;
+    border-radius: 20px;
+    background: #610000;
+    border: none;
 
     color: #F4F4F4;
     font-family: Koulen;
@@ -102,16 +121,29 @@ img{
     font-weight: 400;
     line-height: normal;
 
-    margin-top: 75px;
+    margin-top: 45px;
     cursor: pointer;
+
+    transition: all 0.3s ease;
 }
+
+.button-login:hover {
+    transform: scale(1.03); 
+}
+
+.vip-login-page-header {
+    margin: 3% 2% 0 2%;
+}
+
 /* Styling for the message element */
 #message {
-    margin-top: 10px; /* Adjust the top margin as needed */
-    padding: 10px; /* Add padding for better readability */
-    font-size: 16px; /* Set the font size */
-    color: #ffffff; /* Set the text color */
-    background-color: #007bff; /* Set the background color */
-    border-radius: 5px; /* Add rounded corners */
-    text-align: center; /* Center align the text */
+    color: #610000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+    margin-top: 20px;
 }
