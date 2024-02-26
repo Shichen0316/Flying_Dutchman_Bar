@@ -9,12 +9,15 @@ document.getElementById('loginButton').addEventListener('click', function(event)
     const user = combinedUsers.find(u => u.username === username && u.password === password);
 
     if (user) {
-        redirectVipStart();
+        redirectVipStart(user);
     } else {
         document.getElementById('message').innerHTML = '<span>Sorry! We are unable to find the corresponding credentials!</span>';
     }
 });
 
-function redirectVipStart() {
-    window.location.href = "/view/vip/vipStartPage/vipStartPage.html";
+function redirectVipStart(user) {
+    
+    const userData = encodeURIComponent(JSON.stringify(user));
+    window.location.href = "/view/vip/vipStartPage/vipStartPage.html?userData=" + userData;
+    //window.location.href = "/view/vip/vipStartPage/vipStartPage.html";
 }
