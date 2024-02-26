@@ -24,13 +24,18 @@ h2, td {
     white-space: nowrap;
 }
 
-h3 {
+h3,
+.order-page-food-title h3 {
     color: #BA0000;
     font-family: Koulen;
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.order-page-food-title h3 {
+    margin: 0;
 }
 
 caption {
@@ -159,6 +164,10 @@ h4, h5, h6, h7, h8, h9 {
     align-items: flex-end;
 }
 
+.order-page-food-title {
+    margin-left: 15px;
+}
+
 .order-page-drink-title h3,
 .order-page-drink-title h2 {
     margin: 0;
@@ -171,6 +180,10 @@ h4, h5, h6, h7, h8, h9 {
 
 .order-page-menu {
     margin: 2% 10% 2% 10%;
+}
+
+.order-page-food-menu {
+    margin: 2% 10% 0 10%;
 }
 
 .minus-button {
@@ -287,7 +300,7 @@ h4, h5, h6, h7, h8, h9 {
 
 .food-menu {
     width: 80%;
-    margin: 3% 10% 3% 10%;
+    margin: 0 10% 3% 10%;
 }
 
 #food-table {
@@ -301,8 +314,7 @@ h4, h5, h6, h7, h8, h9 {
     background-color: #f2f2f2;
 }
 
-.order-page-drink-title h2,
-.order-page-food-title {
+.order-page-drink-title h2 {
     padding-bottom: 20px;
     margin-left: 15px;
 }
