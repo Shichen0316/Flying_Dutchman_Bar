@@ -1,5 +1,5 @@
 function redirectTableoverview() {
-    window.location.href = "view/staff/tableOverviewPage/tableoverviewPage-staff.html";
+    window.location.href = "/view/staff/tableOverviewPage/tableoverviewPage-staff.html";
 }
 
 function redirectOrderoverview() {

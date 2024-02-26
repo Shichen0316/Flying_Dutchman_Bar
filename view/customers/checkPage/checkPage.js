@@ -7,10 +7,11 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const orders1 = JSON.parse(decodeURIComponent(urlParams.get('temporaryOrderJSON')));
-        const orders3 = JSON.parse(orders1);
-        const orders = [orders3.items];
-        // console.log(orders);
-        
+      
+        // const orders3 = JSON.parse(orders1);
+        const orders = [orders1.items];
+        console.log(orders);
+    //demo order list     
 const orders4 = [
     [
 
@@ -226,6 +227,17 @@ function getNextOrderId(orders) {
     // Increment the maximum orderId to get the next available orderId
     return (maxOrderId + 1).toString();
 }
+// Add an event listener to the confirm button
+const confirmButton = document.getElementById('confirm-button'); // Assuming the button has an id of 'confirm-button'
+confirmButton.addEventListener('click', function() {
+    // Call the pushToOrderData function when the button is clicked
+    const customerName = "John Doe"; // Replace with actual customer name
+    const orders = [
+        { name: "Cold Beer", quantity: 3, price: 4.50 },
+        { name: "Brown Beer", quantity: 1, price: 5.30 }
+    ]; // Replace with actual orders
+    pushToOrderData(customerName, orders);
+});
 
 function redirectStart() {
 

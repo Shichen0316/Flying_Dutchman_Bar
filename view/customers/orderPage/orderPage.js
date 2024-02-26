@@ -689,8 +689,58 @@ function redirectCheck() {
 }
     
 
+// filter functions
 
+// Filter food by allergy
+    function filterFoodByAllergy(allergy) {
+        return new Promise((resolve, reject) => {
+            // Fetch food data and filter based on the specified allergy
+            fetch("../../../../models/database/FoodStock.json")
+                .then(response => response.json())
+                .then(data => {
+                    const foodItems = data.foodItems || [];
+                    const filteredFood = foodItems.filter(food => {
+                        return food.ingredients.includes(allergy) || food.allergies.includes(allergy);
+                    });
+                    resolve(filteredFood);
+                })
+                .catch(error => {
+                    console.error('Error fetching food data:', error);
+                    reject(error);
+                });
+        });
+    }
 
+// Display filtered food
+    function displayFilteredFood(filteredFood) {
+        // Apply styling to filtered food items
+        filteredFood.forEach(food => {
+            const foodElement = document.getElementById(food.name);
+            if (foodElement) {
+                foodElement.style.color = "red";
+            }
+        });
+    }
 
+// Filter items by allergy
+    function filterItemsByAllergy() {
+        // Get the user input from the input field
+        const allergyInput = document.getElementById("allergy-input").value;
+        // Call the filter function with the user input
+        filterItems(allergyInput);
+    }
 
+// Main filter function
+    function filterItems(allergy) {
+        // Call the specific filter functions for drinks and food with the allergy input
+        Promise.all([filterCocktailsByAllergy(allergy), filterFoodByAllergy(allergy)])
+            .then(([filteredCocktails, filteredFood]) => {
+                // Display the filtered items
+                displayFilteredFood(filteredFood);
+            })
+            .catch(error => {
+                console.error('Error filtering items:', error);
+            });
+    }
+    
 
