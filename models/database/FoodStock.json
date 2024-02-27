@@ -28,7 +28,7 @@
       "ingredients": ["fettuccine pasta", "chicken breast", "cream sauce", "parmesan cheese", "garlic", "butter"],
       "allergies": ["gluten", "lactose"],
       "avoidWith": ["gluten intolerance", "lactose intolerance"],
-      "price": 14,
+      "price": 140,
       "stock": 6
     },
     {
