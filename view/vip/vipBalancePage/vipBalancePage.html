@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Balance Page</title>
+    <link rel="stylesheet" href="vipBalancePage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div>
+    <center>
+        <h1>YOUR BALANCE:</h1>
+        <h2>Mr. dylan Matthew</h2>
+    </center>
+</div>
+
+<div class= "balance" id="balance">0</div>
+
+<p>
+    SEK
+</p>
+
+
+<div class="button-container">
+    <button class="button-topup" onclick="showTopUpWindow(event)">Top Up</button>
+</div>
+
+<div id="topUpWindow">
+    <h2 class="topup-text">Top Up</h2>
+    <label class="topUpAmount" for="topUpAmount">Enter Amount: </label>
+    <br>
+    <input type="number" id="topUpAmount" placeholder="Enter amount" required>
+    <br>
+    <button class="button-confirm" onclick="topUpBalance()">Confirm</button>
+</div>
+
+<div>
+    <a class="button-logout" href="javascript:logoutFunction()">
+        <img src="logout 1.svg" alt="Logout">
+    </a>
+</div>
+
+<div>
+    <a class="button-back" href="/view/vip/vipStartPage/vipStartPage.html">
+        <img src="/../../assets/backButton.svg" alt="Back button">
+    </a>
+</div>
+
+<script src="vipBalancePage.js"></script>
+</body>
+</html>
