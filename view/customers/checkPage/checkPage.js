@@ -49,107 +49,121 @@ const dateTime = formattedDate + " " + formattedTime;
 // Creating the HTMl dynamically bases on the const orders
 const ordersContainer = document.querySelector('.check-page-all-orders');
 
-orders.forEach((order, personIndex) => {
+document.addEventListener('DOMContentLoaded', function () {
+    // Retrieve the selected language from localStorage or set a default language
+    const storedLang = localStorage.getItem('selectedLang') || 'en';
 
+    // Define translations object based on your language mappings
+    const translations = {
+        en: {
+            orderSummary: "Order Summary",
+            tableText: "Table",
+            totalText: "Total:",
+            paymentText: "Please make your payment at the bar counter! <br> Thank you!"
+        },
+        sv: {
+            orderSummary: "Beställningsöversikt",
+            tableText: "Bord",
+            totalText: "Totalt:",
+            paymentText: "Vänligen gör din betalning vid baren! <br> Tack!"
+        },
+        de: {
+            orderSummary: "Bestellungsübersicht",
+            tableText: "Tisch",
+            totalText: "Gesamt:",
+            paymentText: "Bitte leisten Sie Ihre Zahlung an der Bar! <br> Danke!"
+        }
+    };
 
-    const personLabel = "Person " + (personIndex + 1);
-    let totalAmount = 0.00;
-    
-    // FIRST div element --> RMB CLOSE
-    const container = document.createElement("div");
-    container.className = "check-page-container";
+    // Update orders content with translated text
+    orders.forEach((order, personIndex) => {
+        const personLabel = "Person " + (personIndex + 1);
+        let totalAmount = 0.00;
 
-    // creating div element in a div element --> RMB CLOSE (CLOSED)
-    const header = document.createElement("div");
-    header.className = "check-page-header";
+        const container = document.createElement("div");
+        container.className = "check-page-container";
 
-    // REB TO APPEND to header(div)
-    const orderSummary = document.createElement("h1");
-    orderSummary.textContent = "Order Summary";
-    
-    // creating div element --> RMB CLOSE (CLOSED)
-    const details = document.createElement("div");
-    details.className = "check-page-details";
+        const header = document.createElement("div");
+        header.className = "check-page-header";
 
-    const dateTimeText = document.createElement("h2");
-    dateTimeText.textContent = dateTime.toLocaleString();
+        const orderSummary = document.createElement("h1");
+        orderSummary.textContent = translations[storedLang].orderSummary;
 
-    const tableNumber = document.createElement("h2");
-    tableNumber.textContent = "Table 12";
+        const details = document.createElement("div");
+        details.className = "check-page-details";
 
-    const personNumber = document.createElement("h2");
-    personNumber.textContent = personLabel;
+        const dateTimeText = document.createElement("h2");
+        dateTimeText.textContent = dateTime.toLocaleString();
 
-    header.appendChild(orderSummary);
-    header.appendChild(details);
+        const tableNumber = document.createElement("h2");
+        tableNumber.textContent = translations[storedLang].tableText + " 12";
 
-    details.appendChild(dateTimeText);
-    details.appendChild(tableNumber);
-    details.appendChild(personNumber);
+        const personNumber = document.createElement("h2");
+        personNumber.textContent = personLabel;
 
-    // SECOND table element --> RMB TO CLOSE! (CLOSED)
-    const tableSummary = document.createElement("table");
-    tableSummary.className = "check-page-summary";
+        header.appendChild(orderSummary);
+        header.appendChild(details);
 
-    order.forEach((item) => {
+        details.appendChild(dateTimeText);
+        details.appendChild(tableNumber);
+        details.appendChild(personNumber);
 
-        //tr element --> rmb to CLOSE
-        const trSummary = document.createElement("tr");
+        const tableSummary = document.createElement("table");
+        tableSummary.className = "check-page-summary";
 
-        //td element --> rmb to append to trSUmmary
-        const tdName = document.createElement("td");
-        tdName.textContent = item.name;
+        order.forEach((item) => {
+            const trSummary = document.createElement("tr");
 
-        const tdQuantity = document.createElement("td");
-        tdQuantity.textContent = item.quantity;
+            const tdName = document.createElement("td");
+            tdName.textContent = item.name;
 
-        const tdPrice = document.createElement("td");
-        tdPrice.textContent = item.cost;
+            const tdQuantity = document.createElement("td");
+            tdQuantity.textContent = item.quantity;
 
-        trSummary.appendChild(tdName);
-        trSummary.appendChild(tdQuantity);
-        trSummary.appendChild(tdPrice);
+            const tdPrice = document.createElement("td");
+            tdPrice.textContent = item.cost;
 
-        tableSummary.appendChild(trSummary);
+            trSummary.appendChild(tdName);
+            trSummary.appendChild(tdQuantity);
+            trSummary.appendChild(tdPrice);
 
-        totalAmount += parseInt(item.cost);
-    })
+            tableSummary.appendChild(trSummary);
 
-    // THIRD div element --> RMB TO CLOSE (CLOSED)
-    const divider = document.createElement("div");
-    divider.className = "check-page-divider";
+            totalAmount += parseInt(item.cost);
+        })
 
-    // FORTH div element --> RMB TO CLOSE (CLOSED)
-    const tableTotal = document.createElement("table");
-    tableTotal.className = "check-page-total";
+        const divider = document.createElement("div");
+        divider.className = "check-page-divider";
 
-    // tr element --> rmb to close (CLOSED)
-    const trTotal = document.createElement("tr");
+        const tableTotal = document.createElement("table");
+        tableTotal.className = "check-page-total";
 
-    const tdTotalText = document.createElement("td");
-    tdTotalText.textContent = "Total:";
+        const trTotal = document.createElement("tr");
 
-    const tdTotal = document.createElement("td");
-    tdTotal.textContent = totalAmount.toFixed(2);
+        const tdTotalText = document.createElement("td");
+        tdTotalText.textContent = translations[storedLang].totalText;
 
-    trTotal.appendChild(tdTotalText)
-    trTotal.appendChild(tdTotal);
+        const tdTotal = document.createElement("td");
+        tdTotal.textContent = totalAmount.toFixed(2);
 
-    tableTotal.appendChild(trTotal);
+        trTotal.appendChild(tdTotalText)
+        trTotal.appendChild(tdTotal);
 
-    // FIFTH h3 element --> RMB TO CLOSE
-    const thankYouText = document.createElement("h3");
-    thankYouText.innerHTML = "Please make your payment at the bar counter! <br> Thank you!"
+        tableTotal.appendChild(trTotal);
 
-    container.appendChild(header);
-    container.appendChild(tableSummary);
-    container.appendChild(divider);
-    container.appendChild(tableTotal);
-    container.appendChild(thankYouText);
+        const thankYouText = document.createElement("h3");
+        thankYouText.innerHTML = translations[storedLang].paymentText;
 
-    ordersContainer.appendChild(container);
+        container.appendChild(header);
+        container.appendChild(tableSummary);
+        container.appendChild(divider);
+        container.appendChild(tableTotal);
+        container.appendChild(thankYouText);
 
+        ordersContainer.appendChild(container);
+    });
 });
+
 
 // redirect to Pages
 function redirectStart() {

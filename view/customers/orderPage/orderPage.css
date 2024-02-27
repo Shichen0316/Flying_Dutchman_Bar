@@ -285,10 +285,9 @@ h4, h5, h6, h7, h8 {
     transform: scale(1.03); 
   }
 
-/* Your existing CSS styles... */
-
 .food-menu {
-    margin-top: 20px;
+    width: 80%;
+    margin: 3% 10% 3% 10%;
 }
 
 #food-table {

@@ -100,11 +100,11 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoStrength = document.createElement("h7");
                     const infoServing = document.createElement("h8");
 
-                    infoProducer.textContent = "Producer/ Brewery: " + beer.producer;
-                    infoCountry.textContent = "Country: " + beer.countryoforiginlandname;
-                    infoType.textContent = "Type: " + beer.category;
-                    infoStrength.textContent = "Strength: " + beer.alcoholstrength;
-                    infoServing.textContent = "Serving Size: " + beer.packaging;
+                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + beer.producer;
+                    infoCountry.textContent = "Country/ Land/ Land: " + beer.countryoforiginlandname;
+                    infoType.textContent = "Type/ Typ/ Typ:: " + beer.category;
+                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + beer.alcoholstrength;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + beer.packaging;
 
                     infoBox.appendChild(infoProducer);
                     infoBox.appendChild(infoCountry);
@@ -235,11 +235,11 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoGrape = document.createElement("h7");
                     const infoServing = document.createElement("h8");
 
-                    infoProducer.textContent = "Producer/ Brewery: " + wine.producer;
-                    infoYear.textContent = "Year: " + wine.productionyear;
-                    infoType.textContent = "Type: " + wine.captype;
-                    infoGrape.textContent = "Grape: " + wine.name2;
-                    infoServing.textContent = "Serving Size: " + wine.packaging;
+                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + wine.producer;
+                    infoYear.textContent = "Year/ År/ Jahr: " + wine.productionyear;
+                    infoType.textContent = "Type/ Typ/ Typ: " + wine.captype;
+                    infoGrape.textContent = "Grape/ Druva/ Traube: " + wine.name2;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + wine.packaging;
 
                     infoBox.appendChild(infoProducer);
                     infoBox.appendChild(infoYear);
@@ -369,9 +369,10 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoStrength = document.createElement("h5");
                     const infoServing = document.createElement("h6");
 
-                    infoContents.textContent = "Contents: " + cocktail.ingredients;
-                    infoStrength.textContent = "Strength: " + cocktail.alcoholstrength;
-                    infoServing.textContent = "Serving Size: " + cocktail.packaging;
+
+                    infoContents.textContent = "Contents/ Innehåll/ Inhalt: " + cocktail.ingredients;
+                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + cocktail.alcoholstrength;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + cocktail.packaging;
 
                     infoBox.appendChild(infoContents);
                     infoBox.appendChild(infoStrength);
@@ -473,6 +474,7 @@ function processCocktailsData() {
     }
 }
 
+
 fetch("../../../../models/database/FoodStock.json")
     .then(response => response.json())
     .then(data => {
@@ -502,6 +504,7 @@ fetch("../../../../models/database/FoodStock.json")
                 infoButton.setAttribute("class", "open-page-button-svg");
 
                 infoButton.onclick = function() {
+                    const infoBox = container.querySelector(".open-page-info-box");
                     if (infoBox.style.display === "block") {
                         infoBox.style.display = "none";
                     } else {
@@ -523,7 +526,7 @@ fetch("../../../../models/database/FoodStock.json")
                 infoBox.style.display = "none"; // Initially hide the info box
 
                 const infoContents = document.createElement("h4");
-                infoContents.textContent = "Ingredients: " + food.ingredients.join(", ");
+                infoContents.textContent = "Ingredients/ Ingredienser/ Zutaten: " + food.ingredients; // Use a function to get translated ingredient
 
                 infoBox.appendChild(infoContents);
                 container.appendChild(infoBox);
@@ -588,12 +591,8 @@ fetch("../../../../models/database/FoodStock.json")
         console.error('Error fetching food data:', error);
     });
 
-
-
-function processFoodItemsData() {
-    // You can add processing logic here if needed
-}
-
+// Default language
+let currentLang = 'en';
 
 // redirect to Pages
 function redirectCheck() {
@@ -653,6 +652,25 @@ function filterItems(allergy) {
             console.error('Error filtering items:', error);
         });
 }
+
+// Add event listener for language change
+$(".order-page-language-dropdown").change(function () {
+    const lang = $(this).val();
+    fetch("../../../../models/database/FoodStock.json")
+        .then(response => response.json())
+        .then(data => {
+            updateFoodTable(data, lang);
+            // Store the selected language in localStorage
+            localStorage.setItem('selectedLang', lang);
+        })
+        .catch(error => {
+            console.error('Error fetching food data:', error);
+        });
+});
+
+
+
+
 
 
 

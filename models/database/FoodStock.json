@@ -4,7 +4,7 @@
     "ingredients": ["spaghetti", "minced beef", "tomato sauce", "onion", "garlic", "herbs"],
     "allergies": ["gluten", "lactose"],
     "avoidWith": ["gluten intolerance", "lactose intolerance"],
-    "price": 12,
+    "price": 120,
     "stock": 8
   },
     {
@@ -12,7 +12,7 @@
       "ingredients": ["romaine lettuce", "croutons", "parmesan cheese", "Caesar dressing"],
       "allergies": ["gluten", "lactose"],
       "avoidWith": ["gluten intolerance", "lactose intolerance"],
-      "price": 9,
+      "price": 90,
       "stock": 10
     },
     {
@@ -20,7 +20,7 @@
       "ingredients": ["pizza dough", "tomato sauce", "mozzarella cheese", "basil"],
       "allergies": ["gluten", "lactose"],
       "avoidWith": ["gluten intolerance", "lactose intolerance"],
-      "price": 10,
+      "price": 100,
       "stock": 7
     },
     {
@@ -36,7 +36,7 @@
       "ingredients": ["mixed vegetables", "tofu", "soy sauce", "ginger", "garlic", "sesame oil"],
       "allergies": ["soy"],
       "avoidWith": ["soy allergy"],
-      "price": 11,
+      "price": 110,
       "stock": 9
     },
     {
@@ -44,7 +44,7 @@
       "ingredients": ["salmon fillet", "lemon", "olive oil", "garlic", "herbs"],
       "allergies": [],
       "avoidWith": [],
-      "price": 16,
+      "price": 160,
       "stock": 5
     },
     {
@@ -52,7 +52,7 @@
       "ingredients": ["ground beef", "taco shells", "lettuce", "tomato", "cheddar cheese", "sour cream"],
       "allergies": ["lactose"],
       "avoidWith": ["lactose intolerance"],
-      "price": 13,
+      "price": 130,
       "stock": 8
     },
     {
@@ -60,7 +60,7 @@
       "ingredients": ["sushi rice", "seaweed", "cucumber", "avocado", "carrot"],
       "allergies": [],
       "avoidWith": [],
-      "price": 10,
+      "price": 100,
       "stock": 10
     },
     {
@@ -68,7 +68,7 @@
       "ingredients": ["beef patty", "burger bun", "lettuce", "tomato", "onion", "pickles"],
       "allergies": ["gluten"],
       "avoidWith": ["gluten intolerance"],
-      "price": 12,
+      "price": 120,
       "stock": 7
     },
     {
@@ -76,7 +76,7 @@
       "ingredients": ["Arborio rice", "mushrooms", "onion", "vegetable broth", "parmesan cheese", "butter"],
       "allergies": ["lactose"],
       "avoidWith": ["lactose intolerance"],
-      "price": 15,
+      "price": 150,
       "stock": 6
     }
 ]
