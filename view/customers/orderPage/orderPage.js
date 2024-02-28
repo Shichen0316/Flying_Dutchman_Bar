@@ -3,6 +3,7 @@
 var beers;
 var wines;
 var cocktails;
+
 fetch("../../../../models/database/DrinksStock.json")
     .then(response => response.json())
     .then(data => {
@@ -100,11 +101,11 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoStrength = document.createElement("h7");
                     const infoServing = document.createElement("h8");
 
-                    infoProducer.textContent = "Producer/ Brewery: " + beer.producer;
-                    infoCountry.textContent = "Country: " + beer.countryoforiginlandname;
-                    infoType.textContent = "Type: " + beer.category;
-                    infoStrength.textContent = "Strength: " + beer.alcoholstrength;
-                    infoServing.textContent = "Serving Size: " + beer.packaging;
+                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + beer.producer;
+                    infoCountry.textContent = "Country/ Land/ Land: " + beer.countryoforiginlandname;
+                    infoType.textContent = "Type/ Typ/ Typ:: " + beer.category;
+                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + beer.alcoholstrength;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + beer.packaging;
 
                     infoBox.appendChild(infoProducer);
                     infoBox.appendChild(infoCountry);
@@ -234,21 +235,18 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoType = document.createElement("h6");
                     const infoGrape = document.createElement("h7");
                     const infoServing = document.createElement("h8");
-                    const infoTannin = document.createElement("h9");
 
-                    infoProducer.textContent = "Producer/ Brewery: " + wine.producer;
-                    infoYear.textContent = "Year: " + wine.productionyear;
-                    infoType.textContent = "Type: " + wine.captype;
-                    infoGrape.textContent = "Grape: " + wine.name2;
-                    infoServing.textContent = "Serving Size: " + wine.packaging;
-                    infoTannin.textContent = "Tannin: " + wine.assortment;
+                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + wine.producer;
+                    infoYear.textContent = "Year/ År/ Jahr: " + wine.productionyear;
+                    infoType.textContent = "Type/ Typ/ Typ: " + wine.captype;
+                    infoGrape.textContent = "Grape/ Druva/ Traube: " + wine.name2;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + wine.packaging;
 
                     infoBox.appendChild(infoProducer);
                     infoBox.appendChild(infoYear);
                     infoBox.appendChild(infoType);
                     infoBox.appendChild(infoGrape);
                     infoBox.appendChild(infoServing);
-                    infoBox.appendChild(infoTannin);
 
                     nameColumn.appendChild(container);
                     nameColumn.appendChild(infoBox)
@@ -372,9 +370,10 @@ fetch("../../../../models/database/DrinksStock.json")
                     const infoStrength = document.createElement("h5");
                     const infoServing = document.createElement("h6");
 
-                    infoContents.textContent = "Contents: " + cocktail.ingredients;
-                    infoStrength.textContent = "Strength: " + cocktail.alcoholstrength;
-                    infoServing.textContent = "Serving Size: " + cocktail.packaging;
+
+                    infoContents.textContent = "Contents/ Innehåll/ Inhalt: " + cocktail.ingredients;
+                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + cocktail.alcoholstrength;
+                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + cocktail.packaging;
 
                     infoBox.appendChild(infoContents);
                     infoBox.appendChild(infoStrength);
@@ -476,6 +475,7 @@ function processCocktailsData() {
     }
 }
 
+
 fetch("../../../../models/database/FoodStock.json")
     .then(response => response.json())
     .then(data => {
@@ -505,6 +505,7 @@ fetch("../../../../models/database/FoodStock.json")
                 infoButton.setAttribute("class", "open-page-button-svg");
 
                 infoButton.onclick = function() {
+                    const infoBox = container.querySelector(".open-page-info-box");
                     if (infoBox.style.display === "block") {
                         infoBox.style.display = "none";
                     } else {
@@ -526,12 +527,9 @@ fetch("../../../../models/database/FoodStock.json")
                 infoBox.style.display = "none"; // Initially hide the info box
 
                 const infoContents = document.createElement("h4");
-                const infoAllergies = document.createElement("h5");
-                infoContents.textContent = "Ingredients: " + food.ingredients.join(", ");
-                infoAllergies.textContent = "Avoid with: " + food.avoidWith.join(", ");
+                infoContents.textContent = "Ingredients/ Ingredienser/ Zutaten: " + food.ingredients; // Use a function to get translated ingredient
 
                 infoBox.appendChild(infoContents);
-                infoBox.appendChild(infoAllergies);
                 container.appendChild(infoBox);
 
                 nameColumn.appendChild(container);
@@ -594,153 +592,152 @@ fetch("../../../../models/database/FoodStock.json")
         console.error('Error fetching food data:', error);
     });
 
-// redirect to Pages
-// Define the function to calculate the total number of items
-function calculateTotalItems() {
-    let totalItemsCount = 0;
+// Default language
+let currentLang = 'en';
 
-    // Calculate total items from food menu
+// Function to check the count of selected products and display a popup if it exceeds 10
+// Function to close the popup
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+}
+
+// Function to check product count and display popup if necessary
+function checkProductCount() {
+    let totalSelectedProducts = 0;
+
+    // Count the number of selected products for beer
+    for (let i = 0; i < beers.length; i++) {
+        const beer = beers[i];
+        const quantitySpan = document.getElementById(beer.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for wine
+    for (let i = 0; i < wines.length; i++) {
+        const wine = wines[i];
+        const quantitySpan = document.getElementById(wine.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for cocktails
+    for (let i = 0; i < cocktails.length; i++) {
+        const cocktail = cocktails[i];
+        const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for food items
     const foodQuantitySpans = document.querySelectorAll('.food-menu span[id$="-quantity-value"]');
     foodQuantitySpans.forEach(span => {
-        totalItemsCount += parseInt(span.textContent);
+        totalSelectedProducts += parseInt(span.textContent);
     });
 
-    // Calculate total items from wine menu
-    const wineQuantitySpans = document.querySelectorAll('.wine-menu span[id$="-quantity-value"]');
-    wineQuantitySpans.forEach(span => {
-        totalItemsCount += parseInt(span.textContent);
-    });
+    // Check if the total count of selected products is greater than 10
+    if (totalSelectedProducts > 10) {
+        // Display the popup window
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
 
-    // Calculate total items from cocktail menu
-    const cocktailQuantitySpans = document.querySelectorAll('.cocktail-menu span[id$="-quantity-value"]');
-    cocktailQuantitySpans.forEach(span => {
-        totalItemsCount += parseInt(span.textContent);
-    });
+        // Prevent redirection to the next page
+        return false;
+    }
 
-    return totalItemsCount;
+    // If the count of selected products is not greater than 10, allow redirection
+    return true;
 }
 
-// Define the function to display the popup notification
-function displayPopup(message) {
-    const popupContainer = document.getElementById('popup-container');
-    const popupMessage = document.getElementById('popup-message');
-    popupMessage.textContent = message;
-    popupContainer.style.display = 'block';
+// Attach event listener to the close button
+document.getElementById('close-button').addEventListener('click', closePopup);
+
+
+
+// Function to trigger redirection to the next page considering the product count
+function redirectToNextPage() {
+    // Check the count of selected products
+    if (checkProductCount()) {
+        // Allow redirection to the next page
+        window.location.href = "/view/customers/checkPage/checkPage.html";
+    }
 }
 
-// Define the function to close the popup notification
-function closePopup() {
-    const popupContainer = document.getElementById('popup-container');
-    popupContainer.style.display = 'none';
-}
-
-// Define the function to redirect and check total items
-function redirectCheck() {
-    // Get the total number of items being ordered
-    const totalItems = calculateTotalItems();
-
-
-    // Check if the total number of items is greater than 10
-    if (totalItems > 10) {
-        // Display the popup notification
-        displayPopup("You cannot order more than 10 items at once.");
-
-    } else {
-        // Collect selected items
-        // Add your logic to collect selected items here...
-        const selectedItems = [];
-        let totalAmount = 0; // Initialize total amount to calculate overall total
-
-        const beerRows = document.querySelectorAll(".beer-menu table tr");
-        beerRows.forEach(row => {
-            const name = row.querySelector(".open-page-beer-name h2").textContent;
-            const price = parseFloat(row.querySelector("td:nth-child(2)").textContent); // Convert price to float
-            const quantity = parseInt(row.querySelector("td:nth-child(3) span").textContent);
-
-        if (quantity > 0) {
-            const itemTotal = price * quantity; // Calculate total amount for the item
-            selectedItems.push({ name, quantity, cost: itemTotal.toFixed(2) }); // Add total amount for the item in the object
-            totalAmount += itemTotal; // Add item total to overall total
-        }    
-    });
-        // Create temporary order object including total amount
-        const order = {
-            items: selectedItems,
-
-        }
-
-    // Convert order object to JSON
-    // Create temporary order object including total amount
-     window.temporaryOrderJSON = JSON.stringify(order);
-    // window.temporaryOrderJSON = JSON.stringify(order);
-
-
-    console.log("Temporary Order JSON:", temporaryOrderJSON,totalItems);
-    
-       
-
-        // Redirect to the CheckPage
-        window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(temporaryOrderJSON);
-        // window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(JSON.stringify(temporaryOrderJSON));
-
-
-
-}
-}
-    
+// Example usage: Add this function to the click event of the redirection button
+// e.g., <button onclick="redirectToNextPage()">Next</button>
 
 // filter functions
 
 // Filter food by allergy
-    function filterFoodByAllergy(allergy) {
-        return new Promise((resolve, reject) => {
-            // Fetch food data and filter based on the specified allergy
-            fetch("../../../../models/database/FoodStock.json")
-                .then(response => response.json())
-                .then(data => {
-                    const foodItems = data.foodItems || [];
-                    const filteredFood = foodItems.filter(food => {
-                        return food.ingredients.includes(allergy) || food.allergies.includes(allergy);
-                    });
-                    resolve(filteredFood);
-                })
-                .catch(error => {
-                    console.error('Error fetching food data:', error);
-                    reject(error);
+function filterFoodByAllergy(allergy) {
+    return new Promise((resolve, reject) => {
+        // Fetch food data and filter based on the specified allergy
+        fetch("../../../../models/database/FoodStock.json")
+            .then(response => response.json())
+            .then(data => {
+                const foodItems = data.foodItems || [];
+                const filteredFood = foodItems.filter(food => {
+                    return food.ingredients.includes(allergy) || food.allergies.includes(allergy);
                 });
-        });
-    }
-
-// Display filtered food
-    function displayFilteredFood(filteredFood) {
-        // Apply styling to filtered food items
-        filteredFood.forEach(food => {
-            const foodElement = document.getElementById(food.name);
-            if (foodElement) {
-                foodElement.style.color = "red";
-            }
-        });
-    }
-
-// Filter items by allergy
-    function filterItemsByAllergy() {
-        // Get the user input from the input field
-        const allergyInput = document.getElementById("allergy-input").value;
-        // Call the filter function with the user input
-        filterItems(allergyInput);
-    }
-
-// Main filter function
-    function filterItems(allergy) {
-        // Call the specific filter functions for drinks and food with the allergy input
-        Promise.all([filterCocktailsByAllergy(allergy), filterFoodByAllergy(allergy)])
-            .then(([filteredCocktails, filteredFood]) => {
-                // Display the filtered items
-                displayFilteredFood(filteredFood);
+                resolve(filteredFood);
             })
             .catch(error => {
-                console.error('Error filtering items:', error);
+                console.error('Error fetching food data:', error);
+                reject(error);
             });
-    }
-    
+    });
+}
+
+// Display filtered food
+function displayFilteredFood(filteredFood) {
+    // Apply styling to filtered food items
+    filteredFood.forEach(food => {
+        const foodElement = document.getElementById(food.name);
+        if (foodElement) {
+            foodElement.style.color = "red";
+        }
+    });
+}
+
+// Filter items by allergy
+function filterItemsByAllergy() {
+    // Get the user input from the input field
+    const allergyInput = document.getElementById("allergy-input").value;
+    // Call the filter function with the user input
+    filterItems(allergyInput);
+}
+
+// Main filter function
+function filterItems(allergy) {
+    // Call the specific filter functions for drinks and food with the allergy input
+    Promise.all([filterCocktailsByAllergy(allergy), filterFoodByAllergy(allergy)])
+        .then(([filteredCocktails, filteredFood]) => {
+            // Display the filtered items
+            displayFilteredFood(filteredFood);
+        })
+        .catch(error => {
+            console.error('Error filtering items:', error);
+        });
+}
+
+// Add event listener for language change
+$(".order-page-language-dropdown").change(function () {
+    const lang = $(this).val();
+    fetch("../../../../models/database/FoodStock.json")
+        .then(response => response.json())
+        .then(data => {
+            updateFoodTable(data, lang);
+            // Store the selected language in localStorage
+            localStorage.setItem('selectedLang', lang);
+        })
+        .catch(error => {
+            console.error('Error fetching food data:', error);
+        });
+});
+
+
+
+
+
+
+
+
 

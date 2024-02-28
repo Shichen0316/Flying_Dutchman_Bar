@@ -1,115 +1,208 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="orderPage.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orderPage.css">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
-    </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
+</head>
 
-    <body>
-        <div class="order-page-header">
-            <a class="order-page-back-button" href="/view/customers/startPage/startPage.html">
-                <img width= "50px" src="../../assets/backButton.svg" alt="Back Button">
-            </a>
+<body>
+<div class="order-page-header">
+    <a class="order-page-back-button" href="/view/customers/startPage/startPage.html">
+        <img width= "50px" src="../../assets/backButton.svg" alt="Back Button">
+    </a>
 
-            <div class="order-page-header-text">
-                <div class="order-page-food-drink-text">
-                    <h1 class="header-food">FOOD</h1>
-                    <h1>&</h1>
-                    <h1 class="header-drinks">DRINKS</h1>
-                </div>
-                <h2>Click on the name to be redirected to that catergory.</h2>
-            </div>
-
-            <img class="order-page-language-button" src="../../assets/languageButton.svg" alt="Language Button">
-
-            <div class="order-page-table-number">
-                <h2>Table No. :</h2>
-                <h1>12</h1>
-                <span>PERSON #1</span>
-            </div>
+    <div class="order-page-header-text">
+        <div class="order-page-food-drink-text">
+            <h1 class="header-food">FOOD</h1>
+            <h1>&</h1>
+            <h1 class="header-drinks">DRINKS</h1>
         </div>
+        <h2 class="click-message">Click on the name to be redirected to that category.</h2>
+    </div>
 
-        <div class="open-page-filter">
+    <select class="order-page-language-dropdown">
+        <option value="en">English</option>
+        <option value="sv">Swedish</option>
+        <option value="de">German</option>
+    </select>
 
-            <div class="open-page-filter-allergies">
-                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
-                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
-                </svg>
-                <h2>Allergies:</h2>
-                <input id="allergy-input" type="text" placeholder="Allergy type?">
-            </div>
+    <div class="order-page-table-number">
+        <h2 class="table-number">Table No. :</h2>
+        <h1>12</h1>
+        <span class="person">PERSON #1</span>
+    </div>
+</div>
 
-            <div class="open-page-filter-alcohol">
-                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
-                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
-                </svg>
-                <h2>Alcohol %:</h2>
-                <input id="alcohol-input" onkeyup="filterItemsByAlcohol()" type="text" placeholder="Alcohol %?">
-            </div>
+<div class="open-page-filter">
+
+    <div class="open-page-filter-allergies">
+        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+        </svg>
+        <h2 class="allergies">Allergies:</h2>
+        <!-- Input field to capture user input -->
+        <input id="allergy-input" type="text" placeholder="Allergy type?">
+        <!-- Button to trigger filtering -->
+        <button onclick="filterItemsByAllergy()">Filter</button>
+    </div>
+
+    <div class="open-page-filter-alcohol">
+        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+        </svg>
+        <h2 class="alcohol_percentage">Alcohol %:</h2>
+        <input id="alcohol-input" onkeyup="filterItemsByAlcohol()" type="text" placeholder="Alcohol %?">
+    </div>
 
 
-            <div class="open-page-filter-tannin">
-                <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
-                    <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
-                </svg>
-                <h2>Tannin:</h2>
-                <input id="tannin-input" onkeyup="filterFunction()" type="text" placeholder="Desired Tannin?">
-            </div>
-        </div>
+    <div class="open-page-filter-tannin">
+        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+            <circle cx="18.5" cy="18.5" r="17.5" stroke="#BA0000" stroke-width="2"/>
+        </svg>
+        <h2 class="tannin">Tannin:</h2>
+        <input id="tannin-input" onkeyup="filterFunction()" type="text" placeholder="Desired Tannin?">
+    </div>
+</div>
 
-        <div class="order-page-menu">
-            <div class="order-page-drink-title">
-                <h3>DRINKS</h3>
-                <h2>Beer, Wine, Cocktails</h2>
-            </div>
-        </div>
+<div class="order-page-menu">
+    <div class="order-page-drink-title">
+        <h3 class="drink-title">DRINKS</h3>
+        <h2 class="drink-categories">Beer, Wine, Cocktails</h2>
+    </div>
+</div>
 
-        <div class="beer-menu">
-            <table id="beer-table">
-                <caption>Beer</caption>
-            </table>
-        </div>
+<div class="beer-menu">
+    <table id="beer-table">
+        <caption class="beer-caption">Beer</caption>
+    </table>
+</div>
 
-        <div class="wine-menu">
-            <table id="wine-table">
-                <caption>Wine:</caption>
-            </table>
-        </div>
+<div class="wine-menu">
+    <table id="wine-table">
+        <caption class="wine-caption">Wine:</caption>
+    </table>
+</div>
 
-        <div class="cocktail-menu">
-            <table id="cocktail-table">
-                <caption>Cocktails:</caption>
-            </table>
-        </div>
+<div class="cocktail-menu">
+    <table id="cocktail-table">
+        <caption class="cocktail-caption">Cocktails:</caption>
+    </table>
+</div>
 
-        <div class="order-page-food-menu">
-            <div class="order-page-food-title">
-                <h3>FOOD</h3>
-            </div>
-        </div>
+<div class="order-page-menu">
+    <div class="order-page-food-title">
+        <h3 class="food-title">FOOD</h3>
+    </div>
+</div>
 
-        <div class="food-menu">
-            <table id="food-table">
-            </table>
-        </div>
+<div class="food-menu">
+    <table id="food-table">
+    </table>
+</div>
 
-        <div class="order-page-buttons">
-            <button class="order-page-add-person-button">ADD PERSON</button>
-            <button class="order-page-confirm-button" onclick="redirectCheck()">ORDER</button>
-        </div>
 
-        <div id="popup-container" class="popup-container">
-            <div class="popup-content">
-                <span class="close-popup" onclick="closePopup()">&times;</span>
-                <p id="popup-message"></p>
-            </div>
-        </div>
+<div class="order-page-buttons">
+    <button class="order-page-add-person-button add-person-button">ADD PERSON</button>
+    <button class="order-page-confirm-button confirm-button" onclick="redirectToNextPage()">ORDER</button>
+</div>
 
-        <script src="orderPage.js"defer></script>
-    </body>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="close-button" class="close-button">&times;</span>
+        <h2 class="popup-title"></h2>
+        <p class="popup-message"></p>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="orderPage.js"></script>
+<script>
+    $(document).ready(function () {
+        var translations = {
+            en: {
+                "header-food": "FOOD",
+                "header-drinks": "DRINKS",
+                "table-number": "Table No. :",
+                "person": "PERSON #1",
+                "click-message": "Click on the name to be redirected to that category.",
+                "allergies": "Allergies:",
+                "alcohol_percentage": "Alcohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "DRINKS",
+                "drink-categories": "Beer, Wine, Cocktails",
+                "beer-caption": "Beer",
+                "wine-caption": "Wine:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "FOOD",
+                "add-person-button": "ADD PERSON",
+                "confirm-button": "ORDER",
+                "popup-title": "Warning!",
+                "popup-message": "You cannot order more than 10 items at once!"
+            },
+            sv: {
+                "header-food": "MAT",
+                "header-drinks": "DRYCKER",
+                "table-number": "Bord nr. :",
+                "person": "PERSON #1",
+                "click-message": "Klicka på namnet för att omdirigera till den kategorin.",
+                "allergies": "Allergier:",
+                "alcohol_percentage": "Alkohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "DRYCKER",
+                "drink-categories": "Öl, Vin, Cocktails",
+                "beer-caption": "Öl",
+                "wine-caption": "Vin:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "MAT",
+                "add-person-button": "LÄGG TILL PERSON",
+                "confirm-button": "BESTÄLL",
+                "popup-title": "Varning!",
+                "popup-message": "Du kan inte beställa mer än 10 artiklar på en gång!"
+            },
+            de: {
+                "header-food": "ESSEN",
+                "header-drinks": "GETRÄNKE",
+                "table-number": "Tischnr. :",
+                "person": "PERSON #1",
+                "click-message": "Klicken Sie auf den Namen, um zu dieser Kategorie umgeleitet zu werden.",
+                "allergies": "Allergien:",
+                "alcohol_percentage": "Alkohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "GETRÄNKE",
+                "drink-categories": "Bier, Wein, Cocktails",
+                "beer-caption": "Bier",
+                "wine-caption": "Wein:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "ESSEN",
+                "add-person-button": "PERSON HINZUFÜGEN",
+                "confirm-button": "BESTELLEN",
+                "popup-title": "Warnung!",
+                "popup-message": "Sie können nicht mehr als 10 Artikel auf einmal bestellen!"
+            }
+        };
+
+        function updateContent(lang) {
+            for (var key in translations[lang]) {
+                if (translations[lang].hasOwnProperty(key)) {
+                    $("." + key).text(translations[lang][key]);
+                    $("." + key).attr("placeholder", translations[lang][key]);
+                }
+            }
+        }
+
+        updateContent('en');
+
+        $(".order-page-language-dropdown").change(function () {
+            var lang = $(this).val();
+            updateContent(lang);
+        });
+    });
+</script>
+</body>
 </html>
