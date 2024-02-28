@@ -362,6 +362,45 @@ td {
     margin: 0 5px;
 }
 
+.popup {
+    display: none; /* Initially hide the pop-up */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 9999; /* Ensure it's on top of other content */
+    overflow: auto; /* Enable scrolling if content exceeds viewport */
+}
+
+.popup-content {
+    background-color: #ffffff; /* White background */
+    margin: 10% auto; /* Center the pop-up vertically and horizontally */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    width: 80%;
+    max-width: 600px; /* Set maximum width for the pop-up */
+    position: relative; /* Position relative to allow absolute positioning of close button */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #888; /* Light gray color */
+    cursor: pointer;
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.close-button:hover {
+    color: #555; /* Darker gray color on hover */
+}
+
+
+
 
 
 

@@ -3,6 +3,7 @@
 var beers;
 var wines;
 var cocktails;
+
 fetch("../../../../models/database/DrinksStock.json")
     .then(response => response.json())
     .then(data => {
@@ -594,10 +595,74 @@ fetch("../../../../models/database/FoodStock.json")
 // Default language
 let currentLang = 'en';
 
-// redirect to Pages
-function redirectCheck() {
-    window.location.href = "/view/customers/checkPage/checkPage.html";
+// Function to check the count of selected products and display a popup if it exceeds 10
+// Function to close the popup
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
 }
+
+// Function to check product count and display popup if necessary
+function checkProductCount() {
+    let totalSelectedProducts = 0;
+
+    // Count the number of selected products for beer
+    for (let i = 0; i < beers.length; i++) {
+        const beer = beers[i];
+        const quantitySpan = document.getElementById(beer.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for wine
+    for (let i = 0; i < wines.length; i++) {
+        const wine = wines[i];
+        const quantitySpan = document.getElementById(wine.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for cocktails
+    for (let i = 0; i < cocktails.length; i++) {
+        const cocktail = cocktails[i];
+        const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
+        totalSelectedProducts += parseInt(quantitySpan.textContent);
+    }
+
+    // Count the number of selected products for food items
+    const foodQuantitySpans = document.querySelectorAll('.food-menu span[id$="-quantity-value"]');
+    foodQuantitySpans.forEach(span => {
+        totalSelectedProducts += parseInt(span.textContent);
+    });
+
+    // Check if the total count of selected products is greater than 10
+    if (totalSelectedProducts > 10) {
+        // Display the popup window
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
+
+        // Prevent redirection to the next page
+        return false;
+    }
+
+    // If the count of selected products is not greater than 10, allow redirection
+    return true;
+}
+
+// Attach event listener to the close button
+document.getElementById('close-button').addEventListener('click', closePopup);
+
+
+
+// Function to trigger redirection to the next page considering the product count
+function redirectToNextPage() {
+    // Check the count of selected products
+    if (checkProductCount()) {
+        // Allow redirection to the next page
+        window.location.href = "/view/customers/checkPage/checkPage.html";
+    }
+}
+
+// Example usage: Add this function to the click event of the redirection button
+// e.g., <button onclick="redirectToNextPage()">Next</button>
 
 // filter functions
 

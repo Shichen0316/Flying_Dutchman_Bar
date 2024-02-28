@@ -108,8 +108,17 @@
 
 <div class="order-page-buttons">
     <button class="order-page-add-person-button add-person-button">ADD PERSON</button>
-    <button class="order-page-confirm-button confirm-button" onclick="redirectCheck()">ORDER</button>
+    <button class="order-page-confirm-button confirm-button" onclick="redirectToNextPage()">ORDER</button>
 </div>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="close-button" class="close-button">&times;</span>
+        <h2 class="popup-title"></h2>
+        <p class="popup-message"></p>
+    </div>
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="orderPage.js"></script>
@@ -132,7 +141,9 @@
                 "cocktail-caption": "Cocktails:",
                 "food-title": "FOOD",
                 "add-person-button": "ADD PERSON",
-                "confirm-button": "ORDER"
+                "confirm-button": "ORDER",
+                "popup-title": "Warning!",
+                "popup-message": "You cannot order more than 10 items at once!"
             },
             sv: {
                 "header-food": "MAT",
@@ -150,7 +161,9 @@
                 "cocktail-caption": "Cocktails:",
                 "food-title": "MAT",
                 "add-person-button": "LÄGG TILL PERSON",
-                "confirm-button": "BESTÄLL"
+                "confirm-button": "BESTÄLL",
+                "popup-title": "Varning!",
+                "popup-message": "Du kan inte beställa mer än 10 artiklar på en gång!"
             },
             de: {
                 "header-food": "ESSEN",
@@ -168,7 +181,9 @@
                 "cocktail-caption": "Cocktails:",
                 "food-title": "ESSEN",
                 "add-person-button": "PERSON HINZUFÜGEN",
-                "confirm-button": "BESTELLEN"
+                "confirm-button": "BESTELLEN",
+                "popup-title": "Warnung!",
+                "popup-message": "Sie können nicht mehr als 10 Artikel auf einmal bestellen!"
             }
         };
 
