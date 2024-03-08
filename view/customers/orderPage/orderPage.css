@@ -197,9 +197,6 @@ h4, h5, h6, h7, h8 {
     margin: 0 0 0 10px;
   }
 
-  table {
-    width: 100%; /* Ensure the table takes up the full width of its container */
-  }
 
   tr {
     width: 100%;
@@ -220,7 +217,6 @@ h4, h5, h6, h7, h8 {
   .beer-menu,
   .wine-menu,
   .cocktail-menu {
-    width: 80%;
     margin: 3% 10% 3% 10%;
   }
 
@@ -301,10 +297,13 @@ h4, h5, h6, h7, h8 {
     background-color: #f2f2f2;
 }
 
-.order-page-drink-title h2,
-.order-page-food-title {
+.order-page-drink-title h2 {
     padding-bottom: 20px;
     margin-left: 15px;
+}
+
+.food-title {
+    margin: 0;
 }
 
 tr {
@@ -337,7 +336,7 @@ td {
     display: none;
     position: absolute;
     max-width: 500px;
-    margin-top: 150px;
+    margin-top: 100px;
     padding: 0 10px 0 10px;
     border: 2px solid #BA0000;
     background: #FFF;
@@ -397,6 +396,45 @@ td {
 
 .close-button:hover {
     color: #555; /* Darker gray color on hover */
+}
+
+.order-page-container {
+    display: flex;
+}
+
+.order-page-menu-container {
+    flex: 2;
+}
+
+.order-page-summary-container {
+    flex: 1;
+    border: 2px solid #BA0000;
+    background: #F4F4F4;
+
+    margin: 3% 5% 5% 5%;
+    padding: 2%;
+}
+
+.order-page-order {
+    display: flex;
+    flex-direction: row;
+}
+
+.beer-name-column,
+.wine-name-column,
+.cocktail-name-column,
+.food-name-column {
+    width: 300px;
+    white-space: normal;
+}
+
+.beer-price-column,
+.wine-price-column,
+.cocktail-price-column,
+.food-price-column {
+    margin: 0 10px 0 10px;
+
+    width: 100px;
 }
 
 

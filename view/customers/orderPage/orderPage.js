@@ -19,426 +19,202 @@ fetch("../../../../models/database/DrinksStock.json")
         const wineTable = document.getElementById("wine-table");
         const cocktailTable = document.getElementById("cocktail-table");
 
-        for (let i = 0; i < beers.length; i += 2) {
+        for (let i = 0; i < beers.length; i++) {
             const beerRow = document.createElement("tr");
-
-            for (let j = 0; j < 2; j++) {
-                const beer = beers[i + j];
-
-                if (beer) {
-                    // For every beer element, 
-                        // create a table row
-                        // create 3 table columns
-                            // first column -- beer name + info button
-                                // create the column
-                                // create a h2 element --> assign textContent, beer name to it
-                                // create an img element --. assign src + alt to it
-                                // append h2 + img button to table column
-
-                            //second column -- beer price
-                                //create the column
-                                //assign textContent, beer price.
-                            
-                            //third column -- quantity buttons
-                                //create the column
-                                //create a MINUS button element --> assign classname and alt
-                                //create a span element --> assign textContent to it,
-                                //create an ADD button element --> assign classname and alt.
-                        // append all columns to the rows + row to the table
-
-
-                    // first column -- beer name + info button
-                    const nameColumn = document.createElement("td");
-
-                    const container = document.createElement("div");
-                    container.className = "open-page-beer-name"
-
-                    const beerName = document.createElement("h2");
-                    beerName.textContent = beer.name;
-
-                    const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                    infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                    infoButton.setAttribute("width", "17");
-                    infoButton.setAttribute("height", "9");
-                    infoButton.setAttribute("viewBox", "0 0 17 9");
-                    infoButton.setAttribute("fill", "#212121");
-                    infoButton.setAttribute("class", "open-page-button-svg");
-
-                    infoButton.onclick = function() {
-                        if (infoBox.style.display === "block") {
-                            infoBox.style.display = "none";
-                        } else {
-                            infoBox.style.display = "block";
-                        }
-                    };
-
-                    // Add hover effect
-                    infoButton.addEventListener("mouseenter", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#BA0000"); // Change to the desired color on hover
-                    });
-
-                    infoButton.addEventListener("mouseleave", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#212121"); // Revert to the original color when not hovering
-                    });
-
-                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
-                    path.setAttribute("fill", "#212121");
-
-                    infoButton.appendChild(path);
-
-                    container.appendChild(beerName);
-                    container.appendChild(infoButton);
-
-                    const infoBox = document.createElement("div");
-                    infoBox.className = "open-page-info-box";
-
-                    const infoProducer = document.createElement("h4");
-                    const infoCountry = document.createElement("h5");
-                    const infoType = document.createElement("h6");
-                    const infoStrength = document.createElement("h7");
-                    const infoServing = document.createElement("h8");
-
-                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + beer.producer;
-                    infoCountry.textContent = "Country/ Land/ Land: " + beer.countryoforiginlandname;
-                    infoType.textContent = "Type/ Typ/ Typ:: " + beer.category;
-                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + beer.alcoholstrength;
-                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + beer.packaging;
-
-                    infoBox.appendChild(infoProducer);
-                    infoBox.appendChild(infoCountry);
-                    infoBox.appendChild(infoType);
-                    infoBox.appendChild(infoStrength);
-                    infoBox.appendChild(infoServing);
-
-                    nameColumn.appendChild(container);
-                    nameColumn.appendChild(infoBox)
-
-                    // second column -- beer price
-                    const priceColumn = document.createElement("td");
-                    priceColumn.textContent = beer.price;
-
-                    // third column -- quantity buttons
-                    const buttonColumn = document.createElement("td");
-                    const minusButton = document.createElement("button");
-                    minusButton.className = "minus-button";
-                    minusButton.alt = "Minus";
-
-                    minusButton.onclick = function() {
-                        const quantitySpan = document.getElementById(beer.name + "-quantity-value"); 
-                    
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity > 0) {
-                            quantitySpan.textContent = quantity - 1;
-                        }
-                    };
-                    
-
-                    const quantitySpan = document.createElement("span");
-                    quantitySpan.textContent = "0";
-                    quantitySpan.id = beer.name + "-quantity-value"
-
-                    const addButton = document.createElement("button");
-                    addButton.className = "add-button";
-                    addButton.alt = "Add";
-
-                    addButton.onclick = function() {
-                        const quantitySpan = document.getElementById(beer.name + "-quantity-value"); 
-                    
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity >= 0) {
-                            quantitySpan.textContent = quantity + 1;
-                        }
-                    };
-
-                    buttonColumn.appendChild(minusButton);
-                    buttonColumn.appendChild(quantitySpan);
-                    buttonColumn.appendChild(addButton);
-
-                    beerRow.appendChild(nameColumn);
-                    beerRow.appendChild(priceColumn);
-                    beerRow.appendChild(buttonColumn);
-
-                    beerTable.appendChild(beerRow);
-                }
-
-                else {
-                    // If there's no beer for this cell, create an empty cell
-                    const cell = document.createElement("td");
-                    beerRow.appendChild(cell);
-                }
+            const beer = beers[i];
+        
+            if (beer) {
+        
+                // Single column for drink name, price, and quantity
+                const column = document.createElement("td");
+        
+                // Drink name
+                const beerName = document.createElement("h2");
+                beerName.textContent = beer.name;
+                beerName.className = "beer-name-column"
+        
+                // Price
+                const priceParagraph = document.createElement("p");
+                priceParagraph.textContent = beer.price;
+                priceParagraph.className = "beer-price-column"
+        
+                // Quantity buttons
+                const quantitySpan = document.createElement("span");
+                quantitySpan.textContent = "0";
+                quantitySpan.id = beer.name + "-quantity-value";
+        
+                const minusButton = document.createElement("button");
+                minusButton.className = "minus-button";
+                minusButton.alt = "Minus";
+                minusButton.onclick = function() {
+                    const quantitySpan = document.getElementById(beer.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    if (quantity > 0) {
+                        quantitySpan.textContent = quantity - 1;
+                    }
+                };
+        
+                const addButton = document.createElement("button");
+                addButton.className = "add-button";
+                addButton.alt = "Add";
+                addButton.onclick = function() {
+                    const quantitySpan = document.getElementById(beer.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    quantitySpan.textContent = quantity + 1;
+                };
+        
+                // Append all elements to the single column
+                column.appendChild(beerName);
+                column.appendChild(priceParagraph);
+                column.appendChild(minusButton);
+                column.appendChild(quantitySpan);
+                column.appendChild(addButton);
+        
+                // Append the single column to the row
+                beerRow.appendChild(column);
+            } else {
+                // If there's no beer for this cell, create an empty cell
+                const cell = document.createElement("td");
+                beerRow.appendChild(cell);
             }
-
+        
+            // Append the row to the table
             beerTable.appendChild(beerRow);
         }
 
-        for (let i = 0; i < wines.length; i += 2) {
+        for (let i = 0; i < wines.length; i++) {
             const wineRow = document.createElement("tr");
-
-            for (let j = 0; j < 2; j++) {
-                const wine = wines[i + j];
-
-                if (wine) {
-
-                    // first column -- wine name + info button
-                    const nameColumn = document.createElement("td");
-
-                    const container = document.createElement("div");
-                    container.className = "open-page-wine-name"
-
-                    const wineName = document.createElement("h2");
-                    wineName.textContent = wine.name;
-
-                    const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                    infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                    infoButton.setAttribute("width", "17");
-                    infoButton.setAttribute("height", "9");
-                    infoButton.setAttribute("viewBox", "0 0 17 9");
-                    infoButton.setAttribute("fill", "#212121");
-                    infoButton.setAttribute("class", "open-page-button-svg");
-
-                    infoButton.onclick = function() {
-                        if (infoBox.style.display === "block") {
-                            infoBox.style.display = "none";
-                        } else {
-                            infoBox.style.display = "block";
-                        }
-                    };
-
-                    // Add hover effect
-                    infoButton.addEventListener("mouseenter", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#BA0000"); // Change to the desired color on hover
-                    });
-
-                    infoButton.addEventListener("mouseleave", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#212121"); // Revert to the original color when not hovering
-                    });
-
-                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
-                    path.setAttribute("fill", "#212121");
-
-                    infoButton.appendChild(path);
-
-                    container.appendChild(wineName);
-                    container.appendChild(infoButton);
-
-                    const infoBox = document.createElement("div");
-                    infoBox.className = "open-page-info-box";
-
-                    const infoProducer = document.createElement("h4");
-                    const infoYear = document.createElement("h5");
-                    const infoType = document.createElement("h6");
-                    const infoGrape = document.createElement("h7");
-                    const infoServing = document.createElement("h8");
-
-                    infoProducer.textContent = "Producer/ Producent/ Produzent: " + wine.producer;
-                    infoYear.textContent = "Year/ År/ Jahr: " + wine.productionyear;
-                    infoType.textContent = "Type/ Typ/ Typ: " + wine.captype;
-                    infoGrape.textContent = "Grape/ Druva/ Traube: " + wine.name2;
-                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + wine.packaging;
-
-                    infoBox.appendChild(infoProducer);
-                    infoBox.appendChild(infoYear);
-                    infoBox.appendChild(infoType);
-                    infoBox.appendChild(infoGrape);
-                    infoBox.appendChild(infoServing);
-
-                    nameColumn.appendChild(container);
-                    nameColumn.appendChild(infoBox)
-
-                    // second column -- wine price
-                    const priceColumn = document.createElement("td");
-                    priceColumn.textContent = wine.price;
-
-                    // third column -- quantity buttons
-                    const buttonColumn = document.createElement("td");
-                    const minusButton = document.createElement("button");
-                    minusButton.className = "minus-button";
-                    minusButton.alt = "Minus";
-
-                    minusButton.onclick = function() {
-                        const quantitySpan = document.getElementById(wine.name + "-quantity-value");
-
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity > 0) {
-                            quantitySpan.textContent = quantity - 1;
-                        }
-                    };
-
-
-                    const quantitySpan = document.createElement("span");
-                    quantitySpan.textContent = "0";
-                    quantitySpan.id = wine.name + "-quantity-value"
-
-                    const addButton = document.createElement("button");
-                    addButton.className = "add-button";
-                    addButton.alt = "Add";
-
-                    addButton.onclick = function() {
-                        const quantitySpan = document.getElementById(wine.name + "-quantity-value");
-
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity >= 0) {
-                            quantitySpan.textContent = quantity + 1;
-                        }
-                    };
-
-                    buttonColumn.appendChild(minusButton);
-                    buttonColumn.appendChild(quantitySpan);
-                    buttonColumn.appendChild(addButton);
-
-                    wineRow.appendChild(nameColumn);
-                    wineRow.appendChild(priceColumn);
-                    wineRow.appendChild(buttonColumn);
-
-                    wineTable.appendChild(wineRow);
-                }
-
-                else {
-                    // If there's no wine for this cell, create an empty cell
-                    const cell = document.createElement("td");
-                    wineRow.appendChild(cell);
-                }
+            const wine = wines[i];
+        
+            if (wine) {
+                // Create a table row
+                // Create a single table column for wine name, price, and quantity
+        
+                // Single column for wine name, price, and quantity
+                const column = document.createElement("td");
+        
+                // Wine name
+                const wineName = document.createElement("h2");
+                wineName.textContent = wine.name;
+                wineName.className = "wine-name-column";
+        
+                // Price
+                const priceParagraph = document.createElement("p");
+                priceParagraph.textContent = wine.price;
+                priceParagraph.className = "wine-price-column";
+        
+                // Quantity buttons
+                const quantitySpan = document.createElement("span");
+                quantitySpan.textContent = "0";
+                quantitySpan.id = wine.name + "-quantity-value";
+        
+                const minusButton = document.createElement("button");
+                minusButton.className = "minus-button";
+                minusButton.alt = "Minus";
+                minusButton.onclick = function() {
+                    const quantitySpan = document.getElementById(wine.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    if (quantity > 0) {
+                        quantitySpan.textContent = quantity - 1;
+                    }
+                };
+        
+                const addButton = document.createElement("button");
+                addButton.className = "add-button";
+                addButton.alt = "Add";
+                addButton.onclick = function() {
+                    const quantitySpan = document.getElementById(wine.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    quantitySpan.textContent = quantity + 1;
+                };
+        
+                // Append all elements to the single column
+                column.appendChild(wineName);
+                column.appendChild(priceParagraph);
+                column.appendChild(minusButton);
+                column.appendChild(quantitySpan);
+                column.appendChild(addButton);
+        
+                // Append the single column to the row
+                wineRow.appendChild(column);
+            } else {
+                // If there's no wine for this cell, create an empty cell
+                const cell = document.createElement("td");
+                wineRow.appendChild(cell);
             }
-
-        wineTable.appendChild(wineRow);
+        
+            // Append the row to the table
+            wineTable.appendChild(wineRow);
         }
 
 
-        for (let i = 0; i < cocktails.length; i += 2) {
+        for (let i = 0; i < cocktails.length; i++) {
             const cocktailRow = document.createElement("tr");
-
-            for (let j = 0; j < 2; j++) {
-                const cocktail = cocktails[i + j];
-
-                if (cocktail) {
-
-                    // first column -- cocktail name + info button
-                    const nameColumn = document.createElement("td");
-
-                    const container = document.createElement("div");
-                    container.className = "open-page-cocktail-name"
-
-                    const cocktailName = document.createElement("h2");
-                    cocktailName.textContent = cocktail.name;
-
-                    const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                    infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                    infoButton.setAttribute("width", "17");
-                    infoButton.setAttribute("height", "9");
-                    infoButton.setAttribute("viewBox", "0 0 17 9");
-                    infoButton.setAttribute("fill", "#212121");
-                    infoButton.setAttribute("class", "open-page-button-svg");
-
-                    infoButton.onclick = function() {
-                        if (infoBox.style.display === "block") {
-                            infoBox.style.display = "none";
-                        } else {
-                            infoBox.style.display = "block";
-                        }
-                    };
-
-                    // Add hover effect
-                    infoButton.addEventListener("mouseenter", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#BA0000"); // Change to the desired color on hover
-                    });
-
-                    infoButton.addEventListener("mouseleave", function() {
-                        path.style.transition = "fill 0.2s ease";
-                        path.setAttribute("fill", "#212121"); // Revert to the original color when not hovering
-                    });
-
-                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
-                    path.setAttribute("fill", "#212121");
-
-                    infoButton.appendChild(path);
-
-                    container.appendChild(cocktailName);
-                    container.appendChild(infoButton);
-
-                    const infoBox = document.createElement("div");
-                    infoBox.className = "open-page-info-box";
-
-                    const infoContents = document.createElement("h4");
-                    const infoStrength = document.createElement("h5");
-                    const infoServing = document.createElement("h6");
-
-
-                    infoContents.textContent = "Contents/ Innehåll/ Inhalt: " + cocktail.ingredients;
-                    infoStrength.textContent = "Strength/ Styrka/ Stärke: " + cocktail.alcoholstrength;
-                    infoServing.textContent = "Serving Size/ Serveringsstorlek/ Serviergröße: " + cocktail.packaging;
-
-                    infoBox.appendChild(infoContents);
-                    infoBox.appendChild(infoStrength);
-                    infoBox.appendChild(infoServing);
-
-                    nameColumn.appendChild(container);
-                    nameColumn.appendChild(infoBox)
-
-                    // second column -- cocktail price
-                    const priceColumn = document.createElement("td");
-                    priceColumn.textContent = cocktail.price;
-
-                    // third column -- quantity buttons
-                    const buttonColumn = document.createElement("td");
-                    const minusButton = document.createElement("button");
-                    minusButton.className = "minus-button";
-                    minusButton.alt = "Minus";
-
-                    minusButton.onclick = function() {
-                        const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
-
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity > 0) {
-                            quantitySpan.textContent = quantity - 1;
-                        }
-                    };
-
-
-                    const quantitySpan = document.createElement("span");
-                    quantitySpan.textContent = "0";
-                    quantitySpan.id = cocktail.name + "-quantity-value"
-
-                    const addButton = document.createElement("button");
-                    addButton.className = "add-button";
-                    addButton.alt = "Add";
-
-                    addButton.onclick = function() {
-                        const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
-
-                        let quantity = parseInt(quantitySpan.textContent);
-                        if (quantity >= 0) {
-                            quantitySpan.textContent = quantity + 1;
-                        }
-                    };
-
-                    buttonColumn.appendChild(minusButton);
-                    buttonColumn.appendChild(quantitySpan);
-                    buttonColumn.appendChild(addButton);
-
-                    cocktailRow.appendChild(nameColumn);
-                    cocktailRow.appendChild(priceColumn);
-                    cocktailRow.appendChild(buttonColumn);
-
-                    cocktailTable.appendChild(cocktailRow);
-                }
-
-                else {
-                    // If there's no cocktail for this cell, create an empty cell
-                    const cell = document.createElement("td");
-                    cocktailRow.appendChild(cell);
-                }
+            const cocktail = cocktails[i];
+        
+            if (cocktail) {
+                // Create a table row
+                // Create a single table column for cocktail name, price, and quantity
+        
+                // Single column for cocktail name, price, and quantity
+                const column = document.createElement("td");
+        
+                // Cocktail name
+                const cocktailName = document.createElement("h2");
+                cocktailName.textContent = cocktail.name;
+                cocktailName.className = "cocktail-name-column";
+        
+                // Price
+                const priceParagraph = document.createElement("p");
+                priceParagraph.textContent = cocktail.price;
+                priceParagraph.className = "cocktail-price-column"
+        
+                // Quantity buttons
+                const quantitySpan = document.createElement("span");
+                quantitySpan.textContent = "0";
+                quantitySpan.id = cocktail.name + "-quantity-value";
+        
+                const minusButton = document.createElement("button");
+                minusButton.className = "minus-button";
+                minusButton.textContent = "-";
+                minusButton.alt = "Minus";
+                minusButton.onclick = function() {
+                    const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    if (quantity > 0) {
+                        quantitySpan.textContent = quantity - 1;
+                    }
+                };
+        
+                const addButton = document.createElement("button");
+                addButton.className = "add-button";
+                addButton.textContent = "+";
+                addButton.alt = "Add";
+                addButton.onclick = function() {
+                    const quantitySpan = document.getElementById(cocktail.name + "-quantity-value");
+                    let quantity = parseInt(quantitySpan.textContent);
+                    quantitySpan.textContent = quantity + 1;
+                };
+        
+                // Append all elements to the single column
+                column.appendChild(cocktailName);
+                column.appendChild(priceParagraph);
+                column.appendChild(minusButton);
+                column.appendChild(quantitySpan);
+                column.appendChild(addButton);
+        
+                // Append the single column to the row
+                cocktailRow.appendChild(column);
+            } else {
+                // If there's no cocktail for this cell, create an empty cell
+                const cell = document.createElement("td");
+                cocktailRow.appendChild(cell);
             }
-
+        
+            // Append the row to the table
             cocktailTable.appendChild(cocktailRow);
         }
+        
 })
 
 function processBeersData() {
@@ -495,6 +271,7 @@ fetch("../../../../models/database/FoodStock.json")
 
                 const foodName = document.createElement("h2");
                 foodName.textContent = food.name;
+                foodName.className = "food-name-column";
 
                 const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -536,8 +313,9 @@ fetch("../../../../models/database/FoodStock.json")
 
                 // Second column -- empty column for price
                 const priceColumn = document.createElement("td");
-                priceColumn.textContent = food.price; // This line is removed
-
+                priceColumn.textContent = food.price;
+                priceColumn.className = "food-price-column";
+                
                 // Third column -- quantity buttons
                 const buttonColumn = document.createElement("td");
                 const minusButton = document.createElement("button");
