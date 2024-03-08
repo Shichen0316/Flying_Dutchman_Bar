@@ -521,7 +521,7 @@ const order = [];
 // Define a variable to store all orders
 let allOrders = [];
 
-function createOrder() {
+function createOrder1() {
     // Collect selected items for the new order
     const selectedItems = [];
 
@@ -562,82 +562,90 @@ function createOrder() {
         allOrders.push(selectedItems);
     }
 }
-// function createOrder(appendOrder = true) {
-//     let order = [];
+function createOrder() {
+    // Collect selected items for the new order
+    const selectedItems = [];
 
-//     // If appendOrder is false, reset order to an empty array
-//     if (!appendOrder) {
-//         order = [];
-//     }
+    // Collect selected beers
+    for (const beer of beers) {
+        const quantity = parseInt(document.getElementById(beer.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: beer.name, quantity, cost: (beer.price * quantity).toFixed(2) });
+        }
+    }
 
-//     // Collect selected items
-//     const selectedItems = [];
+    // Collect selected wines
+    for (const wine of wines) {
+        const quantity = parseInt(document.getElementById(wine.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: wine.name, quantity, cost: (wine.price * quantity).toFixed(2) });
+        }
+    }
 
-//     // Collect selected beers
-//     for (const beer of beers) {
-//         const quantity = parseInt(document.getElementById(beer.name + "-quantity-value").textContent);
-//         if (quantity > 0) {
-//             selectedItems.push({ name: beer.name, quantity, cost: (beer.price * quantity).toFixed(2) });
-//         }
-//     }
+    // Collect selected cocktails
+    for (const cocktail of cocktails) {
+        const quantity = parseInt(document.getElementById(cocktail.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: cocktail.name, quantity, cost: (cocktail.price * quantity).toFixed(2) });
+        }
+    }
 
-//     // Collect selected wines
-//     for (const wine of wines) {
-//         const quantity = parseInt(document.getElementById(wine.name + "-quantity-value").textContent);
-//         if (quantity > 0) {
-//             selectedItems.push({ name: wine.name, quantity, cost: (wine.price * quantity).toFixed(2) });
-//         }
-//     }
-
-//     // Collect selected cocktails
-//     for (const cocktail of cocktails) {
-//         const quantity = parseInt(document.getElementById(cocktail.name + "-quantity-value").textContent);
-//         if (quantity > 0) {
-//             selectedItems.push({ name: cocktail.name, quantity, cost: (cocktail.price * quantity).toFixed(2) });
-//         }
-//     }
-
-//     // Collect selected food items
-//     for (const food of foodItems) {
-//         const quantity = parseInt(document.getElementById(food.name + "-quantity-value").textContent);
-//         if (quantity > 0) {
-//             selectedItems.push({ name: food.name, quantity, cost: (food.price * quantity).toFixed(2) });
-//         }
-//     }
-
-//     // If appendOrder is true and there are existing orders, append selectedItems to the existing order
-//     if (appendOrder && order.length > 0) {
-//         order[0] = order[0].concat(selectedItems);
-//     } else {
-//         // Otherwise, create a new order array with selectedItems
-//         order.push(selectedItems);
-//     }
-
-//     return order;
-// }
-// let existingOrders = [];
-// function encodeOrder(order) {
-//     const encodedOrder = encodeURIComponent(JSON.stringify(order));
-//     return encodedOrder;
-// }
-// document.querySelector('.order-page-add-person-button').addEventListener('click', function() {
-   
+    // Collect selected food items
+    for (const food of foodItems) {
+        const quantity = parseInt(document.getElementById(food.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: food.name, quantity, cost: (food.price * quantity).toFixed(2) });
+        }
+    }
+    
+    // Add the selected items to the allOrders array
+    if (selectedItems.length > 0) {
+        allOrders.push(selectedItems);
+        updateOrderListDisplay();
+    }
     
 
-//     // Call createOrder function to create a new order
-//     createOrder();
+}
+
+function updateOrderListDisplay() {
+    const orderList = document.getElementById('order-list');
+    orderList.innerHTML = ''; // Clear the previous content
+
+    // Loop through allOrders and populate the order list
+    allOrders.forEach((order, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Order ${index + 1}: `;
+        listItem.setAttribute('data-index', index); // Set custom attribute for index
+        
+        order.forEach(item => {
+            const itemText = `${item.quantity} ${item.name} - $${item.cost}`;
+            const itemElement = document.createElement('div');
+            itemElement.textContent = itemText;
+            listItem.appendChild(itemElement);
+        });
+
+        // Create a delete button for each order
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => deleteOrder(index));
+        listItem.appendChild(deleteButton);
+        listItem.draggable = true;
+        orderList.appendChild(listItem);
+    });
+}
+
+function deleteOrder(index) {
+    allOrders.splice(index, 1); // Remove the order at the specified index
+    updateOrderListDisplay(); // Update the order list display
+}
 
 
-//     // Reset quantities to zero
-//     resetQuantities();
-// });
 // Define a function to create multiple orders when the "Add Person" button is pressed
 function handleAddPerson() {
     // Create a new order and add it to the allOrders array
     createOrder();
     // Optionally, you can reset the quantities or perform any other actions here
 
-    // Log allOrders to see the accumulated orders (for testing purposes)
     resetQuantities();
 }
 
@@ -664,5 +672,6 @@ function resetQuantities() {
         document.getElementById(food.name + '-quantity-value').textContent = '0';
     }
 }
+
 
 
