@@ -410,15 +410,13 @@ td {
     flex: 1;
     position: fixed;
     top: 170px; /* Adjust this value according to your layout */
-    bottom: 200px;
     right: 0px; 
     border: 2px solid #BA0000;
     background: #F4F4F4;
-    width: 25%; /* Adjust the width to your preference */
-    max-width: 800px; /* Set a maximum width if needed */
-    /* height: 80vh;  */
+
     margin: 3% 5% 5% 5%;
     padding: 2%;
+    overflow: auto;
     z-index: 999;
 }
 
@@ -445,31 +443,9 @@ td {
     width: 100px;
 }
 
-#order-list {
-    list-style-type: none;
-    padding: 0;
-}
 
-/* Style for the trash can */
-#trash-can {
-    width: 50px;
-    height: 50px;
-    background-color: #f00;
-    color: #fff;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 50px;
-    font-size: 24px;
-    cursor: pointer; /* Set cursor to pointer */
-}
 
-/* Style for the draggable items */
-#order-list li {
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    cursor: move; /* Set cursor to indicate draggable items */
-}
+
 
 
 
