@@ -2,8 +2,14 @@
     //  Person X --> list (x+1)
     // List --> bunch of dictionaries
         // 1 Dictionary --> 1 drink/ 1 food.
-
-const orders = [
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const orders = JSON.parse(decodeURIComponent(urlParams.get('temporaryOrderJSON')));
+      ;
+        
+        // console.log(transformedArray);
+        console.log(orders)
+const orders1 = [
     [
 
         {name: "Cold Beer",
