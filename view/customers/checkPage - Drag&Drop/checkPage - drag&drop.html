@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="checkPage%20-%20drag&drop.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
+    <title>Check Page</title>
+</head>
+
+<body>
+<div class="check-page-body">
+    <a class="check-page-back-button" href="../orderPage/orderPage.html">
+        <img width= "50px" src="../../assets/backButton.svg" alt="Back Button">
+    </a>
+
+    <div class="check-page-all-orders"></div>
+
+    <div id="trash-bin" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+        <img class="img-trashbin" src="trash-can.svg" alt="Trash Bin">
+    </div>
+
+</div>
+
+<div class="check-page-buttons">
+    <button class="check-page-confirm-button" onclick="redirectStart()">CONFIRM</button>
+    <h3 id="send-order-text"></h3> <!-- Updated to include an ID for easy language update -->
+</div>
+
+<script src="checkPage%20-%20drag&drop.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve the selected language from localStorage or set a default language
+        const storedLang = localStorage.getItem('selectedLang') || 'en';
+
+        // Define translations object based on your language mappings
+        const translations = {
+            en: "Send my order!",
+            sv: "Skicka min beställning!",
+            de: "Meine Bestellung abschicken!"
+        };
+
+        // Update the send order text with the translated text
+        document.getElementById('send-order-text').textContent = translations[storedLang];
+    });
+</script>
+</body>
+</html>
+
