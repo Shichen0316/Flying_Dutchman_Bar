@@ -1,5 +1,5 @@
-//Fetching Data from JSON
 
+//Fetching Data from JSON
 var beers;
 var wines;
 var cocktails;
@@ -251,124 +251,117 @@ function processCocktailsData() {
     }
 }
 
+let foodItems;
 
 fetch("../../../../models/database/FoodStock.json")
     .then(response => response.json())
     .then(data => {
-        const foodItems = data; // Assuming food items are directly under the root of the JSON object
-
+        foodItems = data; // Assuming food items are directly under the root of the JSON object
         const foodTable = document.getElementById("food-table");
 
         foodItems.forEach(food => {
             const foodRow = document.createElement("tr");
 
-            if (food) {
-                // First column -- food name + info button
-                const nameColumn = document.createElement("td");
+            // First column -- food name + info button
+            const nameColumn = document.createElement("td");
 
-                const container = document.createElement("div");
-                container.className = "open-page-food-name";
+            const container = document.createElement("div");
+            container.className = "open-page-food-name";
 
-                const foodName = document.createElement("h2");
-                foodName.textContent = food.name;
-                foodName.className = "food-name-column";
+            const foodName = document.createElement("h2");
+            foodName.textContent = food.name;
 
-                const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                infoButton.setAttribute("width", "17");
-                infoButton.setAttribute("height", "9");
-                infoButton.setAttribute("viewBox", "0 0 17 9");
-                infoButton.setAttribute("fill", "#212121");
-                infoButton.setAttribute("class", "open-page-button-svg");
+            const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+            infoButton.setAttribute("width", "17");
+            infoButton.setAttribute("height", "9");
+            infoButton.setAttribute("viewBox", "0 0 17 9");
+            infoButton.setAttribute("fill", "#212121");
+            infoButton.setAttribute("class", "open-page-button-svg");
 
-                infoButton.onclick = function() {
-                    const infoBox = container.querySelector(".open-page-info-box");
-                    if (infoBox.style.display === "block") {
-                        infoBox.style.display = "none";
-                    } else {
-                        infoBox.style.display = "block";
-                    }
-                };
+            infoButton.onclick = function() {
+                const infoBox = container.querySelector(".open-page-info-box");
+                if (infoBox.style.display === "block") {
+                    infoBox.style.display = "none";
+                } else {
+                    infoBox.style.display = "block";
+                }
+            };
 
-                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
-                path.setAttribute("fill", "#212121");
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
+            path.setAttribute("fill", "#212121");
 
-                infoButton.appendChild(path);
+            infoButton.appendChild(path);
 
-                container.appendChild(foodName);
-                container.appendChild(infoButton);
+            container.appendChild(foodName);
+            container.appendChild(infoButton);
 
-                const infoBox = document.createElement("div");
-                infoBox.className = "open-page-info-box";
-                infoBox.style.display = "none"; // Initially hide the info box
+            const infoBox = document.createElement("div");
+            infoBox.className = "open-page-info-box";
+            infoBox.style.display = "none"; // Initially hide the info box
 
-                const infoContents = document.createElement("h4");
-                infoContents.textContent = "Ingredients/ Ingredienser/ Zutaten: " + food.ingredients; // Use a function to get translated ingredient
+            const infoContents = document.createElement("h4");
+            infoContents.textContent = "Ingredients/ Ingredienser/ Zutaten: " + food.ingredients.join(', '); // Join ingredients array into a string
 
-                infoBox.appendChild(infoContents);
-                container.appendChild(infoBox);
+            infoBox.appendChild(infoContents);
+            container.appendChild(infoBox);
 
-                nameColumn.appendChild(container);
+            nameColumn.appendChild(container);
 
-                // Second column -- empty column for price
-                const priceColumn = document.createElement("td");
-                priceColumn.textContent = food.price;
-                priceColumn.className = "food-price-column";
-                
-                // Third column -- quantity buttons
-                const buttonColumn = document.createElement("td");
-                const minusButton = document.createElement("button");
-                minusButton.className = "minus-button";
-                minusButton.alt = "Minus";
+            // Second column -- price
+            const priceColumn = document.createElement("td");
+            priceColumn.textContent = food.price;
 
-                minusButton.onclick = function() {
-                    const quantitySpan = document.getElementById(food.name + "-quantity-value");
+            // Third column -- quantity buttons
+            const buttonColumn = document.createElement("td");
+            const minusButton = document.createElement("button");
+            minusButton.className = "minus-button";
+            minusButton.textContent = "-";
+            minusButton.alt = "Minus";
 
-                    let quantity = parseInt(quantitySpan.textContent);
-                    if (quantity > 0) {
-                        quantitySpan.textContent = quantity - 1;
-                    }
-                };
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(food.name + "-quantity-value");
 
-                const quantitySpan = document.createElement("span");
-                quantitySpan.textContent = "0";
-                quantitySpan.id = food.name + "-quantity-value";
+                let quantity = parseInt(quantitySpan.textContent);
+                if (!isNaN(quantity) && quantity > 0) {
+                    quantitySpan.textContent = quantity - 1;
+                }
+            };
 
-                const addButton = document.createElement("button");
-                addButton.className = "add-button";
-                addButton.alt = "Add";
+            const quantitySpan = document.createElement("span");
+            quantitySpan.textContent = "0";
+            quantitySpan.id = food.name + "-quantity-value";
 
-                addButton.onclick = function() {
-                    const quantitySpan = document.getElementById(food.name + "-quantity-value");
+            const addButton = document.createElement("button");
+            addButton.className = "add-button";
+            addButton.textContent = "+";
+            addButton.alt = "Add";
 
-                    let quantity = parseInt(quantitySpan.textContent);
-                    if (quantity >= 0) {
-                        quantitySpan.textContent = quantity + 1;
-                    }
-                };
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(food.name + "-quantity-value");
 
-                buttonColumn.appendChild(minusButton);
-                buttonColumn.appendChild(quantitySpan);
-                buttonColumn.appendChild(addButton);
+                let quantity = parseInt(quantitySpan.textContent);
+                if (!isNaN(quantity)) {
+                    quantitySpan.textContent = quantity + 1;
+                }
+            };
 
-                foodRow.appendChild(nameColumn);
-                foodRow.appendChild(priceColumn); // This line is removed
-                foodRow.appendChild(buttonColumn);
+            buttonColumn.appendChild(minusButton);
+            buttonColumn.appendChild(quantitySpan);
+            buttonColumn.appendChild(addButton);
 
-                foodTable.appendChild(foodRow);
-            }
+            foodRow.appendChild(nameColumn);
+            foodRow.appendChild(priceColumn);
+            foodRow.appendChild(buttonColumn);
 
-            else {
-                // If there's no food item for this cell, create an empty cell
-                const cell = document.createElement("td");
-                foodRow.appendChild(cell);
-            }
+            foodTable.appendChild(foodRow);
         });
     })
     .catch(error => {
         console.error('Error fetching food data:', error);
     });
+
 
 // Default language
 let currentLang = 'en';
@@ -432,10 +425,19 @@ document.getElementById('close-button').addEventListener('click', closePopup);
 
 // Function to trigger redirection to the next page considering the product count
 function redirectToNextPage() {
+
+   
     // Check the count of selected products
     if (checkProductCount()) {
         // Allow redirection to the next page
-        window.location.href = "/view/customers/checkPage/checkPage.html";
+        // const order = createOrder();
+        createOrder();
+        window.temporaryOrderJSON = JSON.stringify(allOrders);
+       
+        // Encode the JSON string to make it safe for passing in the URL
+        // console.log(allOrders);
+        
+        window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(temporaryOrderJSON);
     }
 }
 
@@ -511,11 +513,165 @@ $(".order-page-language-dropdown").change(function () {
         });
 });
 
+// new 
+
+const order = [];
 
 
+// Define a variable to store all orders
+let allOrders = [];
+
+function createOrder1() {
+    // Collect selected items for the new order
+    const selectedItems = [];
+
+    // Collect selected beers
+    for (const beer of beers) {
+        const quantity = parseInt(document.getElementById(beer.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: beer.name, quantity, cost: (beer.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected wines
+    for (const wine of wines) {
+        const quantity = parseInt(document.getElementById(wine.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: wine.name, quantity, cost: (wine.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected cocktails
+    for (const cocktail of cocktails) {
+        const quantity = parseInt(document.getElementById(cocktail.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: cocktail.name, quantity, cost: (cocktail.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected food items
+    for (const food of foodItems) {
+        const quantity = parseInt(document.getElementById(food.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: food.name, quantity, cost: (food.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Add the selected items to the allOrders array
+    if (selectedItems.length > 0) {
+        allOrders.push(selectedItems);
+    }
+}
+function createOrder() {
+    // Collect selected items for the new order
+    const selectedItems = [];
+
+    // Collect selected beers
+    for (const beer of beers) {
+        const quantity = parseInt(document.getElementById(beer.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: beer.name, quantity, cost: (beer.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected wines
+    for (const wine of wines) {
+        const quantity = parseInt(document.getElementById(wine.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: wine.name, quantity, cost: (wine.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected cocktails
+    for (const cocktail of cocktails) {
+        const quantity = parseInt(document.getElementById(cocktail.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: cocktail.name, quantity, cost: (cocktail.price * quantity).toFixed(2) });
+        }
+    }
+
+    // Collect selected food items
+    for (const food of foodItems) {
+        const quantity = parseInt(document.getElementById(food.name + "-quantity-value").textContent);
+        if (quantity > 0) {
+            selectedItems.push({ name: food.name, quantity, cost: (food.price * quantity).toFixed(2) });
+        }
+    }
+    
+    // Add the selected items to the allOrders array
+    if (selectedItems.length > 0) {
+        allOrders.push(selectedItems);
+        updateOrderListDisplay();
+    }
+    
+
+}
+
+function updateOrderListDisplay() {
+    const orderList = document.getElementById('order-list');
+    orderList.innerHTML = ''; // Clear the previous content
+
+    // Loop through allOrders and populate the order list
+    allOrders.forEach((order, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Order ${index + 1}: `;
+        listItem.setAttribute('data-index', index); // Set custom attribute for index
+        
+        order.forEach(item => {
+            const itemText = `${item.quantity} ${item.name} - $${item.cost}`;
+            const itemElement = document.createElement('div');
+            itemElement.textContent = itemText;
+            listItem.appendChild(itemElement);
+        });
+
+        // Create a delete button for each order
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => deleteOrder(index));
+        listItem.appendChild(deleteButton);
+        listItem.draggable = true;
+        orderList.appendChild(listItem);
+    });
+}
+
+function deleteOrder(index) {
+    allOrders.splice(index, 1); // Remove the order at the specified index
+    updateOrderListDisplay(); // Update the order list display
+}
 
 
+// Define a function to create multiple orders when the "Add Person" button is pressed
+function handleAddPerson() {
+    // Create a new order and add it to the allOrders array
+    createOrder();
+    // Optionally, you can reset the quantities or perform any other actions here
 
+    resetQuantities();
+}
+
+// Add an event listener to the "Add Person" button
+document.querySelector('.order-page-add-person-button').addEventListener('click', handleAddPerson);
+function resetQuantities() {
+    // Reset beer quantities
+    for (const beer of beers) {
+        document.getElementById(beer.name + '-quantity-value').textContent = '0';
+    }
+
+    // Reset wine quantities
+    for (const wine of wines) {
+        document.getElementById(wine.name + '-quantity-value').textContent = '0';
+    }
+
+    // Reset cocktail quantities
+    for (const cocktail of cocktails) {
+        document.getElementById(cocktail.name + '-quantity-value').textContent = '0';
+    }
+
+    // Reset food item quantities
+    for (const food of foodItems) {
+        document.getElementById(food.name + '-quantity-value').textContent = '0';
+    }
+}
 
 
 
