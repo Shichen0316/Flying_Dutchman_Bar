@@ -408,16 +408,22 @@ td {
 
 .order-page-summary-container {
     flex: 1;
+    position: fixed;
+    top: 170px; /* Adjust this value according to your layout */
+    right: 0px; 
     border: 2px solid #BA0000;
     background: #F4F4F4;
 
     margin: 3% 5% 5% 5%;
     padding: 2%;
+    overflow: auto;
+    z-index: 999;
 }
 
 .order-page-order {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .beer-name-column,
