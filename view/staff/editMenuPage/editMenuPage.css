@@ -1,0 +1,134 @@
+.edit-page-stock-container {
+    border-radius: 5px;
+    border: 2px solid #BA0000;
+
+    margin: 2% 10% 2% 10%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+}
+
+.edit-page-stock-container p {
+    color: #BA0000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    margin-bottom: 5px;
+}
+
+.edit-page-stock-container span {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.beer-price-stock,
+.wine-price-stock,
+.cocktail-price-stock {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.beer-remove-button,
+.wine-remove-button,
+.cocktail-remove-button {
+    color: #FFF;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 5px;
+    border: none;
+    background: #CF2727;
+
+    padding: 1%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.beer-refill-button,
+.wine-refill-button,
+.cocktail-refill-button {
+    color: #FFF;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 5px;
+    border: none;
+    background: rgba(68, 186, 58, 0.50);
+
+    padding: 1%;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.beer-edit-button,
+.wine-edit-button,
+.cocktail-edit-button {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.beer-name-input,
+.beer-price-input,
+.beer-stock-input,
+.wine-name-input,
+.wine-price-input,
+.wine-stock-input,
+.cocktail-name-input,
+.cocktail-price-input,
+.cocktail-stock-input {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+
+    padding: 1%;
+    margin-right: 20px;
+    margin-left: 20px;
+
+}
+
+.food-remove-button {
+    color: #FFF;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 5px;
+    border: none;
+    background: #CF2727;
+
+    padding: 2%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.food-refill-button {
+    color: #FFF;
+    font-family: "Josefin Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 5px;
+    border: none;
+    background: rgba(68, 186, 58, 0.50);
+
+    padding: 2%;
+    margin-left: 20px;
+    margin-right: 20px;
+}

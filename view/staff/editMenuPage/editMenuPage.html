@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../view/customers/orderPage/orderPage.css">
+    <link rel="stylesheet" href="editMenuPage.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="order-page-header">
+    <a class="order-page-back-button" href="/view/customers/startPage/startPage.html">
+        <img width= "50px" src="../../assets/backButton.svg" alt="Back Button">
+    </a>
+
+    <div class="order-page-header-text">
+        <div class="order-page-food-drink-text">
+            <h1 class="header-food">FOOD</h1>
+            <h1>&</h1>
+            <h1 class="header-drinks">DRINKS</h1>
+        </div>
+        <h2 class="click-message">Click on the name to be redirected to that category.</h2>
+    </div>
+
+    <select class="order-page-language-dropdown">
+        <option value="en">English</option>
+        <option value="sv">Swedish</option>
+        <option value="de">German</option>
+    </select>
+
+    <div class="order-page-table-number">
+        <h2 class="table-number">Table No. :</h2>
+        <h1>NIL</h1>
+    </div>
+</div>
+
+<div class="edit-page-stock-container">
+    <p>LOW STOCK:</p>
+    <span id="lowStockItem"></span>
+</div>
+
+
+<div class="order-page-menu-container">
+    <div class="order-page-menu">
+        <div class="order-page-drink-title">
+            <h3 class="drink-title">DRINKS</h3>
+            <h2 class="drink-categories">Beer, Wine, Cocktails</h2>
+        </div>
+    </div>
+
+    <div class="beer-menu">
+        <table id="beer-table">
+            <caption class="beer-caption">Beer</caption>
+        </table>
+    </div>
+
+    <div class="wine-menu">
+        <table id="wine-table">
+            <caption class="wine-caption">Wine:</caption>
+        </table>
+    </div>
+
+    <div class="cocktail-menu">
+        <table id="cocktail-table">
+            <caption class="cocktail-caption">Cocktails:</caption>
+        </table>
+    </div>
+
+    <div class="order-page-menu">
+        <div class="order-page-food-title">
+            <h3 class="food-title">FOOD</h3>
+        </div>
+    </div>
+
+    <div class="food-menu">
+        <table id="food-table">
+        </table>
+    </div>
+</div>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span id="close-button" class="close-button">&times;</span>
+        <h2 class="popup-title"></h2>
+        <p class="popup-message"></p>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="editMenuPage.js"></script>
+<script>
+    $(document).ready(function () {
+        var translations = {
+            en: {
+                "header-food": "FOOD",
+                "header-drinks": "DRINKS",
+                "table-number": "Table No. :",
+                "person": "PERSON #1",
+                "click-message": "Click on the name to be redirected to that category.",
+                "allergies": "Allergies:",
+                "alcohol_percentage": "Alcohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "DRINKS",
+                "drink-categories": "Beer, Wine, Cocktails",
+                "beer-caption": "Beer",
+                "wine-caption": "Wine:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "FOOD",
+                "add-person-button": "ADD PERSON",
+                "confirm-button": "ORDER",
+                "popup-title": "Warning!",
+                "popup-message": "You cannot order more than 10 items at once!"
+            },
+            sv: {
+                "header-food": "MAT",
+                "header-drinks": "DRYCKER",
+                "table-number": "Bord nr. :",
+                "person": "PERSON #1",
+                "click-message": "Klicka på namnet för att omdirigera till den kategorin.",
+                "allergies": "Allergier:",
+                "alcohol_percentage": "Alkohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "DRYCKER",
+                "drink-categories": "Öl, Vin, Cocktails",
+                "beer-caption": "Öl",
+                "wine-caption": "Vin:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "MAT",
+                "add-person-button": "LÄGG TILL PERSON",
+                "confirm-button": "BESTÄLL",
+                "popup-title": "Varning!",
+                "popup-message": "Du kan inte beställa mer än 10 artiklar på en gång!"
+            },
+            de: {
+                "header-food": "ESSEN",
+                "header-drinks": "GETRÄNKE",
+                "table-number": "Tischnr. :",
+                "person": "PERSON #1",
+                "click-message": "Klicken Sie auf den Namen, um zu dieser Kategorie umgeleitet zu werden.",
+                "allergies": "Allergien:",
+                "alcohol_percentage": "Alkohol %:",
+                "tannin": "Tannin:",
+                "drink-title": "GETRÄNKE",
+                "drink-categories": "Bier, Wein, Cocktails",
+                "beer-caption": "Bier",
+                "wine-caption": "Wein:",
+                "cocktail-caption": "Cocktails:",
+                "food-title": "ESSEN",
+                "add-person-button": "PERSON HINZUFÜGEN",
+                "confirm-button": "BESTELLEN",
+                "popup-title": "Warnung!",
+                "popup-message": "Sie können nicht mehr als 10 Artikel auf einmal bestellen!"
+            }
+        };
+
+        function updateContent(lang) {
+            for (var key in translations[lang]) {
+                if (translations[lang].hasOwnProperty(key)) {
+                    $("." + key).text(translations[lang][key]);
+                    $("." + key).attr("placeholder", translations[lang][key]);
+                }
+            }
+        }
+
+        updateContent('en');
+
+        $(".order-page-language-dropdown").change(function () {
+            var lang = $(this).val();
+            updateContent(lang);
+        });
+    });
+</script>
+</body>
+</html>
