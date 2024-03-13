@@ -19,52 +19,49 @@
     </center>
 </div>
 
-<div class="vip-nonvip">
-    <button class="button-vip">VIP</button>
-    <button class="button-nonvip">Non-VIP</button>
-</div>
-
 <div>
     <center>
-    <h2 class="neworders">
-        NEW ORDERS:
-    </h2>
-
-    <h2 class="person">
-        PERSON:
-        <div class="button-container">
-            <button class="button-1">1</button>
-
-            <button class="button-2">2</button>
-
-            <button class="button-3">3</button>
-
-            <button class="button-4">4</button>
-
-            <button class="button-5">5</button>
-        </div>
-    </h2>
-
-    <h2 class="existingorders">
-        EXISTING ORDERS:
-    </h2>
+        <h2 class="orders">
+            ORDERS:
+        </h2>
     </center>
 </div>
 
+<div id="order-container"></div>
+
+<div id="order-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
+
 <div>
-    <button class="button-grouppay">GROUP PAY</button>
-    <button class="button-pay">PAY</button>
+    <button class="button-pay" id="button-pay" onclick="showPopup()">PAY</button>
+    <button class="button-discount" id="button-discount" onclick="showDiscountPopup()">DISCOUNT</button>
 </div>
 
-<p>
-    EMILY ZUCHERBUK
-</p>
+<div id="popup" class="popup">
+    <p>Selected Orders:</p>
+    <ul id="selected-orders"></ul>
+    <div id="order-buttons">
+    <button class="button-popup" onclick="showPayPopup()">Pay</button>
+    <button class="button-popup" onclick="showPayFromAccountPopup()">Pay from Account</button>
+    </div>
+    <button class="button-popup" onclick="closePopup()">Close</button>
+</div>
+
+<div id="discountPopup" class="discountPopup">
+    <p>Selected Orders:</p>
+    <ul id="selected-orders-discount"></ul>
+    <button class="button-discountPopup" onclick="discountPopup()">Give Discount</button>
+    <button class="button-discountPopup" onclick="closeDiscountPopup()">Close</button>
+</div>
 
 <div>
     <a class="button-back" href="view/staff/tableOverviewPage/tableoverviewPage-staff.html">
         <img src="../../assets/backButton.svg" alt="Back button">
     </a>
 </div>
+
+<script src="orderdisplay.js"></script>
+<script src="dropanddrop.js"></script>
+<script src="popupwindow.js"></script>
 
 </body>
 </html>
