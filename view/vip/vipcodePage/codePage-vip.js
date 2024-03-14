@@ -14,3 +14,6 @@ function displayRandomDigits() {
 window.onload = function() {
     displayRandomDigits();
 };
+function redirectToNextPage() {
+    window.location.href = "/view/vip/vipOrderPage/vipOrderPage.html";
+}
