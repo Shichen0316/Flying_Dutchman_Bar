@@ -1,0 +1,172 @@
+body {
+    background-color: #F4F4F4;
+    text-align: center;
+}
+
+h1 {
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+
+    margin: 0;
+}
+
+h2 {
+    color: #BA0000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+.payFromAccount-back-button {
+    margin-right: 25%;
+}
+
+.balance {
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 60px;
+}
+
+p {
+    color: #212121;
+    font-family: Koulen;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: -20px;
+}
+
+table {
+    width: 100%;
+}
+
+td{
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payFromAccount-container {
+    border: 3px solid #BA0000;
+    background: #FFF;
+    text-align: center;
+
+    padding: 2% 10% 2% 10%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+}
+
+.payFromAccount-details {
+    display: flex;
+    justify-content: center;
+}
+
+.payFromAccount-divider {
+    background: #212121;
+
+    height: 1px;
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+input {
+    width: 200px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #BA0000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+button {
+    width: 300px;
+    height: 150px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 4px solid #BA0000;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-pay {
+    transition: all 0.3s ease;
+}
+
+.button-confirm {
+    width: 150px;
+    height: 70px;
+    font-size: 25px;
+    border: 2px solid #BA0000;
+    margin-top: 35px;
+    transition: all 0.3s ease;
+}
+
+
+
+.button-confirm:hover,
+.button-pay:hover {
+    transform: scale(1.03);
+}
+
+.button-confirm:active,
+.button-pay:active {
+    transform: scale(0.9);
+}
+
+.button-logout {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+}
+
+
