@@ -5,6 +5,7 @@ var wines;
 var cocktails;
 
 let lowStock = "";
+const removedRows = [];
 // drinks less than 30 will be shown
 // food less than 10 will be shown
 
@@ -53,6 +54,12 @@ fetch("../../../../models/database/DrinksStock.json")
                 removeButton.textContent = "REMOVE";
                 removeButton.onclick = function() {
                     const rowToRemove = this.parentNode.parentNode; // tr element
+                    const beerData = {
+                        name: beer.name,
+                        price: beer.price,
+                        stock: beer.stock
+                    };
+                    removedRows.push(beerData);
                     rowToRemove.remove();
                 };
                 
@@ -900,6 +907,86 @@ $(".order-page-language-dropdown").change(function () {
         });
 });
 
+function handleUndo() {
+    if (removedRows.length > 0) {
+        const beerData = removedRows.pop();
+        const beerTable = document.getElementById("beer-table");
+        
+        if (beerData) {
+            const { name, price, stock } = beerData;
+
+            // Recreate table row
+            const newRow = document.createElement("tr");
+
+            // Create column elements for beer name, price, stock, buttons, etc.
+            const column = document.createElement("td");
+            const beerName = document.createElement("h2");
+            const priceParagraph = document.createElement("p");
+            const QuantityParagraph = document.createElement("p");
+            const removeButton = document.createElement("button");
+            const refillButton = document.createElement("button");
+            const quantitySpan = document.createElement("span");
+            const minusButton = document.createElement("button");
+            const addButton = document.createElement("button");
+            const editButton = document.createElement("img");
+
+            // Assign classes and text content to elements
+            beerName.className = "beer-name-column";
+            beerName.textContent = name;
+            priceParagraph.className = "beer-price-column";
+            priceParagraph.textContent = price + " Kr";
+            QuantityParagraph.className = "beer-price-stock";
+            QuantityParagraph.textContent = stock;
+            removeButton.className = "beer-remove-button";
+            removeButton.textContent = "REMOVE";
+            refillButton.className = "beer-refill-button";
+            refillButton.textContent = "REFILL";
+            quantitySpan.textContent = "0";
+            quantitySpan.id = name + "-quantity-value";
+            minusButton.className = "minus-button";
+            minusButton.alt = "Minus";
+            addButton.className = "add-button";
+            addButton.alt = "Add";
+            editButton.src = "../../assets/editButton.svg";
+            editButton.style.width = "20px";
+            editButton.style.height = "20px";
+            editButton.className = "beer-edit-button";
+
+            removeButton.onclick = function() {
+                const rowToRemove = this.parentNode.parentNode; // tr element
+                const beerName = rowToRemove.querySelector(".beer-name-column").textContent;
+                const beerPrice = parseFloat(rowToRemove.querySelector(".beer-price-column").textContent);
+                const beerStock = parseFloat(rowToRemove.querySelector(".beer-price-stock").textContent);
+                
+                const beerData = {
+                    name: beerName,
+                    price: beerPrice,
+                    stock: beerStock
+                };
+                removedRows.push(beerData);
+                rowToRemove.remove();
+            };
+            
+            // Include onclick handlers for other buttons as needed
+
+            // Append elements to the column
+            column.appendChild(beerName);
+            column.appendChild(priceParagraph);
+            column.appendChild(QuantityParagraph);
+            column.appendChild(removeButton);
+            column.appendChild(refillButton);
+            column.appendChild(minusButton);
+            column.appendChild(quantitySpan);
+            column.appendChild(addButton);
+            column.appendChild(editButton);
+
+            // Append the column to the new row
+            newRow.appendChild(column);
+            // Append the new row to the table
+            beerTable.appendChild(newRow);
+        }
+    }
+}
 
 
 
