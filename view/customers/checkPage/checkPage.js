@@ -4,12 +4,27 @@
         // 1 Dictionary --> 1 drink/ 1 food.
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const orders = JSON.parse(decodeURIComponent(urlParams.get('temporaryOrderJSON')));
+        const orders1 = JSON.parse(decodeURIComponent(urlParams.get('temporaryOrderJSON')));
       ;
         
         // console.log(transformedArray);
-        console.log(orders)
-const orders1 = [
+        console.log(orders1)
+        function convertData(data) {
+            const orders = [];
+            for (const key in data) {
+                const orderData = data[key][0];
+                const items = orderData.items.map(item => ({
+                    name: item.name,
+                    quantity: item.quantity.toString(),
+                    cost: (parseFloat(item.cost) * parseInt(item.quantity)).toFixed(2)
+                }));
+                orders.push(items);
+            }
+            return orders;
+        }
+        
+        const orders = convertData(orders1);
+const orders2 = [
     [
 
         {name: "Cold Beer",

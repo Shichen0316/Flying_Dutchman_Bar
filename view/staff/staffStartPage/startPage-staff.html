@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <div>
@@ -25,13 +24,15 @@
 </div>
 
 <div class="button-container">
-
     <button class="button-editmenu">EDIT MENU</button>
-
+    <!-- <button class="button-orderoverview">ORDER OVERVIEW / PAYMENT</button> -->
     <button class="button-orderoverview" onclick="redirectTableoverview()">ORDER OVERVIEW / PAYMENT</button>
+    <button class="button-notify">NOTIFY SECURITY</button>
+</div>
 
-    <button class="button-notify">NOTIFY SERCURITY</button>
-
+<div id="ordersOverview" class="ordersOverview">
+    <h2>Orders Overview</h2>
+    <!-- Orders will be dynamically inserted here by JavaScript -->
 </div>
 
 <script src="startPage-staff.js"></script>

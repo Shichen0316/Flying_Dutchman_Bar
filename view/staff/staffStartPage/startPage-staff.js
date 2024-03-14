@@ -10,4 +10,3 @@ function logoutFunction() {
     alert('Logout successful');
     window.location.href = "view/homePage.html";
 }
-

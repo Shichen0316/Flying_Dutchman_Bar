@@ -47,7 +47,7 @@ button{
 }
 
 .button-table1{
-    background: #FFE3E3;
+    /* background: #FFE3E3; */
 
     font-size: 30px;
     margin-right: 90px;
@@ -169,4 +169,99 @@ p{
     position: absolute;
     top:40px;
     left:40px;
+}
+.highlight {
+    background: #FFDD57; /* Yellow background for highlight */
+    border-color: #BA0000; /* Red border color for highlight */
+    box-shadow: 0px 0px 10px rgba(186, 0, 0, 0.5); /* Optional: Adds a soft shadow for more emphasis */
+}
+.order-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;
+    width: 80%; 
+    max-width: 600px; 
+    max-height: 80vh;
+}
+
+.order-popup .order-item {
+    margin-bottom: 10px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 50;
+}
+
+/* Add styles for the date */
+#todaysDate {
+    color: #212121;
+    font-size: 20px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+/* Add this to hide the main content when the overlay is active */
+#mainContent.hide {
+    display: none;
+}
+
+.order-popup h2 {
+    font-size: 1.5rem; /* Adjust heading size */
+    margin-bottom: 15px; /* Space below the heading */
+}
+
+.order-popup p {
+    font-size: 1rem; /* Adjust paragraph/text size */
+    line-height: 1.5; /* Adjust line height for better readability */
+    margin-bottom: 10px; /* Space below each item */
+}
+
+/* Style for the close button */
+.order-popup button {
+    display: block; /* Change to block to ensure proper spacing */
+    margin: 5px auto 0; /* Center the button and add space above */
+    background-color: #BA0000;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.order-popup button:hover {
+    background-color: #A30000;
+}
+/* CSS to handle the popup content */
+.order-popup-content {
+    margin-bottom: 10px; /* Space between each order's details */
+}
+.proceedButton {
+    display: block; /* Change to block to ensure proper spacing */
+    margin: 10px auto 0; /* Center the button and add space above */
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    cursor: pointer; /* Add cursor pointer */
+    font-size: 16px; /* Font size */
+    border-radius: 5px; /* Add border radius */
+    z-index: 100; /* Ensure it's on top of other elements */
+    position: relative; /* Adjust if needed based on your layout */
+}
+
+.proceedButton:hover:hover {
+    background-color: #45a049; /* Darker green on hover */
 }

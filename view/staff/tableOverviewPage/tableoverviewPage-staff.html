@@ -10,53 +10,64 @@
 </head>
 
 <body>
+    <section id="mainContent">
+        <div>
+            <center>
+                <h1>
+                    TABLE OVERVIEW
+                </h1>
+                <h2>
+                    EMILY ZUCHERBUK
+                </h2>
+            </center>
+        </div>
 
-<div>
-    <center>
-        <h1>
-            TABLE OVERVIEW
-        </h1>
-    </center>
+        <div class="button-row1">
+            <button class="button-table1" onclick="redirectorderoverviewPage()">TABLE 1</button>
+            <button class="button-table2">TABLE 2</button>
+            <button class="button-table3">TABLE 3</button>
+            <button class="button-table4">TABLE 4</button>
+        </div>
+
+        <div class="button-row2">
+            <button class="button-table5">TABLE 5</button>
+            <button class="button-table6">TABLE 6</button>
+            <button class="button-table7">TABLE 7</button>
+            <button class="button-table8">TABLE 8</button>
+        </div>
+
+        <div class="button-row3">
+            <button class="button-table9">TABLE 9</button>
+            <button class="button-table10">TABLE 10</button>
+            <button class="button-table11">TABLE 11</button>
+            <button class="button-table12">TABLE 12</button>
+        </div>
+
+        <div class="button-row4">
+            <button class="button-table13">TABLE 13</button>
+            <button class="button-table14">TABLE 14</button>
+            <button class="button-table15">TABLE 15</button>
+            <button class="button-table16">TABLE 16</button>
+        </div>
+
+</section>
+
+<div id="orderPopup" class="order-popup" style="display:none;">
+    <!-- Order details will be inserted here -->
+    <button id="closeButton" onclick="closePopup()">Close</button>
+    <button id="proceedButton" onclick="redirectOrderOverview()">Proceed to Order Overview</button>
 </div>
+<!-- Overlay div -->
+<div id="overlay" style="display:none;"></div>
 
-<div class="button-row1">
-    <button class="button-table1" onclick="redirectorderoverviewPage()">TABLE 1</button>
-    <button class="button-table2">TABLE 2</button>
-    <button class="button-table3">TABLE 3</button>
-    <button class="button-table4">TABLE 4</button>
-</div>
-
-<div class="button-row2">
-    <button class="button-table5">TABLE 5</button>
-    <button class="button-table6">TABLE 6</button>
-    <button class="button-table7">TABLE 7</button>
-    <button class="button-table8">TABLE 8</button>
-</div>
-
-<div class="button-row3">
-    <button class="button-table9">TABLE 9</button>
-    <button class="button-table10">TABLE 10</button>
-    <button class="button-table11">TABLE 11</button>
-    <button class="button-table12">TABLE 12</button>
-</div>
-
-<div class="button-row4">
-    <button class="button-table13">TABLE 13</button>
-    <button class="button-table14">TABLE 14</button>
-    <button class="button-table15">TABLE 15</button>
-    <button class="button-table16">TABLE 16</button>
-</div>
-
-<p>
-    EMILY ZUCHERBUK
-</p>
-
+<!-- Back button -->
 <div>
     <a class="button-back" href="/view/staff/staffStartPage/startPage-staff.html">
         <img src="../../assets/backButton.svg" alt="Back button">
     </a>
 </div>
-e
+
+<!-- Your existing script -->
 <script src="tableoverviewPage-staff.js"></script>
 </body>
 </html>
