@@ -74,3 +74,9 @@ h1 {
 .home-page-vip-button:active {
     transform: scale(0.9); 
 }
+body {
+    background-image: url("../../../../view/images/Flying_Dutchman.png");
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+}
