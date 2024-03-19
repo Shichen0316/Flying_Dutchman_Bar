@@ -216,7 +216,7 @@ fetch("../../../../models/database/DrinksStock.json")
         }
         
 })
-
+// Process and log beers data - could be used for additional processing or logging
 function processBeersData() {
 
     if (beers) {
@@ -228,6 +228,7 @@ function processBeersData() {
         console.log("Beers data has not been fetched yet.");
     }
 }
+// Similar processing functions for wines and cocktails
 function processWinesData() {
 
     if (wines) {
@@ -646,32 +647,6 @@ function createOrder() {
     
 
 }
-// function updateOrderListDisplay() {
-//     const orderList = document.getElementById('order-list');
-//     orderList.innerHTML = ''; // Clear the previous content
-
-//     // Loop through allOrders and populate the order list
-//     allOrders.forEach((order, index) => {
-//         const listItem = document.createElement('li');
-//         listItem.textContent = `Order ${index + 1}: `;
-//         listItem.setAttribute('data-index', index); // Set custom attribute for index
-        
-//         order.forEach(item => {
-//             const itemText = `${item.quantity} ${item.name} - $${item.cost}`;
-//             const itemElement = document.createElement('div');
-//             itemElement.textContent = itemText;
-//             listItem.appendChild(itemElement);
-//         });
-
-//         // Create a delete button for each order
-//         const deleteButton = document.createElement('button');
-//         deleteButton.textContent = 'Delete';
-//         deleteButton.addEventListener('click', () => deleteOrder(index));
-//         listItem.appendChild(deleteButton);
-//         listItem.draggable = true;
-//         orderList.appendChild(listItem);
-//     });
-// }
 function updateOrderListDisplay() {
     const orderList = document.getElementById('order-list');
     orderList.innerHTML = ''; // Clear the previous content
