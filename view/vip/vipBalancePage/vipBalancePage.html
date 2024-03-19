@@ -18,32 +18,37 @@
     </center>
 </div>
 
+<!-- function to display the balance  -->
 <div class= "balance" id="balance">0</div>
 
 <p>
     SEK
 </p>
 
-
+<!-- top up button, showing the popup window asking for amount -->
 <div class="button-container">
     <button class="button-topup" onclick="showTopUpWindow(event)">Top Up</button>
 </div>
 
+<!-- popup window asking for top up amount -->
 <div id="topUpWindow">
     <h2 class="topup-text">Top Up</h2>
     <label class="topUpAmount" for="topUpAmount">Enter Amount: </label>
     <br>
     <input type="number" id="topUpAmount" placeholder="Enter amount" required>
     <br>
+    <!-- call topping up balance function -->
     <button class="button-confirm" onclick="topUpBalance()">Confirm</button>
 </div>
 
+<!-- logout function -->
 <div>
     <a class="button-logout" href="javascript:logoutFunction()">
         <img src="logout 1.svg" alt="Logout">
     </a>
 </div>
 
+<!-- back button function, getting back to previous page -->
 <div>
     <a class="button-back" href="/view/vip/vipStartPage/vipStartPage.html">
         <img src="/../../assets/backButton.svg" alt="Back button">

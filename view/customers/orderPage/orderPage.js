@@ -421,7 +421,9 @@ function checkProductCount() {
 // Attach event listener to the close button
 document.getElementById('close-button').addEventListener('click', closePopup);
 
-
+//document.addEventListener('DOMContentLoaded', function() {
+  //  document.querySelector('.order-page-confirm-button').addEventListener('click', redirectToNextPage);
+//});
 
 // Function to trigger redirection to the next page considering the product count
 function redirectToNextPage() {
@@ -433,13 +435,17 @@ function redirectToNextPage() {
         // const order = createOrder();
         createOrder();
         window.temporaryOrderJSON = JSON.stringify(allOrders);
-       
+        alert('Order confirmed and saved!');
         // Encode the JSON string to make it safe for passing in the URL
         // console.log(allOrders);
         
         window.location.href = "/view/customers/checkPage/checkPage.html?temporaryOrderJSON=" + encodeURIComponent(temporaryOrderJSON);
     }
 }
+
+
+
+
 
 // Example usage: Add this function to the click event of the redirection button
 // e.g., <button onclick="redirectToNextPage()">Next</button>
@@ -521,6 +527,21 @@ const order = [];
 // Define a variable to store all orders
 let allOrders = [];
 
+// Function to load existing orders from LocalStorage
+function loadExistingOrders() {
+    const ordersString = localStorage.getItem('allOrders');
+    if (ordersString) {
+        allOrders = JSON.parse(ordersString);
+    } else {
+        allOrders = [];
+    }
+    //updateOrderListDisplay(); // Update the display whenever you load orders
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadExistingOrders(); // Load existing orders when the page loads
+});
+
 function createOrder1() {
     // Collect selected items for the new order
     const selectedItems = [];
@@ -597,41 +618,87 @@ function createOrder() {
             selectedItems.push({ name: food.name, quantity, cost: (food.price * quantity).toFixed(2) });
         }
     }
-    
-    // Add the selected items to the allOrders array
+    console.log("Selected items:", selectedItems);
+
+    // Collect the table number and person from the page
+    const tableNumberElement = document.querySelector('.order-page-table-number h1');
+    const tableNumber = tableNumberElement.textContent; // Assumes your table number is directly in this h1
+
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+    const existingOrders = [];
     if (selectedItems.length > 0) {
-        allOrders.push(selectedItems);
+
+        // Append new order with additional details
+        existingOrders.push({
+            items: selectedItems,
+            tableNumber: tableNumber,
+            date: date
+        });
+        // Append new order to the existing orders
+        allOrders.push(existingOrders);
+        // Save updated orders list back to LocalStorage
+        console.log('Order created:', allOrders);
+        saveOrdersToLocalStorage(allOrders); // Pass the updated orders list to be saved
         updateOrderListDisplay();
     }
     
 
 }
+// function updateOrderListDisplay() {
+//     const orderList = document.getElementById('order-list');
+//     orderList.innerHTML = ''; // Clear the previous content
 
+//     // Loop through allOrders and populate the order list
+//     allOrders.forEach((order, index) => {
+//         const listItem = document.createElement('li');
+//         listItem.textContent = `Order ${index + 1}: `;
+//         listItem.setAttribute('data-index', index); // Set custom attribute for index
+        
+//         order.forEach(item => {
+//             const itemText = `${item.quantity} ${item.name} - $${item.cost}`;
+//             const itemElement = document.createElement('div');
+//             itemElement.textContent = itemText;
+//             listItem.appendChild(itemElement);
+//         });
+
+//         // Create a delete button for each order
+//         const deleteButton = document.createElement('button');
+//         deleteButton.textContent = 'Delete';
+//         deleteButton.addEventListener('click', () => deleteOrder(index));
+//         listItem.appendChild(deleteButton);
+//         listItem.draggable = true;
+//         orderList.appendChild(listItem);
+//     });
+// }
 function updateOrderListDisplay() {
     const orderList = document.getElementById('order-list');
     orderList.innerHTML = ''; // Clear the previous content
 
-    // Loop through allOrders and populate the order list
-    allOrders.forEach((order, index) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Order ${index + 1}: `;
-        listItem.setAttribute('data-index', index); // Set custom attribute for index
-        
-        order.forEach(item => {
-            const itemText = `${item.quantity} ${item.name} - $${item.cost}`;
-            const itemElement = document.createElement('div');
-            itemElement.textContent = itemText;
-            listItem.appendChild(itemElement);
+    // Loop through allOrders (which is an array of arrays of order objects)
+    allOrders.forEach(orderContainer => {
+        orderContainer.forEach(order => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `Order for Table ${order.tableNumber}: `;
+            
+            order.items.forEach(item => {
+                const itemText = `${item.quantity} x ${item.name} - $${item.cost}`;
+                const itemElement = document.createElement('div');
+                itemElement.textContent = itemText;
+                listItem.appendChild(itemElement);
+            });
+            
+            // You might want to add a delete button or other elements here
+            
+            orderList.appendChild(listItem);
         });
-
-        // Create a delete button for each order
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', () => deleteOrder(index));
-        listItem.appendChild(deleteButton);
-        listItem.draggable = true;
-        orderList.appendChild(listItem);
     });
+}
+
+function saveOrdersToLocalStorage(orders) {
+    console.log('Saving orders to LocalStorage', orders);
+    localStorage.setItem('allOrders', JSON.stringify(orders));
 }
 
 function deleteOrder(index) {
@@ -650,7 +717,14 @@ function handleAddPerson() {
 }
 
 // Add an event listener to the "Add Person" button
-document.querySelector('.order-page-add-person-button').addEventListener('click', handleAddPerson);
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup confirm button event listener
+    document.querySelector('.order-page-confirm-button').addEventListener('click', redirectToNextPage);
+    
+    // Optionally, set up the "Add Person" button event listener
+    document.querySelector('.order-page-add-person-button').addEventListener('click', handleAddPerson);
+} );
+
 function resetQuantities() {
     // Reset beer quantities
     for (const beer of beers) {
@@ -672,6 +746,3 @@ function resetQuantities() {
         document.getElementById(food.name + '-quantity-value').textContent = '0';
     }
 }
-
-
-

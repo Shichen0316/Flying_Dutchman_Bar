@@ -232,14 +232,14 @@ h4, h5, h6, h7, h8, h9 {
 
   .beer-menu,
   .wine-menu,
-  .cocktail-menu {
+  .cocktail-menu,.special-menu {
     width: 80%;
     margin: 3% 10% 3% 10%;
   }
 
   .open-page-beer-name,
   .open-page-wine-name,
-  .open-page-cocktail-name {
+  .open-page-cocktail-name,.special-menu {
     display: flex;
     align-items: center;
   }

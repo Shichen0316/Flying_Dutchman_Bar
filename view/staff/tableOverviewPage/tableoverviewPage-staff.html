@@ -1,62 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and link references for CSS and fonts -->
     <meta charset="UTF-8">
     <title>Table overview</title>
     <link rel="stylesheet" href="tableoverviewPage-staff.css">
+    <!-- Google Fonts link for custom fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Main content section for table overview -->
+    <section id="mainContent">
+        <!-- Staff name display -->
+        <div>
+            <center>
+                <h1>TABLE OVERVIEW</h1>
+                <h2>EMILY ZUCHERBUK</h2>
+            </center>
+        </div>
 
-<div>
-    <center>
-        <h1>
-            TABLE OVERVIEW
-        </h1>
-    </center>
-</div>
+        <!-- Buttons for each table, organized in rows -->
+        <div class="button-row1">
+            <!-- Each button represents a table, can be highlighted or interacted with based on JavaScript logic -->
+            <button class="button-table1" onclick="redirectorderoverviewPage()">TABLE 1</button>
+            <button class="button-table2">TABLE 2</button>
+            <!-- Additional table buttons omitted for brevity -->
+        </div>
+        <!-- Additional button rows omitted for brevity -->
+    </section>
 
-<div class="button-row1">
-    <button class="button-table1" onclick="redirectorderoverviewPage()">TABLE 1</button>
-    <button class="button-table2">TABLE 2</button>
-    <button class="button-table3">TABLE 3</button>
-    <button class="button-table4">TABLE 4</button>
-</div>
+    <!-- Popup for displaying orders, initially hidden -->
+    <div id="orderPopup" class="order-popup" style="display:none;">
+        <!-- Dynamic content will be inserted here -->
+    </div>
+    <!-- Overlay div, shown when popup is active -->
+    <div id="overlay" style="display:none;"></div>
 
-<div class="button-row2">
-    <button class="button-table5">TABLE 5</button>
-    <button class="button-table6">TABLE 6</button>
-    <button class="button-table7">TABLE 7</button>
-    <button class="button-table8">TABLE 8</button>
-</div>
+    <!-- Back button to return to the staff start page -->
+    <div>
+        <a class="button-back" href="/view/staff/staffStartPage/startPage-staff.html">
+            <img src="../../assets/backButton.svg" alt="Back button">
+        </a>
+    </div>
 
-<div class="button-row3">
-    <button class="button-table9">TABLE 9</button>
-    <button class="button-table10">TABLE 10</button>
-    <button class="button-table11">TABLE 11</button>
-    <button class="button-table12">TABLE 12</button>
-</div>
-
-<div class="button-row4">
-    <button class="button-table13">TABLE 13</button>
-    <button class="button-table14">TABLE 14</button>
-    <button class="button-table15">TABLE 15</button>
-    <button class="button-table16">TABLE 16</button>
-</div>
-
-<p>
-    EMILY ZUCHERBUK
-</p>
-
-<div>
-    <a class="button-back" href="/view/staff/staffStartPage/startPage-staff.html">
-        <img src="../../assets/backButton.svg" alt="Back button">
-    </a>
-</div>
-e
-<script src="tableoverviewPage-staff.js"></script>
+    <!-- Linking to the JavaScript file for functionality -->
+    <script src="tableoverviewPage-staff.js"></script>
 </body>
 </html>

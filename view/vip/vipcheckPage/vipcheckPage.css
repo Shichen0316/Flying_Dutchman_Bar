@@ -1,0 +1,129 @@
+body {
+    background-color: #F4F4F4;
+}
+
+h1 {
+    color: #BA0000;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #610000;
+    font-family: "Krona One";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+
+    margin: 0;
+}
+
+h2 {
+    color: #BA0000;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+}
+
+td{
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #212121;
+    font-family: "Josefin Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-align: center;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+.check-page-body {
+    display: flex;
+    margin: 3% 2% 0 2%;
+}
+
+.check-page-back-button {
+    margin-right: 15%;
+}
+
+.check-page-container {
+    border: 3px solid #BA0000;
+    background: #FFF;
+    text-align: center;
+
+    padding: 2% 10% 2% 10%;
+    margin-right: 20%;
+    margin-bottom: 5%;
+}
+
+.check-page-all-orders {
+    width: 100%;
+}
+
+.check-page-details {
+    display: flex;
+    justify-content: center;
+}
+
+.check-page-divider {
+    background: #212121;
+
+    height: 1px;
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+button {
+    color: #BA0000;
+    font-family: Koulen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 10px;
+    border: 2px solid #BA0000;
+    background: #FFF;
+
+    padding: 0.5% 2% 0.5% 2%;
+    transition: all 0.3s ease;
+}
+
+.check-page-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin-left: auto;
+
+    margin-right: 20px;
+}
+
+.check-page-confirm-button:hover {
+
+    transform: scale(1.03); 
+    color: #FFF;
+    border: 2px solid #FFF;
+
+    background: #BA0000;
+}

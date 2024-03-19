@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and link references for CSS and fonts -->
     <meta charset="UTF-8">
     <title>Start-Staff</title>
     <link rel="stylesheet" href="startPage-staff.css">
+    <!-- Google Fonts link for custom fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Koulen&family=Krona+One&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
+<!-- Header section for staff member's name -->
 <div>
     <center>
         <h1>STAFF:</h1>
@@ -18,22 +20,27 @@
     </center>
 </div>
 
+<!-- Logout button -->
 <div>
     <a class="button-logout" href="/view/staff/staffLoginPage/loginPage-staff.html">
         <img src="../../assets/logoutButton.svg" alt="Logout">
     </a>
 </div>
 
+<!-- Navigation buttons for different functionalities -->
 <div class="button-container">
-
     <button class="button-editmenu">EDIT MENU</button>
-
+    <!-- Redirects to the table overview page on click -->
     <button class="button-orderoverview" onclick="redirectTableoverview()">ORDER OVERVIEW / PAYMENT</button>
-
-    <button class="button-notify">NOTIFY SERCURITY</button>
-
+    <button class="button-notify">NOTIFY SECURITY</button>
 </div>
 
+<!-- Section where orders overview will be dynamically inserted via JavaScript -->
+<div id="ordersOverview" class="ordersOverview">
+    <h2>Orders Overview</h2>
+</div>
+
+<!-- Linking to the JavaScript file -->
 <script src="startPage-staff.js"></script>
 </body>
 </html>

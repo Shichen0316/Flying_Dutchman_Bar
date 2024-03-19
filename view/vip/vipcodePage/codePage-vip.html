@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Code-Vip</title>
-    <link rel="stylesheet" href="codePage-vip.css">
+    <link rel="stylesheet" href="codePage-vip.css"> <!-- External CSS file for page styling -->
 </head>
-
 <body>
-<div>
-    <center>
-        <h1>
-            CODE
-        </h1>
-    </center>
-</div>
-
-<div class="code">
-    <div id="rectangle1" class="rectangle1"></div>
-    <div id="rectangle2" class="rectangle2"></div>
-    <div id="rectangle3" class="rectangle3"></div>
-    <div id="rectangle4" class="rectangle4"></div>
-</div>
-
-<div class="text-link">
-    <p>Did not receive your code?
+    <!-- Header section with the page title -->
+    <div>
+        <center>
+            <h1>CODE</h1>
+            <h4>Collect your drink(s) from the cooler using this code</h4>
+        </center>
+    </div>
+    <!-- Container for the randomly generated code -->
+    <div class="code">
+        <div id="rectangle1" class="rectangle1"></div>
+        <div id="rectangle2" class="rectangle2"></div>
+        <div id="rectangle3" class="rectangle3"></div>
+        <div id="rectangle4" class="rectangle4"></div>
+    </div>
+    <!-- Link for users to resend the code if not received -->
+    <div class="text-link">
+        <p>Did not receive your code?
+            <a href="">Resend code here!</a>
+        </p>
+    </div>
+    <!-- Navigation button to go back -->
+    <div class="button-back">
         <a href="">
-            Resend code here!
+            <img src="../../assets/backButton.svg" alt="Back">
         </a>
-    </p>
-</div>
-
-<div class="button-back">
-    <a href="">
-        <img src="../../assets/backButton.svg" alt="Back">
-    </a>
-</div>
-
-<script src="codePage-vip.js"></script>
-
+    </div>
+    <!-- Button to confirm and proceed to the next page -->
+    <div class="order-page-buttons">
+        <center>
+            <button class="order-page-confirm-button" onclick="redirectToNextPage()">Back TO Menu</button>
+        </center>
+    </div>
+    <!-- JavaScript file link for functionality -->
+    <script src="codePage-vip.js"></script>
 </body>
 </html>

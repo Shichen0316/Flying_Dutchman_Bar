@@ -27,8 +27,10 @@
     </center>
 </div>
 
+<!-- list displaying the order fetched from the local database -->
 <div id="order-container"></div>
 
+<!-- order drop area -->
 <div id="order-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
 
 <div>
@@ -36,16 +38,21 @@
     <button class="button-discount" id="button-discount" onclick="showDiscountPopup()">DISCOUNT</button>
 </div>
 
+<!-- popup window showing selected orders and payment methods -->
 <div id="popup" class="popup">
     <p>Selected Orders:</p>
     <ul id="selected-orders"></ul>
     <div id="order-buttons">
+        <!-- pay directly -->
     <button class="button-popup" onclick="showPayPopup()">Pay</button>
+        <!-- pay from account -->
     <button class="button-popup" onclick="showPayFromAccountPopup()">Pay from Account</button>
     </div>
+    <!-- close popup window -->
     <button class="button-popup" onclick="closePopup()">Close</button>
 </div>
 
+<!-- popup window showing selected orders and discount method -->
 <div id="discountPopup" class="discountPopup">
     <p>Selected Orders:</p>
     <ul id="selected-orders-discount"></ul>
@@ -53,6 +60,7 @@
     <button class="button-discountPopup" onclick="closeDiscountPopup()">Close</button>
 </div>
 
+<!-- back button to get back to the previous page -->
 <div>
     <a class="button-back" href="view/staff/tableOverviewPage/tableoverviewPage-staff.html">
         <img src="../../assets/backButton.svg" alt="Back button">
@@ -60,7 +68,7 @@
 </div>
 
 <script src="orderdisplay.js"></script>
-<script src="dropanddrop.js"></script>
+<script src="draganddrop.js"></script>
 <script src="popupwindow.js"></script>
 
 </body>

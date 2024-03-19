@@ -188,5 +188,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // redirect to Pages
 function redirectStart() {
-    window.location.href = "/view/customers/startPage/startPage.html";
+    window.location.href = "/view/vip/vipOrderPage/vipOrderPage.html";
 }
