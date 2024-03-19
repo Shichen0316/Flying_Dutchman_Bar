@@ -14,7 +14,7 @@
 <div>
     <center>
         <h1>
-            TABLE 1
+            ORDER OVERVIEW
         </h1>
     </center>
 </div>
@@ -26,18 +26,19 @@
         </h2>
     </center>
 </div>
-
+<div class="flex-container">
 <!-- list displaying the order fetched from the local database -->
 <div id="order-container"></div>
-
 <!-- order drop area -->
 <div id="order-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
-
-<div>
+</div>
+<div class="button-container">
+<!-- <div> -->
     <button class="button-pay" id="button-pay" onclick="showPopup()">PAY</button>
     <button class="button-discount" id="button-discount" onclick="showDiscountPopup()">DISCOUNT</button>
+    <button class="button-changeorder" id="button-changeorder" onclick="showChangeorderPopup()">CHANGE ORDER</button>
+<!-- </div> -->
 </div>
-
 <!-- popup window showing selected orders and payment methods -->
 <div id="popup" class="popup">
     <p>Selected Orders:</p>
