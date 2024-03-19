@@ -6,6 +6,9 @@ var cocktails;
 
 let lowStock = "";
 const removedRows = [];
+const undoneRows = [];
+const redoneRows = [];
+
 // drinks less than 30 will be shown
 // food less than 10 will be shown
 
@@ -55,11 +58,13 @@ fetch("../../../../models/database/DrinksStock.json")
                 removeButton.onclick = function() {
                     const rowToRemove = this.parentNode.parentNode; // tr element
                     const beerData = {
+                        type: "Beer",
                         name: beer.name,
                         price: beer.price,
                         stock: beer.stock
                     };
                     removedRows.push(beerData);
+                    undoneRows.push(beerData);
                     rowToRemove.remove();
                 };
                 
@@ -74,6 +79,8 @@ fetch("../../../../models/database/DrinksStock.json")
 
                     currentAmount += refillAmount;
                     QuantityParagraph.textContent = currentAmount.toString();
+
+
                 }
 
                 // Quantity buttons
@@ -224,9 +231,15 @@ fetch("../../../../models/database/DrinksStock.json")
                 removeButton.textContent = "REMOVE";
                 removeButton.onclick = function() {
                     const rowToRemove = this.parentNode.parentNode; // tr element
+                    const wineData = {
+                        type: "Wine",
+                        name: wine.name,
+                        price: wine.price,
+                        stock: wine.stock
+                    };
+                    removedRows.push(wineData);
                     rowToRemove.remove();
                 };
-                
 
                 // Refill Button
                 const refillButton = document.createElement("button");
@@ -389,6 +402,13 @@ fetch("../../../../models/database/DrinksStock.json")
                 removeButton.textContent = "REMOVE";
                 removeButton.onclick = function() {
                     const rowToRemove = this.parentNode.parentNode; // tr element
+                    const cocktailData = {
+                        type: "Cocktail",
+                        name: cocktail.name,
+                        price: cocktail.price,
+                        stock: cocktail.stock
+                    };
+                    removedRows.push(cocktailData);
                     rowToRemove.remove();
                 };
                 
@@ -665,7 +685,14 @@ fetch("../../../../models/database/FoodStock.json")
                 removeButton.className = "food-remove-button";
                 removeButton.textContent = "REMOVE";
                 removeButton.onclick = function() {
-                    // Remove the entire row
+                    const rowToRemove = this.parentNode.parentNode; // tr element
+                    const foodData = {
+                        type: "Food",
+                        name: food.name,
+                        price: food.price,
+                        stock: food.stock
+                    };
+                    removedRows.push(foodData);
                     foodRow.remove();
                 };
 
@@ -907,13 +934,75 @@ $(".order-page-language-dropdown").change(function () {
         });
 });
 
+function handleRedo() {
+    if (undoneRows.length > 0) {
+        const beerData = undoneRows.pop();
+        removedRows.push(beerData); // STORE FOR UNDO
+        
+        if (beerData.type == "Beer") {
+            const beerTable = document.getElementById("beer-table");
+            const rows = beerTable.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                const beerNameColumn = rows[i].querySelector(".beer-name-column");
+                if (beerNameColumn && beerNameColumn.textContent === beerData.name) {
+                    rows[i].remove();
+                    break;
+                }
+            }
+        }
+
+        else if (beerData.type == "Wine") {
+            const wineTable = document.getElementById("wine-table");
+            const rows = wineTable.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                const wineNameColumn = rows[i].querySelector(".wine-name-column");
+                if (wineNameColumn && wineNameColumn.textContent === beerData.name) {
+                    rows[i].remove();
+                    break;
+                }
+            }
+        }
+
+        else if (beerData.type == "Cocktail") {
+            const cocktailTable = document.getElementById("cocktail-table");
+            const rows = cocktailTable.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                const cocktailNameColumn = rows[i].querySelector(".cocktail-name-column");
+                if (cocktailNameColumn && cocktailNameColumn.textContent === beerData.name) {
+                    rows[i].remove();
+                    break;
+                }
+            }
+        }
+
+        else if (beerData.type == "Food") {
+            const foodTable = document.getElementById("food-table");
+            const rows = foodTable.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                const foodNameColumn = rows[i].querySelector(".food-name-column");
+                if (foodNameColumn && foodNameColumn.textContent === beerData.name) {
+                    rows[i].remove();
+                    break;
+                }
+            }
+        }
+
+    }
+}
+
 function handleUndo() {
     if (removedRows.length > 0) {
         const beerData = removedRows.pop();
-        const beerTable = document.getElementById("beer-table");
+        undoneRows.push(beerData); // STORE FOR REDO
+        console.log(beerData);
         
-        if (beerData) {
-            const { name, price, stock } = beerData;
+        const beerTable = document.getElementById("beer-table");
+        const wineTable = document.getElementById("wine-table");
+        const cocktailTable = document.getElementById("cocktail-table");
+        const foodTable = document.getElementById("food-table");
+        
+        if (beerData.type == "Beer") {
+            const { type, name, price, stock } = beerData;
 
             // Recreate table row
             const newRow = document.createElement("tr");
@@ -959,15 +1048,98 @@ function handleUndo() {
                 const beerStock = parseFloat(rowToRemove.querySelector(".beer-price-stock").textContent);
                 
                 const beerData = {
+                    type: "Beer",
                     name: beerName,
                     price: beerPrice,
                     stock: beerStock
                 };
                 removedRows.push(beerData);
+                undoneRows.push(beerData);
                 rowToRemove.remove();
+
+                console.log(removedRows);
+            };
+
+            refillButton.onclick = function() {
+                const refillAmount = parseInt(quantitySpan.textContent);
+                let currentAmount = parseInt(QuantityParagraph.textContent);
+
+                currentAmount += refillAmount;
+                QuantityParagraph.textContent = currentAmount.toString();
+            }
+
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantitySpan.textContent > 1) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "#44BA3A";
+                }
+
+                else if (quantitySpan.textContent == 1 ) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "rgba(68, 186, 58, 0.50)";
+                }
+            };
+
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                quantitySpan.textContent = quantity + 1;
+                if (quantitySpan.textContent > 0) {
+                    refillButton.style.background = "#44BA3A";
+                }
+            };
+
+            editButton.onclick = function() {
+                const beerNameInputBox = document.createElement("input");
+                beerNameInputBox.type = "text";
+                beerNameInputBox.value = name;
+                beerNameInputBox.className = "beer-name-input";
+            
+                const priceInputBox = document.createElement("input");
+                priceInputBox.type = "text";
+                priceInputBox.value = price;
+                priceInputBox.className = "beer-price-input";
+
+                const quantityInputBox = document.createElement("input");
+                quantityInputBox.type = "text";
+                quantityInputBox.value = stock;
+                quantityInputBox.className = "beer-stock-input";
+            
+                // Replace beerName with inputBox
+                column.replaceChild(beerNameInputBox, beerName);
+                column.replaceChild(priceInputBox, priceParagraph);
+                column.replaceChild(quantityInputBox, QuantityParagraph);
+                
+                // Hide edit button
+                editButton.style.display = "none";
+
+                const saveButton = document.createElement("button");
+                saveButton.textContent = "SAVE";
+                saveButton.className = "beer-save-button";
+                column.appendChild(saveButton);
+
+                beerNameInputBox.focus();
+
+                saveButton.onclick = function() {
+                    inputName = beerNameInputBox.value;
+                    inputPrice = parseFloat(priceInputBox.value);
+                    inputStock = parseFloat(quantityInputBox.value);
+                
+                    beerName.textContent = inputName; 
+                    priceParagraph.textContent = inputPrice + " " + "Kr";
+                    QuantityParagraph.textContent = inputStock;
+                
+                    column.replaceChild(beerName, beerNameInputBox);
+                    column.replaceChild(priceParagraph, priceInputBox);
+                    column.replaceChild(QuantityParagraph, quantityInputBox);
+                
+                    editButton.style.display = "inline";
+                    column.removeChild(saveButton);
+                };
             };
             
-            // Include onclick handlers for other buttons as needed
 
             // Append elements to the column
             column.appendChild(beerName);
@@ -980,20 +1152,512 @@ function handleUndo() {
             column.appendChild(addButton);
             column.appendChild(editButton);
 
-            // Append the column to the new row
             newRow.appendChild(column);
-            // Append the new row to the table
+
             beerTable.appendChild(newRow);
+        }
+
+        else if (beerData.type == "Wine") {
+            const { type, name, price, stock } = beerData;
+
+            // Recreate table row
+            const newRow = document.createElement("tr");
+
+            // Create column elements for beer name, price, stock, buttons, etc.
+            const column = document.createElement("td");
+            const wineName = document.createElement("h2");
+            const priceParagraph = document.createElement("p");
+            const QuantityParagraph = document.createElement("p");
+            const removeButton = document.createElement("button");
+            const refillButton = document.createElement("button");
+            const quantitySpan = document.createElement("span");
+            const minusButton = document.createElement("button");
+            const addButton = document.createElement("button");
+            const editButton = document.createElement("img");
+
+            // Assign classes and text content to elements
+            wineName.className = "wine-name-column";
+            wineName.textContent = name;
+            priceParagraph.className = "wine-price-column";
+            priceParagraph.textContent = price + " Kr";
+            QuantityParagraph.className = "wine-price-stock";
+            QuantityParagraph.textContent = stock;
+            removeButton.className = "wine-remove-button";
+            removeButton.textContent = "REMOVE";
+            refillButton.className = "wine-refill-button";
+            refillButton.textContent = "REFILL";
+            quantitySpan.textContent = "0";
+            quantitySpan.id = name + "-quantity-value";
+            minusButton.className = "minus-button";
+            minusButton.alt = "Minus";
+            addButton.className = "add-button";
+            addButton.alt = "Add";
+            editButton.src = "../../assets/editButton.svg";
+            editButton.style.width = "20px";
+            editButton.style.height = "20px";
+            editButton.className = "wine-edit-button";
+
+            removeButton.onclick = function() {
+                const rowToRemove = this.parentNode.parentNode; // tr element
+                const wineName = rowToRemove.querySelector(".wine-name-column").textContent;
+                const winePrice = parseFloat(rowToRemove.querySelector(".wine-price-column").textContent);
+                const wineStock = parseFloat(rowToRemove.querySelector(".wine-price-stock").textContent);
+                
+                const wineData = {
+                    name: wineName,
+                    price: winePrice,
+                    stock: wineStock
+                };
+                removedRows.push(wineData);
+                undoneRows.push(wineData);
+                rowToRemove.remove();
+            };
+
+            refillButton.onclick = function() {
+                const refillAmount = parseInt(quantitySpan.textContent);
+                let currentAmount = parseInt(QuantityParagraph.textContent);
+
+                currentAmount += refillAmount;
+                QuantityParagraph.textContent = currentAmount.toString();
+            }
+
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantitySpan.textContent > 1) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "#44BA3A";
+                }
+
+                else if (quantitySpan.textContent == 1 ) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "rgba(68, 186, 58, 0.50)";
+                }
+            };
+
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                quantitySpan.textContent = quantity + 1;
+                if (quantitySpan.textContent > 0) {
+                    refillButton.style.background = "#44BA3A";
+                }
+            };
+
+            editButton.onclick = function() {
+                const wineNameInputBox = document.createElement("input");
+                wineNameInputBox.type = "text";
+                wineNameInputBox.value = name;
+                wineNameInputBox.className = "wine-name-input";
+            
+                const priceInputBox = document.createElement("input");
+                priceInputBox.type = "text";
+                priceInputBox.value = price;
+                priceInputBox.className = "wine-price-input";
+
+                const quantityInputBox = document.createElement("input");
+                quantityInputBox.type = "text";
+                quantityInputBox.value = stock;
+                quantityInputBox.className = "wine-stock-input";
+            
+                // Replace beerName with inputBox
+                column.replaceChild(wineNameInputBox, wineName);
+                column.replaceChild(priceInputBox, priceParagraph);
+                column.replaceChild(quantityInputBox, QuantityParagraph);
+                
+                // Hide edit button
+                editButton.style.display = "none";
+
+                const saveButton = document.createElement("button");
+                saveButton.textContent = "SAVE";
+                saveButton.className = "beer-save-button";
+                column.appendChild(saveButton);
+
+                wineNameInputBox.focus();
+
+                saveButton.onclick = function() {
+                    inputName = wineNameInputBox.value;
+                    inputPrice = parseFloat(priceInputBox.value);
+                    inputStock = parseFloat(quantityInputBox.value);
+                
+                    wineName.textContent = inputName; 
+                    priceParagraph.textContent = inputPrice + " " + "Kr";
+                    QuantityParagraph.textContent = inputStock;
+                
+                    column.replaceChild(wineName, wineNameInputBox);
+                    column.replaceChild(priceParagraph, priceInputBox);
+                    column.replaceChild(QuantityParagraph, quantityInputBox);
+                
+                    editButton.style.display = "inline";
+                    column.removeChild(saveButton);
+                };
+            };
+            
+
+            // Append elements to the column
+            column.appendChild(wineName);
+            column.appendChild(priceParagraph);
+            column.appendChild(QuantityParagraph);
+            column.appendChild(removeButton);
+            column.appendChild(refillButton);
+            column.appendChild(minusButton);
+            column.appendChild(quantitySpan);
+            column.appendChild(addButton);
+            column.appendChild(editButton);
+
+            newRow.appendChild(column);
+
+            wineTable.appendChild(newRow);
+        }
+
+        else if (beerData.type == "Food") {
+            const { name, price, stock } = beerData;
+        
+            // Recreate table row
+            const newRow = document.createElement("tr");
+        
+            // First column -- food name + info button
+            const nameColumn = document.createElement("td");
+            const nameContainer = document.createElement("div");
+            nameContainer.className = "open-page-food-name";
+        
+            const foodName = document.createElement("h2");
+            foodName.textContent = name;
+            foodName.className = "food-name-column";
+        
+            const infoButton = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            infoButton.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+            infoButton.setAttribute("width", "17");
+            infoButton.setAttribute("height", "9");
+            infoButton.setAttribute("viewBox", "0 0 17 9");
+            infoButton.setAttribute("fill", "#212121");
+            infoButton.setAttribute("class", "open-page-button-svg");
+        
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M8.35238 8.83852C8.43168 8.92526 8.56832 8.92526 8.64762 8.83852L16.4211 0.334942C16.5384 0.206596 16.4473 0 16.2734 0H0.726559C0.552669 0 0.461616 0.206597 0.578942 0.334942L8.35238 8.83852Z");
+            path.setAttribute("fill", "#212121");
+        
+            infoButton.appendChild(path);
+            nameContainer.appendChild(foodName);
+            nameContainer.appendChild(infoButton);
+        
+            // Append name container to the column
+            nameColumn.appendChild(nameContainer);
+            newRow.appendChild(nameColumn);
+        
+            // Second column -- price
+            const priceColumn = document.createElement("td");
+            const priceParagraph = document.createElement("p");
+            priceParagraph.textContent = price + " Kr";
+            priceParagraph.className = "food-price-column";
+            priceColumn.appendChild(priceParagraph);
+            newRow.appendChild(priceColumn);
+        
+            // Third column -- stock
+            const stockColumn = document.createElement("td");
+            const stockParagraph = document.createElement("p");
+            stockParagraph.textContent = stock;
+            stockParagraph.className = "food-stock-column";
+            stockColumn.appendChild(stockParagraph);
+            newRow.appendChild(stockColumn);
+        
+            // Fourth column -- buttons
+            const buttonColumn = document.createElement("td");
+        
+            const removeButton = document.createElement("button");
+            removeButton.className = "food-remove-button";
+            removeButton.textContent = "REMOVE";
+        
+            removeButton.onclick = function() {
+                const rowToRemove = this.parentNode.parentNode; // tr element
+                const foodName = rowToRemove.querySelector(".food-name-column").textContent;
+                const foodPrice = parseFloat(rowToRemove.querySelector(".food-price-column").textContent);
+                const foodStock = parseFloat(rowToRemove.querySelector(".food-stock-column").textContent);
+        
+                const foodData = {
+                    type: "Food",
+                    name: foodName,
+                    price: foodPrice,
+                    stock: foodStock
+                };
+                removedRows.push(foodData);
+                undoneRows.push(foodData);
+                rowToRemove.remove();
+            };
+        
+            const refillButton = document.createElement("button");
+            refillButton.className = "food-refill-button";
+            refillButton.textContent = "REFILL";
+
+            // Quantity Minus Button
+            const minusButton = document.createElement("button");
+            minusButton.className = "minus-button";
+            minusButton.alt = "Minus";
+
+            // Quantity Span
+            const quantitySpan = document.createElement("span");
+            quantitySpan.textContent = "0";
+            quantitySpan.id = name + "-quantity-value";
+
+            // Quantity Add Button
+            const addButton = document.createElement("button");
+            addButton.className = "add-button";
+            addButton.alt = "Add";
+
+            // Edit Button
+            const editButton = document.createElement("img");
+            editButton.src = "../../assets/editButton.svg";
+            editButton.style.width = "20px";
+            editButton.style.height = "20px";
+            editButton.className = "cocktail-edit-button";
+
+            refillButton.onclick = function() {
+                const refillAmount = parseInt(quantitySpan.textContent);
+                let currentAmount = parseInt(stockParagraph.textContent);
+
+                currentAmount += refillAmount;
+                stockParagraph.textContent = currentAmount.toString();
+            }
+
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantitySpan.textContent > 1) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "#44BA3A";
+                }
+
+                else if (quantitySpan.textContent == 1 ) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "rgba(68, 186, 58, 0.50)";
+                }
+            };
+
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                quantitySpan.textContent = quantity + 1;
+                if (quantitySpan.textContent > 0) {
+                    refillButton.style.background = "#44BA3A";
+                }
+            };
+
+            editButton.onclick = function() {
+                const foodNameInputBox = document.createElement("input");
+                foodNameInputBox.type = "text";
+                foodNameInputBox.value = name;
+                foodNameInputBox.className = "food-name-input";
+            
+                const priceInputBox = document.createElement("input");
+                priceInputBox.type = "text";
+                priceInputBox.value = price;
+                priceInputBox.className = "food-price-input";
+
+                const quantityInputBox = document.createElement("input");
+                quantityInputBox.type = "text";
+                quantityInputBox.value = stock;
+                quantityInputBox.className = "food-stock-input";
+            
+                // Replace beerName with inputBox
+                nameContainer.replaceChild(foodNameInputBox, foodName);
+                priceColumn.replaceChild(priceInputBox, priceParagraph);
+                stockColumn.replaceChild(quantityInputBox, stockParagraph);
+                
+                // Hide edit button
+                editButton.style.display = "none";
+
+                const saveButton = document.createElement("button");
+                saveButton.textContent = "SAVE";
+                saveButton.className = "food-save-button";
+                buttonColumn.appendChild(saveButton);
+
+                foodNameInputBox.focus();
+
+                saveButton.onclick = function() {
+                    inputName = foodNameInputBox.value;
+                    inputPrice = parseFloat(priceInputBox.value);
+                    inputStock = parseFloat(quantityInputBox.value);
+                
+                    foodName.textContent = inputName; 
+                    priceParagraph.textContent = inputPrice + " " + "Kr";
+                    stockParagraph.textContent = inputStock;
+                
+                    nameContainer.replaceChild(foodName, foodNameInputBox);
+                    priceColumn.replaceChild(priceParagraph, priceInputBox);
+                    stockColumn.replaceChild(stockParagraph, quantityInputBox);
+                
+                    editButton.style.display = "inline";
+                    buttonColumn.removeChild(saveButton);
+                };
+            };
+        
+            // Append buttons to the button column
+            buttonColumn.appendChild(removeButton);
+            buttonColumn.appendChild(refillButton);
+            buttonColumn.appendChild(minusButton);
+            buttonColumn.appendChild(quantitySpan);
+            buttonColumn.appendChild(addButton);
+            buttonColumn.appendChild(editButton);
+        
+            // Append button column to the row
+            newRow.appendChild(buttonColumn);
+        
+            // Append the row to the table
+            foodTable.appendChild(newRow);
+        }
+        
+
+        else if (beerData.type == "Cocktail") {
+            const { type, name, price, stock } = beerData;
+
+            // Recreate table row
+            const newRow = document.createElement("tr");
+
+            // Create column elements for beer name, price, stock, buttons, etc.
+            const column = document.createElement("td");
+            const cocktailName = document.createElement("h2");
+            const priceParagraph = document.createElement("p");
+            const QuantityParagraph = document.createElement("p");
+            const removeButton = document.createElement("button");
+            const refillButton = document.createElement("button");
+            const quantitySpan = document.createElement("span");
+            const minusButton = document.createElement("button");
+            const addButton = document.createElement("button");
+            const editButton = document.createElement("img");
+
+            // Assign classes and text content to elements
+            cocktailName.className = "cocktail-name-column";
+            cocktailName.textContent = name;
+            priceParagraph.className = "cocktail-price-column";
+            priceParagraph.textContent = price + " Kr";
+            QuantityParagraph.className = "cocktail-price-stock";
+            QuantityParagraph.textContent = stock;
+            removeButton.className = "cocktail-remove-button";
+            removeButton.textContent = "REMOVE";
+            refillButton.className = "cocktail-refill-button";
+            refillButton.textContent = "REFILL";
+            quantitySpan.textContent = "0";
+            quantitySpan.id = name + "-quantity-value";
+            minusButton.className = "minus-button";
+            minusButton.alt = "Minus";
+            addButton.className = "add-button";
+            addButton.alt = "Add";
+            editButton.src = "../../assets/editButton.svg";
+            editButton.style.width = "20px";
+            editButton.style.height = "20px";
+            editButton.className = "cocktail-edit-button";
+
+            removeButton.onclick = function() {
+                const rowToRemove = this.parentNode.parentNode; // tr element
+                const cocktailName = rowToRemove.querySelector(".cocktail-name-column").textContent;
+                const cocktailPrice = parseFloat(rowToRemove.querySelector(".cocktail-price-column").textContent);
+                const cocktailStock = parseFloat(rowToRemove.querySelector(".cocktail-price-stock").textContent);
+                
+                const cocktailData = {
+                    name: cocktailName,
+                    price: cocktailPrice,
+                    stock: cocktailStock
+                };
+                removedRows.push(cocktailData);
+                undoneRows.push(cocktailData);
+                rowToRemove.remove();
+            };
+
+            refillButton.onclick = function() {
+                const refillAmount = parseInt(quantitySpan.textContent);
+                let currentAmount = parseInt(QuantityParagraph.textContent);
+
+                currentAmount += refillAmount;
+                QuantityParagraph.textContent = currentAmount.toString();
+            }
+
+            minusButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                if (quantitySpan.textContent > 1) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "#44BA3A";
+                }
+
+                else if (quantitySpan.textContent == 1 ) {
+                    quantitySpan.textContent = quantity - 1;
+                    refillButton.style.background = "rgba(68, 186, 58, 0.50)";
+                }
+            };
+
+            addButton.onclick = function() {
+                const quantitySpan = document.getElementById(name + "-quantity-value");
+                let quantity = parseInt(quantitySpan.textContent);
+                quantitySpan.textContent = quantity + 1;
+                if (quantitySpan.textContent > 0) {
+                    refillButton.style.background = "#44BA3A";
+                }
+            };
+
+            editButton.onclick = function() {
+                const cocktailNameInputBox = document.createElement("input");
+                cocktailNameInputBox.type = "text";
+                cocktailNameInputBox.value = name;
+                cocktailNameInputBox.className = "cocktail-name-input";
+            
+                const priceInputBox = document.createElement("input");
+                priceInputBox.type = "text";
+                priceInputBox.value = price;
+                priceInputBox.className = "cocktail-price-input";
+
+                const quantityInputBox = document.createElement("input");
+                quantityInputBox.type = "text";
+                quantityInputBox.value = stock;
+                quantityInputBox.className = "cocktail-stock-input";
+            
+                // Replace beerName with inputBox
+                column.replaceChild(cocktailNameInputBox, cocktailName);
+                column.replaceChild(priceInputBox, priceParagraph);
+                column.replaceChild(quantityInputBox, QuantityParagraph);
+                
+                // Hide edit button
+                editButton.style.display = "none";
+
+                const saveButton = document.createElement("button");
+                saveButton.textContent = "SAVE";
+                saveButton.className = "cocktail-save-button";
+                column.appendChild(saveButton);
+
+                cocktailNameInputBox.focus();
+
+                saveButton.onclick = function() {
+                    inputName = cocktailNameInputBox.value;
+                    inputPrice = parseFloat(priceInputBox.value);
+                    inputStock = parseFloat(quantityInputBox.value);
+                
+                    cocktailName.textContent = inputName; 
+                    priceParagraph.textContent = inputPrice + " " + "Kr";
+                    QuantityParagraph.textContent = inputStock;
+                
+                    column.replaceChild(cocktailName, cocktailNameInputBox);
+                    column.replaceChild(priceParagraph, priceInputBox);
+                    column.replaceChild(QuantityParagraph, quantityInputBox);
+                
+                    editButton.style.display = "inline";
+                    column.removeChild(saveButton);
+                };
+            };
+            
+
+            // Append elements to the column
+            column.appendChild(cocktailName);
+            column.appendChild(priceParagraph);
+            column.appendChild(QuantityParagraph);
+            column.appendChild(removeButton);
+            column.appendChild(refillButton);
+            column.appendChild(minusButton);
+            column.appendChild(quantitySpan);
+            column.appendChild(addButton);
+            column.appendChild(editButton);
+
+            newRow.appendChild(column);
+
+            cocktailTable.appendChild(newRow);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
